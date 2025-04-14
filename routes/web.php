@@ -8,6 +8,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\CriteriaController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StudentScoreController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, "index"])->name('home');
@@ -40,3 +41,11 @@ Route::middleware('auth')->group(function ()
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
 
 Route::resource('college-majors', CollegeMajorController::class);
+
+Route::prefix('student-scores')->name('student-scores.')->group(function ()
+{
+    Route::get('/create-many', [StudentScoreController::class, 'createMany'])->name('create-many');
+    Route::post('/store-many', [StudentScoreController::class, 'storeMany'])->name('store-many');
+    Route::post('/delete-many', [StudentScoreController::class, 'deleteMany'])->name('delete-many');
+});
+Route::resource('student-scores', StudentScoreController::class);

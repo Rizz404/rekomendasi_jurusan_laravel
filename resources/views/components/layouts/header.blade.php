@@ -17,6 +17,10 @@
                 class="font-medium cursor-pointer hover:underline underline-offset-4">
                 Kriteria Jurusan
             </a>
+            <a href="{{ route('student-scores.index') }}"
+                class="font-medium cursor-pointer hover:underline underline-offset-4">
+                Kalkulasi nilai
+            </a>
         </div>
         @auth
             <div class="flex items-center gap-2">

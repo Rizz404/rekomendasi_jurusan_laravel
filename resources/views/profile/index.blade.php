@@ -1,18 +1,22 @@
 <x-user-layout title="Profile">
     <div class="container max-w-md py-4 mx-auto">
+        @if (session('success'))
+            <x-alert type='success'>
+                {{ session('success') }}
+            </x-alert>
+        @endif
         <form action="{{ route('profile') }}" method="POST"
             class="flex flex-col gap-4">
             @csrf
             @method('PUT')
 
-            <!-- User Fields -->
             <div>
-                <label for="name"
-                    class="block text-sm font-medium text-gray-700">Name</label>
-                <input type="text" id="name" name="name"
-                    value="{{ old('name', $user->name) }}"
+                <label for="username"
+                    class="block text-sm font-medium text-gray-700">Username</label>
+                <input type="text" id="username" name="username"
+                    value="{{ old('username', $user->username) }}"
                     class="block w-full px-4 py-2 mt-1 border-gray-300 rounded shadow-sm focus:border-gray-500 focus:ring-slate-500">
-                @error('name')
+                @error('username')
                     <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
                 @enderror
             </div>
@@ -24,6 +28,19 @@
                     value="{{ old('email', $user->email) }}"
                     class="block w-full px-4 py-2 mt-1 border-gray-300 rounded shadow-sm focus:border-gray-500 focus:ring-slate-500">
                 @error('email')
+                    <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <div>
+                <label for="name"
+                    class="block text-sm font-medium text-gray-700">
+                    Full Name
+                </label>
+                <input type="text" id="name" name="name"
+                    value="{{ old('name', $user->name) }}"
+                    class="block w-full px-4 py-2 mt-1 border-gray-300 rounded shadow-sm focus:border-gray-500 focus:ring-slate-500">
+                @error('name')
                     <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
                 @enderror
             </div>
