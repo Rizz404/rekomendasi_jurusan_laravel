@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CollegeMajor;
+use App\Models\MajorCharacteristic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use PhpParser\Node\Stmt\TryCatch;
@@ -62,6 +63,14 @@ class CollegeMajorController extends Controller
      */
     public function show(CollegeMajor $collegeMajor)
     {
+        // muat juga relasi 'criteria'-nya.
+        $collegeMajor->load('majorCharacteristics.criteria');
+
+        // Sekarang $collegeMajor->majorCharacteristics sudah berisi collection
+        // dari MajorCharacteristic yang terkait, dan setiap item di dalamnya
+        // sudah memiliki data $item->criteria yang ter-load.
+
+        // Kirim $collegeMajor (yang sudah lengkap datanya) ke view
         return view("college-major.show", compact('collegeMajor'));
     }
 
@@ -76,10 +85,11 @@ class CollegeMajorController extends Controller
     /**
      * Update the specified resource in storage.
      */
+    // Todo: Partial update mungkin soalnya unique validation bakalan ke triger
     public function update(Request $request, CollegeMajor $collegeMajor)
     {
         $validated = $request->validate([
-            'major_name' => 'required|string|max:100|unique:college_majors',
+            'major_name' => 'required|string|max:100',
             'faculty' => 'nullable|string|max:100',
             'description' => 'nullable|string',
             'field_of_study' => 'nullable|string|max:100',

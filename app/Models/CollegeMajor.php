@@ -20,12 +20,12 @@ class CollegeMajor extends Model
         'is_active',
     ];
 
-    public function saw_results(): HasMany
+    public function sawResults(): HasMany
     {
         return $this->hasMany(SawResult::class);
     }
 
-    public function characteristics()
+    public function majorCharacteristics()
     {
         return $this->hasMany(MajorCharacteristic::class);
     }
