@@ -21,7 +21,7 @@ class StudentScoreFactory extends Factory
         return [
             'student_id' => Student::factory(),
             'criteria_id' => Criteria::factory(),
-            'score' => $this->faker->randomFloat(2, 0, 100),
+            'score' => $this->faker->randomFloat(2, 60, 100),
             'input_date' => now(),
         ];
     }

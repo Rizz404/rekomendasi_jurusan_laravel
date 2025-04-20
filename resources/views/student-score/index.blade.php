@@ -26,5 +26,9 @@
                 </div>
             @endforeach
         </div>
+
+        <x-link-button
+            href="{{ route('recomendations.my-recomendations') }}">Lihat
+            rekomendasi</x-link-button>
     </div>
 </x-user-layout>

@@ -25,7 +25,7 @@ class SawResult extends Model
         return $this->belongsTo(Student::class, 'student_id');
     }
 
-    public function college_major(): BelongsTo
+    public function collegeMajor(): BelongsTo
     {
         return $this->belongsTo(CollegeMajor::class, 'college_major_id');
     }

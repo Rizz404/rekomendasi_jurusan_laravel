@@ -16,19 +16,40 @@ class StudentScoreSeeder extends Seeder
     public function run(): void
     {
         $students = Student::all();
-        $criteria = Criteria::all();
+        $criterias = Criteria::all();
 
         foreach ($students as $student)
         {
-            $student->scores()->createMany(
-                $criteria->random(5)->map(function ($crit)
+            foreach ($criterias as $criteria)
+            {
+                // Skip if criteria doesn't match student's school type
+                $schoolMapping = [
+                    'high_school' => 'SMA',
+                    'vocational_school' => 'SMK'
+                ];
+
+                $studentSchoolType = $schoolMapping[$student->school_type] ?? 'All';
+
+                if ($criteria->school_type !== 'All' && $criteria->school_type !== $studentSchoolType)
                 {
-                    return [
-                        'criteria_id' => $crit->id,
-                        'score' => fake()->randomFloat(2, 0, 100)
-                    ];
-                })->toArray()
-            );
+                    continue;
+                }
+
+                // Generate a realistic score based on criteria name
+                $score = match (true)
+                {
+                    str_contains($criteria->name, 'UN') => fake()->numberBetween(70, 100),
+                    str_contains($criteria->name, 'Minat') => fake()->numberBetween(50, 100),
+                    default => fake()->numberBetween(60, 100),
+                };
+
+                StudentScore::create([
+                    'student_id' => $student->id,
+                    'criteria_id' => $criteria->id,
+                    'score' => $score,
+                    'input_date' => now(),
+                ]);
+            }
         }
     }
 }

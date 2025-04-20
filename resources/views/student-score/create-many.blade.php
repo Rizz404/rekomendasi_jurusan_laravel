@@ -1,5 +1,17 @@
 <x-user-layout title="Input Banyak Nilai Siswa">
     <div class="container max-w-2xl py-6">
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
+
+        @if (session('raw'))
+            <div class="alert alert-danger">
+                {{ session('raw') }}
+            </div>
+        @endif
+
         <div class="mb-6">
             <h1 class="text-2xl font-bold">Input Banyak Nilai Siswa</h1>
             <p class="text-gray-600">Silahkan isi nilai untuk semua kriteria yang

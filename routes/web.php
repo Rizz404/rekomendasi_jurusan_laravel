@@ -9,6 +9,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\CriteriaController;
 use App\Http\Controllers\MajorCharacteristicController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SawResultController;
 use App\Http\Controllers\StudentScoreController;
 use Illuminate\Support\Facades\Route;
 
@@ -62,3 +63,10 @@ Route::get('/major-characteristics/create/{collegeMajor}', [MajorCharacteristicC
     ->name('major-characteristics.create');
 // ! kalo misalnya ada yang diubah exclude dari default resource
 Route::resource('major-characteristics', MajorCharacteristicController::class)->except(['create']);
+
+
+Route::prefix('recomendations')->name('recomendations.')->group(function ()
+{
+    Route::get('/my-recomendations', [SawResultController::class, 'myRecommendations'])->name('my-recomendations');
+    Route::post('/calculate-recomendations', [SawResultController::class, 'calculateCurrentStudentRecommendations'])->name('calculate-recommendations');
+});

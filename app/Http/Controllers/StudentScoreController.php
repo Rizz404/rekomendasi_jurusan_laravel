@@ -234,6 +234,7 @@ class StudentScoreController extends Controller
             Log::error("Student score creation failed: " . $e->getMessage());
             return redirect()->back()
                 ->with("error", "Gagal menyimpan nilai siswa. Silahkan coba lagi.")
+                ->with("raw", $e)
                 ->withInput();
         }
     }

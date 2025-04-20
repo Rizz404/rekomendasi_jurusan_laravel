@@ -21,8 +21,8 @@ class MajorCharacteristicFactory extends Factory
         return [
             'college_major_id' => CollegeMajor::factory(),
             'criteria_id' => Criteria::factory(),
-            'compatibility_weight' => $this->faker->randomFloat(2, 0, 1),
-            'minimum_score' => $this->faker->optional()->randomFloat(2, 0, 100),
+            'compatibility_weight' => $this->faker->randomFloat(2, 0.1, 1),
+            'minimum_score' => $this->faker->randomFloat(2, 60, 80),
         ];
     }
 }

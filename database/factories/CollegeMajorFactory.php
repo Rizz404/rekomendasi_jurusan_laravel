@@ -19,12 +19,44 @@ class CollegeMajorFactory extends Factory
     public function definition(): array
     {
         return [
-            'major_name' => $this->faker->jobTitle(),
-            'faculty' => $this->faker->word(),
+            'major_name' => $this->faker->randomElement([
+                'Teknik Informatika',
+                'Teknik Elektro',
+                'Manajemen',
+                'Akuntansi',
+                'Kedokteran',
+                'Hukum',
+                'Psikologi',
+                'Biologi',
+                'Teknik Sipil',
+                'Farmasi',
+                'Sastra Inggris',
+                'Ilmu Komunikasi',
+                'Arsitektur',
+                'Pendidikan Dokter'
+            ]),
+            'faculty' => $this->faker->randomElement([
+                'Fakultas Teknik',
+                'Fakultas Ekonomi dan Bisnis',
+                'Fakultas Kedokteran',
+                'Fakultas Hukum',
+                'Fakultas Psikologi',
+                'Fakultas MIPA',
+                'Fakultas Ilmu Budaya',
+                'Fakultas Ilmu Sosial dan Politik'
+            ]),
             'description' => $this->faker->paragraph(),
-            'field_of_study' => $this->faker->word(),
+            'field_of_study' => $this->faker->randomElement([
+                'Teknik',
+                'Sains',
+                'Sosial',
+                'Kesehatan',
+                'Ekonomi',
+                'Pendidikan',
+                'Seni'
+            ]),
             'career_prospects' => $this->faker->paragraph(),
-            'is_active' => $this->faker->boolean(),
+            'is_active' => true,
         ];
     }
 }

@@ -22,10 +22,10 @@ class CriteriaFactory extends Factory
         return [
             'name' => $this->faker->word(),
             'description' => $this->faker->sentence(),
-            'weight' => $this->faker->randomFloat(2, 0.1, 5),
+            'weight' => $this->faker->randomFloat(2, 0.1, 1),
             'type' => $this->faker->randomElement(['benefit', 'cost']),
             'school_type' => $this->faker->randomElement(['SMA', 'SMK', 'All']),
-            'is_active' => $this->faker->boolean(),
+            'is_active' => true,
         ];
     }
 
