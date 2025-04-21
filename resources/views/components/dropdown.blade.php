@@ -18,7 +18,7 @@
     <div class="relative">
         <select id="{{ $name }}" name="{{ $name }}"
             {{ $attributes->class([
-                'px-3 py-2 block w-full rounded-md border-slate-300 text-slate-700 focus:ring-slate-500 focus:border-slate-500 shadow-sm',
+                'px-3 py-2 block w-full rounded-md border border-slate-300 text-slate-700 focus:ring-slate-500 focus:border-slate-500 shadow-sm',
                 'border-red-500' => $errors->has($name),
             ]) }}>
             {{ $slot }}

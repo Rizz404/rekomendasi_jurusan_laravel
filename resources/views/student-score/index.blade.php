@@ -1,8 +1,5 @@
 <x-user-layout title="Nilai kamu">
     <div class="container px-4 py-6">
-        @if (session('success'))
-            <x-alert>{{ session('success') }}</x-alert>
-        @endif
 
         <div class="flex items-center justify-between ">
             <h2 class="text-2xl font-bold text-slate-800">

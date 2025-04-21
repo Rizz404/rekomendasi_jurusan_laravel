@@ -24,7 +24,7 @@ class MajorCharacteristicController extends Controller
             ->orderByDesc("created_at")
             ->get();
 
-        return view("major-characteristic.index", compact("majorChars"));
+        return view("admin.major-characteristic.index", compact("majorChars"));
     }
 
     /**
@@ -37,7 +37,7 @@ class MajorCharacteristicController extends Controller
             ->get();
 
 
-        return view("major-characteristic.create", [
+        return view("admin.major-characteristic.create", [
             "collegeMajor" => $collegeMajor,
             "criterias" => $criterias,
         ]);
@@ -89,7 +89,7 @@ class MajorCharacteristicController extends Controller
             ->orderByDesc("created_at")
             ->get();
 
-        return view("major-characteristic.create-many", [
+        return view("admin.major-characteristic.create-many", [
             "collegeMajor" => $collegeMajor,
             "criterias" => $criterias,
         ]);
@@ -143,7 +143,7 @@ class MajorCharacteristicController extends Controller
     public function show(MajorCharacteristic $majorChar)
     {
         $majorChar->load(['criteria']);
-        return view("major-characteristic.show", compact("majorChar"));
+        return view("admin.major-characteristic.show", compact("majorChar"));
     }
 
     /**
@@ -154,7 +154,7 @@ class MajorCharacteristicController extends Controller
 
         $majorChar->load(['criteria']);
 
-        return view("major-characteristic.edit", [
+        return view("admin.major-characteristic.edit", [
             "majorChar" => $majorChar,
         ]);
     }

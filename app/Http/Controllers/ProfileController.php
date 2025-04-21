@@ -13,7 +13,7 @@ class ProfileController extends Controller
     public function index()
     {
         $user = User::with('student')->find(Auth::id());
-        return view('profile.index', compact('user'));
+        return view('user.profile.index', compact('user'));
     }
 
     public function update(Request $request)

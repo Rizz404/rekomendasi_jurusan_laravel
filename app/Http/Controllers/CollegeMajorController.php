@@ -17,7 +17,7 @@ class CollegeMajorController extends Controller
     {
         $collegeMajors = CollegeMajor::orderByDesc('created_at')->get();
 
-        return view('college-major.index', compact('collegeMajors'));
+        return view('admin.college-major.index', compact('collegeMajors'));
     }
 
     /**
@@ -25,7 +25,7 @@ class CollegeMajorController extends Controller
      */
     public function create()
     {
-        return view('college-major.create');
+        return view('admin.college-major.create');
     }
 
     /**
@@ -71,7 +71,7 @@ class CollegeMajorController extends Controller
         // sudah memiliki data $item->criteria yang ter-load.
 
         // Kirim $collegeMajor (yang sudah lengkap datanya) ke view
-        return view("college-major.show", compact('collegeMajor'));
+        return view("admin.college-major.show", compact('collegeMajor'));
     }
 
     /**
@@ -79,7 +79,7 @@ class CollegeMajorController extends Controller
      */
     public function edit(CollegeMajor $collegeMajor)
     {
-        return view("college-major.edit", compact('collegeMajor'));
+        return view("admin.college-major.edit", compact('collegeMajor'));
     }
 
     /**

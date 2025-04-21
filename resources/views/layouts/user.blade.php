@@ -2,7 +2,7 @@
 
 {{-- * Passing props dari base layout --}}
 <x-base-layout title="{{ $title }}">
-    <x-layouts.header />
+    <x-layouts.user-header />
     @php
         $alertTypes = ['success', 'error', 'warning', 'info'];
     @endphp

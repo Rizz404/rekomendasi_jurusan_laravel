@@ -12,7 +12,7 @@ class AuthController extends Controller
 {
     public function showRegisterForm()
     {
-        return view('auth.register');
+        return view('shared.auth.register');
     }
 
     public function register(Request $request)
@@ -49,7 +49,7 @@ class AuthController extends Controller
 
             Auth::login($user);
 
-            return redirect()->route('home')->with('success', 'Registrasi berhasil!');
+            return redirect()->route('profile')->with('success', 'Registrasi berhasil!');
         }
         catch (\Exception $e)
         {
@@ -63,7 +63,7 @@ class AuthController extends Controller
 
     public function showLoginForm()
     {
-        return view('auth.login');
+        return view('shared.auth.login');
     }
 
     public function login(Request $request)
@@ -82,7 +82,7 @@ class AuthController extends Controller
         if (Auth::attempt($credentials, $request->remember))
         {
             $request->session()->regenerate();
-            return redirect()->intended('/')->with('success', 'Login berhasil!');
+            return redirect()->intended('/profile')->with('success', 'Login berhasil!');
         }
 
         return back()

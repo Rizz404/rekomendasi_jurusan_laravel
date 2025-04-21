@@ -35,6 +35,6 @@ class HomeController extends Controller
 
         // dump($users);
 
-        return view('home.home');
+        return view('user.home.index');
     }
 }

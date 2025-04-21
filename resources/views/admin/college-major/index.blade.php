@@ -1,9 +1,5 @@
 <x-user-layout title="Jurusan Kuliah">
     <div class="container px-4 py-6">
-        @if (session('success'))
-            <x-alert>{{ session('success') }}</x-alert>
-        @endif
-
         <div class=" flex justify-between items-center">
             <h2 class=" text-2xl font-bold text-slate-800 ">
                 List jurusan kuliah

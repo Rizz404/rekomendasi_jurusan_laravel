@@ -16,7 +16,7 @@ class CriteriaController extends Controller
     {
         $criterias = Criteria::orderByDesc('created_at')->get();
 
-        return view('criteria.index', compact('criterias'));
+        return view('admin.criteria.index', compact('criterias'));
     }
 
     /**
@@ -24,7 +24,7 @@ class CriteriaController extends Controller
      */
     public function create()
     {
-        return view('criteria.create', [
+        return view('admin.criteria.create', [
             'schoolTypes' => Criteria::SCHOOL_TYPES,
             'types' => Criteria::TYPES
         ]);
@@ -65,7 +65,7 @@ class CriteriaController extends Controller
      */
     public function show(Criteria $criteria)
     {
-        return view("criteria.show", compact('criteria'));
+        return view("admin.criteria.show", compact('criteria'));
     }
 
     /**
@@ -73,7 +73,7 @@ class CriteriaController extends Controller
      */
     public function edit(Criteria $criteria)
     {
-        return view('criteria.edit', [
+        return view('admin.criteria.edit', [
             'criteria' => $criteria,
             'schoolTypes' => Criteria::SCHOOL_TYPES,
             'types' => Criteria::TYPES
