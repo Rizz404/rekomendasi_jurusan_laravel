@@ -8,6 +8,8 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\CriteriaController;
 use App\Http\Controllers\MajorCharacteristicController;
+use App\Http\Controllers\MyGradeController;
+use App\Http\Controllers\MyRecomendationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SawResultController;
 use App\Http\Controllers\StudentScoreController;
@@ -69,4 +71,18 @@ Route::prefix('recomendations')->name('recomendations.')->group(function ()
 {
     Route::get('/my-recomendations', [SawResultController::class, 'myRecommendations'])->name('my-recomendations');
     Route::post('/calculate-recomendations', [SawResultController::class, 'calculateCurrentStudentRecommendations'])->name('calculate-recommendations');
+});
+
+Route::prefix('my-grades')->name('my-grades.')->group(function ()
+{
+    Route::get('/create-many', [MyGradeController::class, 'createMany'])->name('create-many');
+    Route::post('/store-many', [MyGradeController::class, 'storeMany'])->name('store-many');
+    Route::post('/delete-many', [MyGradeController::class, 'deleteMany'])->name('delete-many');
+});
+Route::resource('my-grades', MyGradeController::class);
+
+Route::prefix('my-recomendations')->name('my-recomendations.')->group(function ()
+{
+    Route::get('/index', [MyRecomendationController::class, 'index'])->name('index');
+    Route::post('/calculate', [MyRecomendationController::class, 'calculate'])->name('calculate');
 });

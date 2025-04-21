@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
 
-class StudentScoreController extends Controller
+class MyGradeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,7 +26,7 @@ class StudentScoreController extends Controller
             ->orderByDesc("created_at")
             ->get();
 
-        return view("student-score.index", compact("studentScores"));
+        return view("user.my-grade.index", compact("studentScores"));
     }
 
     /**
@@ -34,22 +34,13 @@ class StudentScoreController extends Controller
      */
     public function create()
     {
-        // Get the currently logged in user
         $user = Auth::user();
 
-        // Get the student associated with the logged in user
-        $student = Student::where('user_id', $user->id)->first();
+        $student = Student::where('user_id', $user->id)->firstOrFail();
 
-        if (!$student)
-        {
-            return redirect()->back()
-                ->with("error", "Data siswa tidak ditemukan untuk user ini.");
-        }
-
-        // Get school type from student data to filter criterias
         $schoolType = $student->school_type === 'high_school' ? 'SMA' : 'SMK';
 
-        // Get criterias based on student's school type or the "All" type
+
         $criterias = Criteria::where('is_active', true)
             ->where(function ($query) use ($schoolType)
             {
@@ -59,18 +50,18 @@ class StudentScoreController extends Controller
             ->orderByDesc("created_at")
             ->get();
 
-        // Get criteria IDs that the student already has scores for
+
         $existingCriteriaIds = StudentScore::where('student_id', $student->id)
             ->pluck('criteria_id')
             ->toArray();
 
-        // Filter out criteria that the student already has scores for
+
         $availableCriterias = $criterias->filter(function ($criteria) use ($existingCriteriaIds)
         {
             return !in_array($criteria->id, $existingCriteriaIds);
         });
 
-        return view("student-score.create", [
+        return view("user.my-grade.create", [
             "criterias" => $availableCriterias,
             "student" => $student
         ]);
@@ -81,10 +72,10 @@ class StudentScoreController extends Controller
      */
     public function store(Request $request)
     {
-        // Get the currently logged in user
+
         $user = Auth::user();
 
-        // Get the student associated with the logged in user
+
         $student = Student::where('user_id', $user->id)->first();
 
         if (!$student)
@@ -103,14 +94,14 @@ class StudentScoreController extends Controller
             "score" => "required|decimal:2|between:0.01,999.99",
         ]);
 
-        // Add the student_id to the validated data
+
         $validated['student_id'] = $student->id;
 
         try
         {
             StudentScore::create($validated);
 
-            return redirect()->route("student-scores.index")
+            return redirect()->route("my-grades.index")
                 ->with("success", "Nilai siswa berhasil dibuat");
         }
         catch (\Exception $e)
@@ -127,10 +118,10 @@ class StudentScoreController extends Controller
      */
     public function createMany()
     {
-        // Get the currently logged in user
+
         $user = Auth::user();
 
-        // Get the student associated with the logged in user
+
         $student = Student::where('user_id', $user->id)->first();
 
         if (!$student)
@@ -139,10 +130,10 @@ class StudentScoreController extends Controller
                 ->with("error", "Data siswa tidak ditemukan untuk user ini.");
         }
 
-        // Get school type from student data to filter criterias
+
         $schoolType = $student->school_type === 'high_school' ? 'SMA' : 'SMK';
 
-        // Get criterias based on student's school type or the "All" type
+
         $criterias = Criteria::where('is_active', true)
             ->where(function ($query) use ($schoolType)
             {
@@ -152,18 +143,18 @@ class StudentScoreController extends Controller
             ->orderByDesc("created_at")
             ->get();
 
-        // Get criteria IDs that the student already has scores for
+
         $existingCriteriaIds = StudentScore::where('student_id', $student->id)
             ->pluck('criteria_id')
             ->toArray();
 
-        // Filter out criteria that the student already has scores for
+
         $availableCriterias = $criterias->filter(function ($criteria) use ($existingCriteriaIds)
         {
             return !in_array($criteria->id, $existingCriteriaIds);
         });
 
-        return view("student-score.create-many", [
+        return view("user.my-grade.create-many", [
             "criterias" => $availableCriterias,
             "student" => $student
         ]);
@@ -174,10 +165,10 @@ class StudentScoreController extends Controller
      */
     public function storeMany(Request $request)
     {
-        // Get the currently logged in user
+
         $user = Auth::user();
 
-        // Get the student associated with the logged in user
+
         $student = Student::where('user_id', $user->id)->first();
 
         if (!$student)
@@ -202,10 +193,10 @@ class StudentScoreController extends Controller
         {
             foreach ($studentScores as $studentScoreData)
             {
-                // Add the student_id to each score data
+
                 $studentScoreData['student_id'] = $student->id;
 
-                // Check for duplicate student_id and criteria_id combination
+
                 $existingScore = StudentScore::where('student_id', $student->id)
                     ->where('criteria_id', $studentScoreData['criteria_id'])
                     ->first();
@@ -217,7 +208,7 @@ class StudentScoreController extends Controller
                 }
             }
 
-            return redirect()->route("student-scores.index")
+            return redirect()->route("my-grades.index")
                 ->with("success", "Nilai siswa berhasil dibuat sebanyak {$created}");
         }
         catch (\Exception $e)
@@ -235,21 +226,21 @@ class StudentScoreController extends Controller
      */
     public function show(StudentScore $studentScore)
     {
-        // Get the currently logged in user
+
         $user = Auth::user();
 
-        // Get the student associated with the logged in user
+
         $student = Student::where('user_id', $user->id)->first();
 
-        // Make sure the student can only see their own scores
+
         if ($studentScore->student_id !== $student->id)
         {
-            return redirect()->route("student-scores.index")
+            return redirect()->route("my-grades.index")
                 ->with("error", "Anda tidak memiliki akses ke nilai ini.");
         }
 
         $studentScore->load(['criteria']);
-        return view("student-score.show", compact("studentScore"));
+        return view("user.my-grade.show", compact("studentScore"));
     }
 
     /**
@@ -257,22 +248,22 @@ class StudentScoreController extends Controller
      */
     public function edit(StudentScore $studentScore)
     {
-        // Get the currently logged in user
+
         $user = Auth::user();
 
-        // Get the student associated with the logged in user
+
         $student = Student::where('user_id', $user->id)->first();
 
-        // Make sure the student can only edit their own scores
+
         if ($studentScore->student_id !== $student->id)
         {
-            return redirect()->route("student-scores.index")
+            return redirect()->route("my-grades.index")
                 ->with("error", "Anda tidak memiliki akses untuk mengedit nilai ini.");
         }
 
         $studentScore->load(['criteria']);
 
-        return view("student-score.edit", [
+        return view("user.my-grade.edit", [
             "studentScore" => $studentScore,
             "student" => $student
         ]);
@@ -283,16 +274,16 @@ class StudentScoreController extends Controller
      */
     public function update(Request $request, StudentScore $studentScore)
     {
-        // Get the currently logged in user
+
         $user = Auth::user();
 
-        // Get the student associated with the logged in user
+
         $student = Student::where('user_id', $user->id)->first();
 
-        // Make sure the student can only update their own scores
+
         if ($studentScore->student_id !== $student->id)
         {
-            return redirect()->route("student-scores.index")
+            return redirect()->route("my-grades.index")
                 ->with("error", "Anda tidak memiliki akses untuk memperbarui nilai ini.");
         }
 
@@ -303,7 +294,7 @@ class StudentScoreController extends Controller
         try
         {
             $studentScore->update($validated);
-            return redirect()->route("student-scores.show", $studentScore)
+            return redirect()->route("my-grades.show", $studentScore)
                 ->with("success", "Nilai siswa berhasil diperbarui");
         }
         catch (\Exception $e)
@@ -320,23 +311,23 @@ class StudentScoreController extends Controller
      */
     public function destroy(StudentScore $studentScore)
     {
-        // Get the currently logged in user
+
         $user = Auth::user();
 
-        // Get the student associated with the logged in user
+
         $student = Student::where('user_id', $user->id)->first();
 
-        // Make sure the student can only delete their own scores
+
         if ($studentScore->student_id !== $student->id)
         {
-            return redirect()->route("student-scores.index")
+            return redirect()->route("my-grades.index")
                 ->with("error", "Anda tidak memiliki akses untuk menghapus nilai ini.");
         }
 
         try
         {
             $studentScore->delete();
-            return redirect()->route("student-scores.index")
+            return redirect()->route("my-grades.index")
                 ->with("success", "Nilai siswa berhasil dihapus");
         }
         catch (\Exception $e)
@@ -352,10 +343,10 @@ class StudentScoreController extends Controller
      */
     public function destroyMany(Request $request)
     {
-        // Get the currently logged in user
+
         $user = Auth::user();
 
-        // Get the student associated with the logged in user
+
         $student = Student::where('user_id', $user->id)->first();
 
         if (!$student)
@@ -371,12 +362,12 @@ class StudentScoreController extends Controller
                 "student_score_ids.*" => "exists:student_scores,id",
             ]);
 
-            // Ensure the student can only delete their own scores
+
             $deleted = StudentScore::whereIn('id', $request->student_score_ids)
                 ->where('student_id', $student->id)
                 ->delete();
 
-            return redirect()->route("student-scores.index")
+            return redirect()->route("my-grades.index")
                 ->with("success", "Berhasil menghapus {$deleted} nilai siswa");
         }
         catch (\Exception $e)

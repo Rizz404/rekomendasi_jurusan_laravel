@@ -18,6 +18,10 @@ class StudentScore extends Model
         'input_date',
     ];
 
+    protected $casts = [
+        'input_date' => 'datetime',
+    ];
+
     public function student(): BelongsTo
     {
         return $this->belongsTo(Student::class, 'student_id');
