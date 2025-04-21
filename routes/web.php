@@ -42,9 +42,13 @@ Route::middleware('auth')->group(function ()
     Route::put('/profile', [ProfileController::class, 'update']);
 });
 
+Route::middleware(['auth', 'role:admin'])->group(function ()
+{
+    Route::resource('college-majors', CollegeMajorController::class);
+});
+
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
 
-Route::resource('college-majors', CollegeMajorController::class);
 
 Route::prefix('student-scores')->name('student-scores.')->group(function ()
 {
