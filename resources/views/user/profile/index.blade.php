@@ -1,9 +1,9 @@
 <x-user-layout title="Profile">
     <div class="container max-w-2xl py-4 mx-auto">
-        <form action="{{ route('profile') }}" method="POST"
+        <form action="{{ route('profile.upsert') }}" method="POST"
             class="flex flex-col gap-4">
             @csrf
-            @method('PUT')
+            @method('PATCH')
 
             <x-input label="Username" name="username"
                 value="{{ old('username', $user->username) }}"

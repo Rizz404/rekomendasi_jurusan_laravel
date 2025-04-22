@@ -16,7 +16,7 @@ class ProfileController extends Controller
         return view('user.profile.index', compact('user'));
     }
 
-    public function update(Request $request)
+    public function upsert(Request $request)
     {
         $user = Auth::user();
 
@@ -67,6 +67,6 @@ class ProfileController extends Controller
             ]
         );
 
-        return redirect()->route('profile')->with('success', 'Profile updated successfully');
+        return redirect()->route('profile.index')->with('success', 'Profile updated successfully');
     }
 }

@@ -3,8 +3,8 @@
         class="flex items-center justify-center min-h-screen py-12 bg-slate-100 sm:px-6 lg:px-8">
         <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
             <div class="px-4 py-8 bg-white shadow sm:rounded-lg sm:px-10">
-                <form class="flex flex-col gap-4" action="{{ route('login') }}"
-                    method="POST">
+                <form class="flex flex-col gap-4"
+                    action="{{ route('auth.login') }}" method="POST">
                     @csrf
 
 
@@ -17,7 +17,7 @@
 
                     <p class="mt-2 text-sm text-slate-600 text-end">
                         Dont have account ?
-                        <a href="{{ route('register') }}"
+                        <a href="{{ route('auth.register') }}"
                             class="font-medium text-slate-600 hover:text-slate-500">
                             register
                         </a>
