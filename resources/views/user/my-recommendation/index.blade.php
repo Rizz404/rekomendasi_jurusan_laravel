@@ -7,7 +7,7 @@
                         <h2 class="text-2xl font-semibold text-gray-800">
                             Rekomendasi Jurusan Kuliah</h2>
                         <form
-                            action="{{ route('recomendations.calculate-recommendations') }}"
+                            action="{{ route('my-recommendations.recalculate', $student) }}"
                             method="POST">
                             @csrf
                             <button type="submit"

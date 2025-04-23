@@ -9,6 +9,11 @@
     'step' => null,
 ])
 
+@php
+    // * Mengubah nama field dari bracket ke dot notation
+    $dotName = str_replace(['[', ']'], ['.', ''], $name);
+@endphp
+
 @if ($name)
     <div class="space-y-2">
         @if ($label)
@@ -24,19 +29,19 @@
         <div class="relative">
             <input type="{{ $type }}" id="{{ $name }}"
                 name="{{ $name }}" placeholder="{{ $placeholder }}"
-                value="{{ old($name, $value) }}"
+                value="{{ old($dotName, $value) }}"
                 autocomplete="{{ $autocomplete }}" step="{{ $step }}"
                 {{ $attributes->class([
                     'w-full px-3 py-2 border rounded-md shadow-sm transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-opacity-50',
                     'border-red-500 text-red-900 placeholder-red-300 focus:ring-red-500 focus:border-red-500' => $errors->has(
-                        $name,
+                        $dotName,
                     ),
                     'border-slate-300 text-slate-900 focus:ring-slate-500 focus:border-slate-500' => !$errors->has(
-                        $name,
+                        $dotName,
                     ),
                 ]) }}>
 
-            @if ($errors->has($name))
+            @if ($errors->has($dotName))
                 <div
                     class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
                     <svg class="w-5 h-5 text-red-500" fill="currentColor"
@@ -49,7 +54,7 @@
             @endif
         </div>
 
-        @error($name)
+        @error($dotName)
             <p class="flex items-center mt-1 text-sm text-red-600">
                 <svg class="w-4 h-4 mr-1 text-red-500" fill="currentColor"
                     viewBox="0 0 20 20">

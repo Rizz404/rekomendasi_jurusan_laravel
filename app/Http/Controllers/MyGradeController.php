@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
 
+// Todo: Pilih antara buat validasi atau pake OrFail
 class MyGradeController extends Controller
 {
     /**
@@ -35,11 +36,15 @@ class MyGradeController extends Controller
     public function create()
     {
         $user = Auth::user();
-
         $student = Student::where('user_id', $user->id)->firstOrFail();
 
-        $schoolType = $student->school_type === 'high_school' ? 'SMA' : 'SMK';
+        if (!$this->isProfileComplete($student))
+        {
+            return redirect()->route('profile.index')
+                ->with("warning", "Mohon lengkapi profil Anda terlebih dahulu sebelum menambahkan nilai.");
+        }
 
+        $schoolType = $student->school_type === 'high_school' ? 'SMA' : 'SMK';
 
         $criterias = Criteria::where('is_active', true)
             ->where(function ($query) use ($schoolType)
@@ -120,8 +125,6 @@ class MyGradeController extends Controller
     {
 
         $user = Auth::user();
-
-
         $student = Student::where('user_id', $user->id)->first();
 
         if (!$student)
@@ -130,6 +133,11 @@ class MyGradeController extends Controller
                 ->with("error", "Data siswa tidak ditemukan untuk user ini.");
         }
 
+        if (!$this->isProfileComplete($student))
+        {
+            return redirect()->route('profile.index')
+                ->with("warning", "Mohon lengkapi profil Anda terlebih dahulu sebelum menambahkan nilai.");
+        }
 
         $schoolType = $student->school_type === 'high_school' ? 'SMA' : 'SMK';
 
@@ -376,5 +384,28 @@ class MyGradeController extends Controller
             return redirect()->back()
                 ->with("error", "Gagal menghapus banyak nilai siswa: Data mungkin masih terkait dengan entitas lain");
         }
+    }
+
+    private function isProfileComplete(Student $student)
+    {
+        $requiredFields = [
+            'NIS',
+            'name',
+            'gender',
+            'school_origin',
+            'school_type',
+            'school_major',
+            'graduation_year',
+        ];
+
+        foreach ($requiredFields as $field)
+        {
+            if (empty($student->$field))
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

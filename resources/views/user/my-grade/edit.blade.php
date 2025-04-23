@@ -1,3 +1,3 @@
 <div>
-    <!-- The whole future lies in uncertainty: live immediately. - Seneca -->
+    <!-- Simplicity is an acquired taste. - Katharine Gerould -->
 </div>

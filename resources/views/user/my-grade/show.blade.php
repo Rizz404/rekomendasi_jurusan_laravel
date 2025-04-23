@@ -1,3 +1,3 @@
 <div>
-    <!-- Breathing in, I calm body and mind. Breathing out, I smile. - Thich Nhat Hanh -->
+    <!-- Because you are alive, everything is possible. - Thich Nhat Hanh -->
 </div>

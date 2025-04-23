@@ -6,7 +6,7 @@
                 Daftar Nilai Kamu
             </h2>
             <div class="flex gap-2">
-                <x-link-button href="{{ route('student-scores.create') }}"
+                <x-link-button href="{{ route('my-grades.create') }}"
                     class="bg-slate-700 hover:bg-slate-800 text-white">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1"
                         viewBox="0 0 20 20" fill="currentColor">
@@ -16,7 +16,7 @@
                     </svg>
                     Tambah
                 </x-link-button>
-                <x-link-button href="{{ route('student-scores.create-many') }}"
+                <x-link-button href="{{ route('my-grades.create-many') }}"
                     class="bg-slate-600 hover:bg-slate-700 text-white">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1"
                         viewBox="0 0 20 20" fill="currentColor">
@@ -86,7 +86,7 @@
                                 class="mt-4 pt-3 border-t border-slate-100 flex justify-between items-center text-xs text-slate-500">
                                 <span>{{ $studentScore->input_date->format('d M Y') }}</span>
                                 <div class="flex gap-2">
-                                    <a href="{{ route('student-scores.edit', $studentScore->id) }}"
+                                    <a href="{{ route('my-grades.edit', $studentScore->id) }}"
                                         class="text-slate-600 hover:text-slate-800">
                                         <svg xmlns="http://www.w3.org/2000/svg"
                                             class="h-4 w-4" viewBox="0 0 20 20"
@@ -96,7 +96,7 @@
                                         </svg>
                                     </a>
                                     <form
-                                        action="{{ route('student-scores.destroy', $studentScore->id) }}"
+                                        action="{{ route('my-grades.destroy', $studentScore->id) }}"
                                         method="POST" class="inline">
                                         @csrf
                                         @method('DELETE')
@@ -119,20 +119,18 @@
                     </div>
                 @endforeach
             </div>
+            <div class="mt-8 text-center">
+                <x-link-button href="{{ route('my-recommendations.index') }}"
+                    class="bg-slate-800 hover:bg-slate-900 text-white px-6 py-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2"
+                        viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    Lihat Rekomendasi
+                </x-link-button>
+            </div>
         @endif
-
-        <div class="mt-8 text-center">
-            <x-link-button
-                href="{{ route('recomendations.my-recomendations') }}"
-                class="bg-slate-800 hover:bg-slate-900 text-white px-6 py-3">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2"
-                    viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd"
-                        d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"
-                        clip-rule="evenodd" />
-                </svg>
-                Lihat Rekomendasi
-            </x-link-button>
-        </div>
     </div>
 </x-user-layout>

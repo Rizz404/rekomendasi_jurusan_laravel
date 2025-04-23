@@ -13,6 +13,7 @@ class ProfileController extends Controller
     public function index()
     {
         $user = User::with('student')->find(Auth::id());
+
         return view('user.profile.index', compact('user'));
     }
 
@@ -20,12 +21,10 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
 
-        // Convert empty string to null for NIS
         $request->merge([
             'NIS' => $request->input('NIS') !== '' ? $request->input('NIS') : null,
         ]);
 
-        // Validasi
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => [
@@ -46,14 +45,12 @@ class ProfileController extends Controller
             'graduation_year' => 'nullable|integer|digits:4',
         ]);
 
-        // Update User
         $user->update([
             'username' => $request->username,
             'email' => $request->email,
             'phone' => $request->phone,
         ]);
 
-        // Update atau Create Student
         $user->student()->updateOrCreate(
             ['user_id' => $user->id],
             [

@@ -25,7 +25,7 @@
                 value="{{ old('NIS', $user->student?->NIS) }}"
                 placeholder="Input NIS" required />
 
-            <x-dropdown label="Gender">
+            <x-dropdown label="Gender" name="gender" required>
                 <option value="">Pilih Gender</option>
                 <option value="man"
                     {{ old('gender', $user->student?->gender) === 'man' ? 'selected' : '' }}>
@@ -41,7 +41,7 @@
                 value="{{ old('school_origin', $user->student?->school_origin) }}"
                 placeholder="Input school_origin" required />
 
-            <x-dropdown>
+            <x-dropdown label="Tipe sekolah" name="school_type" required>
                 <option value="">Select School Type</option>
                 <option value="high_school"
                     {{ old('school_type', $user->student?->school_type) === 'high_school' ? 'selected' : '' }}>
@@ -63,6 +63,13 @@
 
             {{-- Todo: Nanti pas pertama kali update bakal redirect ke kalkulasi nilai --}}
             <x-button type="submit">Update profile</x-button>
+        </form>
+
+        <form action="{{ route('logout') }}" method="post"
+            class="flex flex-col mt-4">
+            @csrf
+            @method('POST')
+            <x-button type="submit">Logout</x-button>
         </form>
     </div>
 </x-user-layout>

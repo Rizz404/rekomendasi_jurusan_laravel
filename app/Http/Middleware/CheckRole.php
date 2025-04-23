@@ -37,6 +37,6 @@ class CheckRole
         }
 
         // Jika role tidak sesuai
-        return redirect()->route('home')->with('error', 'Anda tidak memiliki akses ke halaman tersebut');
+        return redirect()->route('landing')->with('error', 'Anda tidak memiliki akses ke halaman tersebut');
     }
 }

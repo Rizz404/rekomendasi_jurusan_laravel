@@ -24,8 +24,7 @@
             @endforeach
         </div>
 
-        <x-link-button
-            href="{{ route('recomendations.my-recomendations') }}">Lihat
+        <x-link-button href="{{ route('my-recommendations.index') }}">Lihat
             rekomendasi</x-link-button>
     </div>
 </x-user-layout>

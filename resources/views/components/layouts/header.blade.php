@@ -19,7 +19,7 @@
             </div>
             @auth
                 <div class="flex items-center gap-2">
-                    <a href="{{ route('profile') }}"
+                    <a href="{{ route('profile.index') }}"
                         class="font-medium cursor-pointer hover:underline underline-offset-4">
                         Profile
                     </a>

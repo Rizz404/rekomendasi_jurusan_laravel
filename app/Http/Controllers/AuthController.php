@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SawResult;
+use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -44,19 +46,21 @@ class AuthController extends Controller
             $user = User::create([
                 'username' => $validated['username'],
                 'email' => $validated['email'],
-                'password' => Hash::make($validated['password'])
+                'password' => Hash::make($validated['password']),
             ]);
 
-            Auth::login($user);
+            Student::create([
+                'user_id' => $user->id,
+            ]);
 
-            return redirect()->route('profile')->with('success', 'Registrasi berhasil!');
+            return redirect()->route('login')->with('success', 'Registrasi berhasil!');
         }
         catch (\Exception $e)
         {
             return back()
                 ->withInput()
                 ->withErrors([
-                    'registration_error' => 'Gagal membuat akun. Silakan coba lagi atau hubungi admin' . $e->getMessage()
+                    'registration_error' => 'Gagal membuat akun. Silakan coba lagi atau hubungi admin: ' . $e->getMessage()
                 ]);
         }
     }
@@ -79,16 +83,16 @@ class AuthController extends Controller
             ]
         ]);
 
-        if (Auth::attempt($credentials, $request->remember))
+        if (Auth::attempt($credentials, $request->boolean('remember')))
         {
             $request->session()->regenerate();
-            return redirect()->intended('/profile')->with('success', 'Login berhasil!');
+
+            return redirect()->intended('/home')->with('success', 'Login berhasil!');
         }
 
         return back()
             ->withErrors([
                 'email' => 'Email atau password tidak valid',
-                'password' => 'Email atau password tidak valid'
             ])
             ->onlyInput('email');
     }

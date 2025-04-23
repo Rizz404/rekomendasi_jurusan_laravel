@@ -21,7 +21,7 @@
                     </svg>
                     <span>My Grades</span>
                 </a>
-                <a href="{{ route('my-recomendations.index') }}"
+                <a href="{{ route('my-recommendations.index') }}"
                     class="font-medium cursor-pointer hover:underline underline-offset-4 flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1"
                         viewBox="0 0 20 20" fill="currentColor">
@@ -35,7 +35,7 @@
             </div>
             @auth
                 <div class="flex items-center gap-2">
-                    <a href="{{ route('profile') }}"
+                    <a href="{{ route('profile.index') }}"
                         class="font-medium cursor-pointer hover:underline underline-offset-4 flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1"
                             viewBox="0 0 20 20" fill="currentColor">
@@ -45,21 +45,6 @@
                         </svg>
                         <span>Profile</span>
                     </a>
-                    <form method="POST" action="{{ route('logout') }}"
-                        class="inline">
-                        @csrf
-                        <button type="submit"
-                            class="font-medium cursor-pointer hover:underline underline-offset-4 flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg"
-                                class="h-5 w-5 mr-1" viewBox="0 0 20 20"
-                                fill="currentColor">
-                                <path fill-rule="evenodd"
-                                    d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z"
-                                    clip-rule="evenodd" />
-                            </svg>
-                            <span>Logout</span>
-                        </button>
-                    </form>
                 </div>
             @else
                 <div class="flex gap-2 items-center">

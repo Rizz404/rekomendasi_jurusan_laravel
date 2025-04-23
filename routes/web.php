@@ -24,26 +24,24 @@ Route::get('/', [LandingController::class, 'index'])->name('landing');
 // * Auth
 Route::middleware('guest')->group(function ()
 {
-    Route::prefix('auth')->name('auth.')->group(function ()
-    {
-        Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-        Route::post('/login', [AuthController::class, 'login']);
-        Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
-        Route::post('/register', [AuthController::class, 'register']);
-    });
+    // * Default routenya login dan register gak usah diganti-ganti
+    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
+    Route::post('/register', [AuthController::class, 'register']);
 });
 
-Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('auth.logout');
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
 
 // * User route
-Route::middleware(['auth', 'role:user '])->group(function ()
+Route::middleware(['auth', 'role:user'])->group(function ()
 {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 
     Route::prefix('profile')->name('profile.')->group(function ()
     {
         Route::get('/index', [ProfileController::class, 'index'])->name('index');
-        Route::patch('/upsert', [ProfileController::class, 'update'])->name('upsert');
+        Route::patch('/upsert', [ProfileController::class, 'upsert'])->name('upsert');
     });
 
     Route::prefix('my-grades')->name('my-grades.')->group(function ()
@@ -54,10 +52,11 @@ Route::middleware(['auth', 'role:user '])->group(function ()
     });
     Route::resource('my-grades', MyGradeController::class);
 
-    Route::prefix('my-recomendations')->name('my-recomendations.')->group(function ()
+    Route::prefix('my-recommendations')->name('my-recommendations.')->group(function ()
     {
-        Route::get('/index', [MyRecomendationController::class, 'index'])->name('index');
-        Route::post('/calculate', [MyRecomendationController::class, 'calculate'])->name('calculate');
+        Route::get('/', [MyRecomendationController::class, 'index'])->name('index');
+        Route::post('/calculate/{student}', [MyRecomendationController::class, 'calculate'])->name('calculate');
+        Route::post('/recalculate/{student}', [MyRecomendationController::class, 'recalculate'])->name('recalculate');
     });
 });
 

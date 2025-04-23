@@ -4,7 +4,7 @@
         <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
             <div class="px-4 py-8 bg-white shadow sm:rounded-lg sm:px-10">
                 <form class="flex flex-col gap-4 "
-                    action="{{ route('auth.register') }}" method="POST">
+                    action="{{ route('register') }}" method="POST">
                     @csrf
 
                     @if ($errors->any())
@@ -32,7 +32,7 @@
 
                     <p class="mt-2 text-sm text-gray-600 text-end">
                         Already have an account?
-                        <a href="{{ route('auth.login') }}"
+                        <a href="{{ route('login') }}"
                             class="font-medium text-slate-600 hover:text-slate-500">
                             Login
                         </a>

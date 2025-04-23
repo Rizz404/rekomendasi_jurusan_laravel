@@ -39,7 +39,7 @@ class SawResultController extends Controller
                 ->get();
         }
 
-        return view('recomendation.my-recomendations', compact('recommendations', 'student'));
+        return view('recommendation.my-recommendations', compact('recommendations', 'student'));
     }
 
     /**
