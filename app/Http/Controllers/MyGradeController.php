@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
 
-// Todo: Pilih antara buat validasi atau pake OrFail
 class MyGradeController extends Controller
 {
     /**
@@ -18,9 +17,7 @@ class MyGradeController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-
-        $student = Student::where('user_id', $user->id)->firstOrFail();
+        $student = $this->getAuthenticatedStudent();
 
         $studentScores = StudentScore::with(['criteria'])
             ->where('student_id', $student->id)
@@ -35,13 +32,12 @@ class MyGradeController extends Controller
      */
     public function create()
     {
-        $user = Auth::user();
-        $student = Student::where('user_id', $user->id)->firstOrFail();
+        $student = $this->getAuthenticatedStudent(true);
 
-        if (!$this->isProfileComplete($student))
+        // * Biar gak error kalo return redirect (penting)
+        if (!$student instanceof Student)
         {
-            return redirect()->route('profile.index')
-                ->with("warning", "Mohon lengkapi profil Anda terlebih dahulu sebelum menambahkan nilai.");
+            return $student;
         }
 
         $schoolType = $student->school_type === 'high_school' ? 'SMA' : 'SMK';
@@ -55,11 +51,9 @@ class MyGradeController extends Controller
             ->orderByDesc("created_at")
             ->get();
 
-
         $existingCriteriaIds = StudentScore::where('student_id', $student->id)
             ->pluck('criteria_id')
             ->toArray();
-
 
         $availableCriterias = $criterias->filter(function ($criteria) use ($existingCriteriaIds)
         {
@@ -77,17 +71,7 @@ class MyGradeController extends Controller
      */
     public function store(Request $request)
     {
-
-        $user = Auth::user();
-
-
-        $student = Student::where('user_id', $user->id)->first();
-
-        if (!$student)
-        {
-            return redirect()->back()
-                ->with("error", "Data siswa tidak ditemukan untuk user ini.");
-        }
+        $student = $this->getAuthenticatedStudent();
 
         $validated = $request->validate([
             "criteria_id" => [
@@ -98,7 +82,6 @@ class MyGradeController extends Controller
             ],
             "score" => "required|decimal:2|between:0.01,999.99",
         ]);
-
 
         $validated['student_id'] = $student->id;
 
@@ -123,24 +106,15 @@ class MyGradeController extends Controller
      */
     public function createMany()
     {
+        $student = $this->getAuthenticatedStudent(true);
 
-        $user = Auth::user();
-        $student = Student::where('user_id', $user->id)->first();
-
-        if (!$student)
+        // * Biar gak error kalo return redirect (penting)
+        if (!$student instanceof Student)
         {
-            return redirect()->back()
-                ->with("error", "Data siswa tidak ditemukan untuk user ini.");
-        }
-
-        if (!$this->isProfileComplete($student))
-        {
-            return redirect()->route('profile.index')
-                ->with("warning", "Mohon lengkapi profil Anda terlebih dahulu sebelum menambahkan nilai.");
+            return $student;
         }
 
         $schoolType = $student->school_type === 'high_school' ? 'SMA' : 'SMK';
-
 
         $criterias = Criteria::where('is_active', true)
             ->where(function ($query) use ($schoolType)
@@ -151,11 +125,9 @@ class MyGradeController extends Controller
             ->orderByDesc("created_at")
             ->get();
 
-
         $existingCriteriaIds = StudentScore::where('student_id', $student->id)
             ->pluck('criteria_id')
             ->toArray();
-
 
         $availableCriterias = $criterias->filter(function ($criteria) use ($existingCriteriaIds)
         {
@@ -173,17 +145,7 @@ class MyGradeController extends Controller
      */
     public function storeMany(Request $request)
     {
-
-        $user = Auth::user();
-
-
-        $student = Student::where('user_id', $user->id)->first();
-
-        if (!$student)
-        {
-            return redirect()->back()
-                ->with("error", "Data siswa tidak ditemukan untuk user ini.");
-        }
+        $student = $this->getAuthenticatedStudent();
 
         $request->validate([
             "student_scores" => "required|array|min:1",
@@ -201,9 +163,7 @@ class MyGradeController extends Controller
         {
             foreach ($studentScores as $studentScoreData)
             {
-
                 $studentScoreData['student_id'] = $student->id;
-
 
                 $existingScore = StudentScore::where('student_id', $student->id)
                     ->where('criteria_id', $studentScoreData['criteria_id'])
@@ -234,14 +194,7 @@ class MyGradeController extends Controller
      */
     public function show(StudentScore $studentScore)
     {
-
-        $user = Auth::user();
-
-
-        $student = Student::where('user_id', $user->id)->first();
-
-
-        if ($studentScore->student_id !== $student->id)
+        if (!$this->verifyScoreOwnership($studentScore))
         {
             return redirect()->route("my-grades.index")
                 ->with("error", "Anda tidak memiliki akses ke nilai ini.");
@@ -256,19 +209,13 @@ class MyGradeController extends Controller
      */
     public function edit(StudentScore $studentScore)
     {
-
-        $user = Auth::user();
-
-
-        $student = Student::where('user_id', $user->id)->first();
-
-
-        if ($studentScore->student_id !== $student->id)
+        if (!$this->verifyScoreOwnership($studentScore))
         {
             return redirect()->route("my-grades.index")
                 ->with("error", "Anda tidak memiliki akses untuk mengedit nilai ini.");
         }
 
+        $student = $this->getAuthenticatedStudent();
         $studentScore->load(['criteria']);
 
         return view("user.my-grade.edit", [
@@ -282,14 +229,7 @@ class MyGradeController extends Controller
      */
     public function update(Request $request, StudentScore $studentScore)
     {
-
-        $user = Auth::user();
-
-
-        $student = Student::where('user_id', $user->id)->first();
-
-
-        if ($studentScore->student_id !== $student->id)
+        if (!$this->verifyScoreOwnership($studentScore))
         {
             return redirect()->route("my-grades.index")
                 ->with("error", "Anda tidak memiliki akses untuk memperbarui nilai ini.");
@@ -319,14 +259,7 @@ class MyGradeController extends Controller
      */
     public function destroy(StudentScore $studentScore)
     {
-
-        $user = Auth::user();
-
-
-        $student = Student::where('user_id', $user->id)->first();
-
-
-        if ($studentScore->student_id !== $student->id)
+        if (!$this->verifyScoreOwnership($studentScore))
         {
             return redirect()->route("my-grades.index")
                 ->with("error", "Anda tidak memiliki akses untuk menghapus nilai ini.");
@@ -351,17 +284,7 @@ class MyGradeController extends Controller
      */
     public function destroyMany(Request $request)
     {
-
-        $user = Auth::user();
-
-
-        $student = Student::where('user_id', $user->id)->first();
-
-        if (!$student)
-        {
-            return redirect()->back()
-                ->with("error", "Data siswa tidak ditemukan untuk user ini.");
-        }
+        $student = $this->getAuthenticatedStudent();
 
         try
         {
@@ -369,7 +292,6 @@ class MyGradeController extends Controller
                 "student_score_ids" => "required|array|min:1",
                 "student_score_ids.*" => "exists:student_scores,id",
             ]);
-
 
             $deleted = StudentScore::whereIn('id', $request->student_score_ids)
                 ->where('student_id', $student->id)
@@ -384,6 +306,32 @@ class MyGradeController extends Controller
             return redirect()->back()
                 ->with("error", "Gagal menghapus banyak nilai siswa: Data mungkin masih terkait dengan entitas lain");
         }
+    }
+
+    private function getAuthenticatedStudent($checkProfileComplete = false)
+    {
+        $user = Auth::user();
+        $student = Student::where('user_id', $user->id)->firstOrFail();
+
+        if ($checkProfileComplete && !$this->isProfileComplete($student))
+        {
+            return redirect()->route('profile.index')
+                ->with("warning", "Mohon lengkapi profil Anda terlebih dahulu sebelum menambahkan nilai.");
+        }
+
+        return $student;
+    }
+
+    private function verifyScoreOwnership(StudentScore $studentScore)
+    {
+        $student = $this->getAuthenticatedStudent();
+
+        if ($studentScore->student_id !== $student->id)
+        {
+            return false;
+        }
+
+        return true;
     }
 
     private function isProfileComplete(Student $student)

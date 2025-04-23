@@ -49,11 +49,11 @@ class MyRecomendationController extends Controller
 
     public function calculate(Student $student)
     {
-        // Dibungkus dalam transaction untuk memastikan operasi atomic
         return DB::transaction(function () use ($student)
         {
-            // Hapus semua hasil sebelumnya untuk student ini
-            SawResult::where('student_id', $student->id)->delete();
+            // * Hapus semua hasil sebelumnya untuk student ini
+            // Todo: Karena pakai soft delete jadi seperti ini, nanti cari solusi terbaik
+            SawResult::where('student_id', $student->id)->forceDelete();
 
             $studentScores = StudentScore::where('student_id', $student->id)
                 ->with('criteria')
@@ -216,21 +216,17 @@ class MyRecomendationController extends Controller
      */
     public function recalculate(Student $student)
     {
-        try
+        $result = $this->calculate($student);
+
+        if ($result === true)
         {
-            // Hapus SEMUA hasil untuk student ini
-            $deleted = SawResult::where('student_id', $student->id)->delete();
-
-            // Hitung ulang hasil
-            $result = $this->calculate($student);
-
             return redirect()->route('my-recommendations.index')
-                ->with('success', "Rekomendasi jurusan berhasil dihitung ulang. ($deleted data lama dihapus)");
+                ->with('success', 'Rekomendasi jurusan berhasil dihitung ulang');
         }
-        catch (\Exception $e)
+        else
         {
             return redirect()->route('my-recommendations.index')
-                ->with('error', 'Gagal menghitung ulang: ' . $e->getMessage());
+                ->with('error', 'Gagal menghitung ulang rekomendasi jurusan');
         }
     }
 

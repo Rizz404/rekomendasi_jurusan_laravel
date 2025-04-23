@@ -87,7 +87,15 @@ class AuthController extends Controller
         {
             $request->session()->regenerate();
 
-            return redirect()->intended('/home')->with('success', 'Login berhasil!');
+            $redirectPath = match (Auth::user()->role)
+            {
+                'admin'    => route('admin.dashboard'),
+                'user'  => route('home'),
+                default    => '/home' // Fallback untuk role tidak dikenal
+            };
+
+            return redirect()->intended($redirectPath)
+                ->with('success', 'Login berhasil!');
         }
 
         return back()

@@ -86,7 +86,7 @@
                                 class="mt-4 pt-3 border-t border-slate-100 flex justify-between items-center text-xs text-slate-500">
                                 <span>{{ $studentScore->input_date->format('d M Y') }}</span>
                                 <div class="flex gap-2">
-                                    <a href="{{ route('my-grades.edit', $studentScore->id) }}"
+                                    <a href="{{ route('my-grades.edit', $studentScore) }}"
                                         class="text-slate-600 hover:text-slate-800">
                                         <svg xmlns="http://www.w3.org/2000/svg"
                                             class="h-4 w-4" viewBox="0 0 20 20"
@@ -96,7 +96,7 @@
                                         </svg>
                                     </a>
                                     <form
-                                        action="{{ route('my-grades.destroy', $studentScore->id) }}"
+                                        action="{{ route('my-grades.destroy', $studentScore) }}"
                                         method="POST" class="inline">
                                         @csrf
                                         @method('DELETE')

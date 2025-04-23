@@ -48,7 +48,7 @@ Route::middleware(['auth', 'role:user'])->group(function ()
     {
         Route::get('/create-many', [MyGradeController::class, 'createMany'])->name('create-many');
         Route::post('/store-many', [MyGradeController::class, 'storeMany'])->name('store-many');
-        Route::post('/delete-many', [MyGradeController::class, 'deleteMany'])->name('delete-many');
+        Route::post('/destroy-many', [MyGradeController::class, 'destroyMany'])->name('destroy-many');
     });
     Route::resource('my-grades', MyGradeController::class);
 
@@ -60,7 +60,7 @@ Route::middleware(['auth', 'role:user'])->group(function ()
     });
 });
 
-Route::middleware(['auth', 'role:admin'])->group(function ()
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function ()
 {
     Route::get('/students/search', [StudentController::class, 'search'])->name('students.search');
     Route::resource('students', StudentController::class);

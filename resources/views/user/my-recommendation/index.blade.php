@@ -10,10 +10,9 @@
                             action="{{ route('my-recommendations.recalculate', $student) }}"
                             method="POST">
                             @csrf
-                            <button type="submit"
-                                class="bg-slate-500 hover:bg-slate-600 text-white font-medium py-2 px-4 rounded">
+                            <x-button type="submit">
                                 Hitung Ulang Rekomendasi
-                            </button>
+                            </x-button>
                         </form>
                     </div>
 
@@ -134,7 +133,7 @@
                                                 </div>
                                             </td>
                                             <td class="py-4 px-4">
-                                                <a href="{{ route('college-majors.show', $recommendation->college_major_id) }}"
+                                                <a href="{{ route('admin.college-majors.show', $recommendation->college_major_id) }}"
                                                     class="text-slate-600 hover:text-slate-900">Detail
                                                     Jurusan</a>
                                             </td>
