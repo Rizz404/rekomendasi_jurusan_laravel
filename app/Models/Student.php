@@ -33,12 +33,12 @@ class Student extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function student_scores(): HasMany
+    public function studentScores(): HasMany
     {
         return $this->hasMany(StudentScore::class);
     }
 
-    public function saw_results(): HasMany
+    public function sawResults(): HasMany
     {
         return $this->hasMany(SawResult::class);
     }

@@ -51,13 +51,21 @@ Route::middleware(['auth', 'role:user'])->group(function ()
         Route::get('/{collegeMajor}', [MyCollegeMajorController::class, 'show'])->name('show');
     });
 
+    Route::prefix('my-universities')->name('my-universities.')->group(function ()
+    {
+        Route::get('/', [MyCollegeMajorController::class, 'index'])->name('index');
+        Route::get('/{university}', [MyCollegeMajorController::class, 'show'])->name('show');
+    });
+
     Route::prefix('my-grades')->name('my-grades.')->group(function ()
     {
         Route::get('/create-many', [MyGradeController::class, 'createMany'])->name('create-many');
         Route::post('/store-many', [MyGradeController::class, 'storeMany'])->name('store-many');
         Route::post('/destroy-many', [MyGradeController::class, 'destroyMany'])->name('destroy-many');
     });
-    Route::resource('my-grades', MyGradeController::class);
+    Route::resource('my-grades', MyGradeController::class)->parameters([
+        'my-grades' => 'studentScore'
+    ]);
 
     Route::prefix('my-recommendations')->name('my-recommendations.')->group(function ()
     {

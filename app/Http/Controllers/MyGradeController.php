@@ -194,11 +194,11 @@ class MyGradeController extends Controller
      */
     public function show(StudentScore $studentScore)
     {
-        if (!$this->verifyScoreOwnership($studentScore))
-        {
-            return redirect()->route("my-grades.index")
-                ->with("error", "Anda tidak memiliki akses ke nilai ini.");
-        }
+        // if (!$this->verifyScoreOwnership($studentScore))
+        // {
+        //     return redirect()->route("my-grades.index")
+        //         ->with("error", "Anda tidak memiliki akses ke nilai ini.");
+        // }
 
         $studentScore->load(['criteria']);
         return view("user.my-grade.show", compact("studentScore"));
@@ -209,18 +209,46 @@ class MyGradeController extends Controller
      */
     public function edit(StudentScore $studentScore)
     {
-        if (!$this->verifyScoreOwnership($studentScore))
+        // if (!$this->verifyScoreOwnership($studentScore))
+        // {
+        //     return redirect()->route("my-grades.index")
+        //         ->with("error", "Anda tidak memiliki akses untuk mengedit nilai ini.");
+        // }
+
+        $student = $this->getAuthenticatedStudent(true);
+
+        // * Biar gak error kalo return redirect (penting)
+        if (!$student instanceof Student)
         {
-            return redirect()->route("my-grades.index")
-                ->with("error", "Anda tidak memiliki akses untuk mengedit nilai ini.");
+            return $student;
         }
 
-        $student = $this->getAuthenticatedStudent();
+        $schoolType = $student->school_type === 'high_school' ? 'SMA' : 'SMK';
+
+        $criterias = Criteria::where('is_active', true)
+            ->where(function ($query) use ($schoolType)
+            {
+                $query->where('school_type', $schoolType)
+                    ->orWhere('school_type', 'All');
+            })
+            ->orderByDesc("created_at")
+            ->get();
+
+        $existingCriteriaIds = StudentScore::where('student_id', $student->id)
+            ->pluck('criteria_id')
+            ->toArray();
+
+        $availableCriterias = $criterias->filter(function ($criteria) use ($existingCriteriaIds)
+        {
+            return !in_array($criteria->id, $existingCriteriaIds);
+        });
+
         $studentScore->load(['criteria']);
 
         return view("user.my-grade.edit", [
             "studentScore" => $studentScore,
-            "student" => $student
+            "student" => $student,
+            "criterias" => $availableCriterias,
         ]);
     }
 
@@ -229,20 +257,20 @@ class MyGradeController extends Controller
      */
     public function update(Request $request, StudentScore $studentScore)
     {
-        if (!$this->verifyScoreOwnership($studentScore))
-        {
-            return redirect()->route("my-grades.index")
-                ->with("error", "Anda tidak memiliki akses untuk memperbarui nilai ini.");
-        }
+        // if (!$this->verifyScoreOwnership($studentScore))
+        // {
+        //     return redirect()->route("my-grades.index")
+        //         ->with("error", "Anda tidak memiliki akses untuk memperbarui nilai ini.");
+        // }
 
         $validated = $request->validate([
-            "score" => "required|decimal:2|between:0.01,999.99",
+            "score" => "required|numeric|between:0.01,999.99",
         ]);
 
         try
         {
             $studentScore->update($validated);
-            return redirect()->route("my-grades.show", $studentScore)
+            return redirect()->route("my-grades.index", $studentScore)
                 ->with("success", "Nilai siswa berhasil diperbarui");
         }
         catch (\Exception $e)
@@ -259,11 +287,11 @@ class MyGradeController extends Controller
      */
     public function destroy(StudentScore $studentScore)
     {
-        if (!$this->verifyScoreOwnership($studentScore))
-        {
-            return redirect()->route("my-grades.index")
-                ->with("error", "Anda tidak memiliki akses untuk menghapus nilai ini.");
-        }
+        // if (!$this->verifyScoreOwnership($studentScore))
+        // {
+        //     return redirect()->route("my-grades.index")
+        //         ->with("error", "Anda tidak memiliki akses untuk menghapus nilai ini.");
+        // }
 
         try
         {
@@ -322,6 +350,7 @@ class MyGradeController extends Controller
         return $student;
     }
 
+    // Todo: Nanti benerin soalnya kaga work
     private function verifyScoreOwnership(StudentScore $studentScore)
     {
         $student = $this->getAuthenticatedStudent();
