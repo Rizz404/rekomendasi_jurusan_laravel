@@ -9,6 +9,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\CriteriaController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\MajorCharacteristicController;
+use App\Http\Controllers\MyCollegeMajorController;
 use App\Http\Controllers\MyGradeController;
 use App\Http\Controllers\MyRecomendationController;
 use App\Http\Controllers\ProfileController;
@@ -42,6 +43,12 @@ Route::middleware(['auth', 'role:user'])->group(function ()
     {
         Route::get('/index', [ProfileController::class, 'index'])->name('index');
         Route::patch('/upsert', [ProfileController::class, 'upsert'])->name('upsert');
+    });
+
+    Route::prefix('my-college-majors')->name('my-college-majors.')->group(function ()
+    {
+        Route::get('/', [MyCollegeMajorController::class, 'index'])->name('index');
+        Route::get('/{collegeMajor}', [MyCollegeMajorController::class, 'show'])->name('show');
     });
 
     Route::prefix('my-grades')->name('my-grades.')->group(function ()

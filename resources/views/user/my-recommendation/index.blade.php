@@ -133,7 +133,7 @@
                                                 </div>
                                             </td>
                                             <td class="py-4 px-4">
-                                                <a href="{{ route('admin.college-majors.show', $recommendation->college_major_id) }}"
+                                                <a href="{{ route('my-college-majors.show', $recommendation->college_major_id) }}"
                                                     class="text-slate-600 hover:text-slate-900">Detail
                                                     Jurusan</a>
                                             </td>

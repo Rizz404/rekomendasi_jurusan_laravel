@@ -29,4 +29,9 @@ class CollegeMajor extends Model
     {
         return $this->hasMany(MajorCharacteristic::class);
     }
+
+    public function universities()
+    {
+        return $this->belongsToMany(University::class, 'college_major_university');
+    }
 }
