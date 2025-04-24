@@ -16,11 +16,9 @@ class MyUniversityController extends Controller
 
     public function show(University $university)
     {
-        $university->load('universities');
-
         return view(
             'user.my-university.show',
             compact('university')
-        )->with('universities', $university->universities()->paginate(10));
+        );
     }
 }

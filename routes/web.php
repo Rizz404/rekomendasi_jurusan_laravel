@@ -12,6 +12,7 @@ use App\Http\Controllers\MajorCharacteristicController;
 use App\Http\Controllers\MyCollegeMajorController;
 use App\Http\Controllers\MyGradeController;
 use App\Http\Controllers\MyRecomendationController;
+use App\Http\Controllers\MyUniversityController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SawResultController;
 use App\Http\Controllers\StudentScoreController;
@@ -53,8 +54,8 @@ Route::middleware(['auth', 'role:user'])->group(function ()
 
     Route::prefix('my-universities')->name('my-universities.')->group(function ()
     {
-        Route::get('/', [MyCollegeMajorController::class, 'index'])->name('index');
-        Route::get('/{university}', [MyCollegeMajorController::class, 'show'])->name('show');
+        Route::get('/', [MyUniversityController::class, 'index'])->name('index');
+        Route::get('/{university}', [MyUniversityController::class, 'show'])->name('show');
     });
 
     Route::prefix('my-grades')->name('my-grades.')->group(function ()
