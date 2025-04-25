@@ -1,5 +1,11 @@
 <x-user-layout title="Edit Nilai Siswa">
     <div class="container max-w-2xl py-6">
+        <x-breadcrumb :items="[
+            ['title' => 'Nilai saya', 'url' => route('my-grades.index')],
+            ['title' => $studentScore->criteria->name, 'url' => '#'],
+        ]" :show-back-button="true" :back-url="route('my-grades.index')"
+            back-text="Kembali ke daftar universitas" />
+
         <div class="mb-6">
             <h1 class="text-2xl font-bold">Edit Nilai Siswa</h1>
             <p class="text-gray-600">Silahkan pilih kriteria dan masukkan nilai

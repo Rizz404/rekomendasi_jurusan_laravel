@@ -1,7 +1,8 @@
+{{-- Todo: Nanti pake route atau semacamnya yang bakal link secara dinamis --}}
 <div class="mb-4 flex justify-between items-center">
     @if ($showBackButton && $backUrl)
         <a href="{{ $backUrl }}"
-            class="text-slate-600 hover:text-slate-800 flex items-center font-medium mb-3">
+            class="text-slate-600 hover:text-slate-800 flex items-center font-medium">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1"
                 viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd"
@@ -13,7 +14,7 @@
     @endif
 
     <nav aria-label="Breadcrumb">
-        <ol class="flex flex-wrap items-center text-sm text-slate-600">
+        <ol class="flex flex-wrap items-center text-slate-600 text-sm">
             <li class="flex items-center">
                 <a href="{{ route('home') }}"
                     class="hover:text-slate-900 transition-colors duration-200 flex items-center">

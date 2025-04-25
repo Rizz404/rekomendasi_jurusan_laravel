@@ -7,6 +7,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\CriteriaController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\MajorCharacteristicController;
 use App\Http\Controllers\MyCollegeMajorController;
@@ -78,6 +79,8 @@ Route::middleware(['auth', 'role:user'])->group(function ()
 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function ()
 {
+    Route::get('/', [DashboardController::class, 'index'])->name('index');
+
     Route::get('/students/search', [StudentController::class, 'search'])->name('students.search');
     Route::resource('students', StudentController::class);
 
