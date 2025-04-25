@@ -1,17 +1,13 @@
 <x-user-layout title="Detail Jurusan">
     <div class="container px-4 py-6">
-        <div class="mb-6">
-            <a href="{{ route('my-college-majors.index') }}"
-                class="text-slate-600 hover:text-slate-800 flex items-center font-medium">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1"
-                    viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd"
-                        d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                        clip-rule="evenodd" />
-                </svg>
-                Kembali ke Daftar Jurusan
-            </a>
-        </div>
+        <x-breadcrumb :items="[
+            [
+                'title' => 'Jurusan Kuliah',
+                'url' => route('my-college-majors.index'),
+            ],
+            ['title' => $collegeMajor->major_name, 'url' => '#'],
+        ]" :show-back-button="true" :back-url="route('my-college-majors.index')"
+            back-text="Kembali ke Daftar Jurusan" />
 
         <div
             class="bg-white border border-slate-200 rounded-lg shadow-sm overflow-hidden">
