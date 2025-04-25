@@ -103,7 +103,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
         Route::post('/store-many', [MajorCharacteristicController::class, 'storeMany'])->name('store-many');
         Route::post('/delete-many', [MajorCharacteristicController::class, 'destroyMany'])->name('delete-many');
     });
-    Route::get('/major-characteristics/create/{collegeMajor}', [MajorCharacteristicController::class, 'create'])
+    Route::get('/major-characteristics/create/{collegeMajor?}', [MajorCharacteristicController::class, 'create'])
         ->name('major-characteristics.create');
     Route::resource('major-characteristics', MajorCharacteristicController::class)->except(['create']);
 

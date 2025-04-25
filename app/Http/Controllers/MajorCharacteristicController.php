@@ -16,15 +16,33 @@ class MajorCharacteristicController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $query = MajorCharacteristic::with('criteria')
+            ->with('collegeMajor')
+            ->orderByDesc('updated_at');
 
-        // Get only scores for the logged in student
-        $majorChars = MajorCharacteristic::with(['criteria', 'college_major'])
-            ->orderByDesc("created_at")
-            ->get();
+        // * Search
+        if ($request->has('search'))
+        {
+            $search = $request->search;
+            $query->where(function ($q) use ($search)
+            {
+                $q->whereHas('collegeMajor', function ($sq) use ($search)
+                {
+                    $sq->where('major_name', 'ilike', "%{$search}%")
+                        ->orWhere('faculty', 'ilike', "%{$search}%");
+                })
+                    ->orWhereHas('criteria', function ($sq) use ($search)
+                    {
+                        $sq->where('name', 'ilike', "%{$search}%");
+                    });
+            });
+        }
 
-        return view("admin.major-characteristic.index", compact("majorChars"));
+        $majorCharacteristics = $query->paginate(10)->withQueryString();
+
+        return view('admin.major-characteristic.index', compact('majorCharacteristics'));
     }
 
     /**
@@ -35,11 +53,15 @@ class MajorCharacteristicController extends Controller
         $criterias = Criteria::where('is_active', true)
             ->orderByDesc("created_at")
             ->get();
+        $collegeMajors = CollegeMajor::where('is_active', true)
+            ->orderByDesc("created_at")
+            ->get();
 
 
         return view("admin.major-characteristic.create", [
-            "collegeMajor" => $collegeMajor,
             "criterias" => $criterias,
+            "collegeMajor" => $collegeMajor,
+            "collegeMajors" => $collegeMajors,
         ]);
     }
 
@@ -83,86 +105,86 @@ class MajorCharacteristicController extends Controller
     /**
      * Show form for creating multiple student scores.
      */
-    public function createMany(CollegeMajor $collegeMajor)
-    {
-        $criterias = Criteria::where('is_active', true)
-            ->orderByDesc("created_at")
-            ->get();
+    // public function createMany(CollegeMajor $collegeMajor)
+    // {
+    //     $criterias = Criteria::where('is_active', true)
+    //         ->orderByDesc("created_at")
+    //         ->get();
 
-        return view("admin.major-characteristic.create-many", [
-            "collegeMajor" => $collegeMajor,
-            "criterias" => $criterias,
-        ]);
-    }
+    //     return view("admin.major-characteristic.create-many", [
+    //         "collegeMajor" => $collegeMajor,
+    //         "criterias" => $criterias,
+    //     ]);
+    // }
 
-    /**
-     * Store multiple student scores.
-     */
-    public function storeMany(Request $request)
-    {
-        $request->validate([
-            "major_characteristics" => "required|array|min:1",
-            // ? college major kan udah ditambahin tenang aja
-            "major_characteristics.*.criteria_id" => [
-                "required",
-                "exists:criterias,id",
-            ],
-            "major_characteristics.*.compatibility_weight" => "required|decimal:2|between:0.01,999.99",
-            "minimum_score.*.compatibility_weight" => "required|decimal:2|between:0.01,999.99",
-        ]);
+    // /**
+    //  * Store multiple student scores.
+    //  */
+    // public function storeMany(Request $request)
+    // {
+    //     $request->validate([
+    //         "major_characteristics" => "required|array|min:1",
+    //         // ? college major kan udah ditambahin tenang aja
+    //         "major_characteristics.*.criteria_id" => [
+    //             "required",
+    //             "exists:criterias,id",
+    //         ],
+    //         "major_characteristics.*.compatibility_weight" => "required|decimal:2|between:0.01,999.99",
+    //         "minimum_score.*.compatibility_weight" => "required|decimal:2|between:0.01,999.99",
+    //     ]);
 
-        $majorChars = $request->major_characteristics;
-        $created = 0;
+    //     $majorCharacteristics = $request->major_characteristics;
+    //     $created = 0;
 
-        try
-        {
-            foreach ($majorChars as $majorCharData)
-            {
-                $majorCharData['college_major_id'] = $request->college_major_id;
+    //     try
+    //     {
+    //         foreach ($majorCharacteristics as $majorCharacteristicData)
+    //         {
+    //             $majorCharacteristicData['college_major_id'] = $request->college_major_id;
 
-                // Todo: tambahin pengecekan kriteria yang sama
-                MajorCharacteristic::create($majorCharData);
-                $created++;
-            }
+    //             // Todo: tambahin pengecekan kriteria yang sama
+    //             MajorCharacteristic::create($majorCharacteristicData);
+    //             $created++;
+    //         }
 
-            return redirect()->route("admin.major-characteristics.index")
-                ->with("success", "Karakteristik jurusan berhasil dibuat sebanyak {$created}");
-        }
-        catch (\Exception $e)
-        {
-            Log::error("Student score creation failed: " . $e->getMessage());
-            return redirect()->back()
-                ->with("error", "Gagal menyimpan karakteristik jurusan. Silahkan coba lagi.")
-                ->withInput();
-        }
-    }
+    //         return redirect()->route("admin.major-characteristics.index")
+    //             ->with("success", "Karakteristik jurusan berhasil dibuat sebanyak {$created}");
+    //     }
+    //     catch (\Exception $e)
+    //     {
+    //         Log::error("Student score creation failed: " . $e->getMessage());
+    //         return redirect()->back()
+    //             ->with("error", "Gagal menyimpan karakteristik jurusan. Silahkan coba lagi.")
+    //             ->withInput();
+    //     }
+    // }
 
     /**
      * Display the specified resource.
      */
-    public function show(MajorCharacteristic $majorChar)
+    public function show(MajorCharacteristic $majorCharacteristic)
     {
-        $majorChar->load(['criteria']);
-        return view("admin.major-characteristic.show", compact("majorChar"));
+        $majorCharacteristic->load(['criteria']);
+        return view("admin.major-characteristic.show", compact("majorCharacteristic"));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(MajorCharacteristic $majorChar)
+    // ! gak boleh ubah-ubah foreign id nya
+    public function edit(MajorCharacteristic $majorCharacteristic)
     {
-
-        $majorChar->load(['criteria']);
+        $majorCharacteristic->load(['criteria', 'collegeMajor']);
 
         return view("admin.major-characteristic.edit", [
-            "majorChar" => $majorChar,
+            "majorCharacteristic" => $majorCharacteristic,
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, MajorCharacteristic $majorChar)
+    public function update(Request $request, MajorCharacteristic $majorCharacteristic)
     {
         $validated = $request->validate([
             "compatibility_weight" => "required|decimal:2|between:0.01,999.99",
@@ -171,8 +193,8 @@ class MajorCharacteristicController extends Controller
 
         try
         {
-            $majorChar->update($validated);
-            return redirect()->route("admin.major-characteristics.show", $majorChar)
+            $majorCharacteristic->update($validated);
+            return redirect()->route("admin.major-characteristics.show", $majorCharacteristic)
                 ->with("success", "Karakteristik jurusan berhasil diperbarui");
         }
         catch (\Exception $e)
@@ -187,11 +209,11 @@ class MajorCharacteristicController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(MajorCharacteristic $majorChar)
+    public function destroy(MajorCharacteristic $majorCharacteristic)
     {
         try
         {
-            $majorChar->delete();
+            $majorCharacteristic->delete();
             return redirect()->route("admin.major-characteristics.index")
                 ->with("success", "Karakteristik jurusan berhasil dihapus");
         }

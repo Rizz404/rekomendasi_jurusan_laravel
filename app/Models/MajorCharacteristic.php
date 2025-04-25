@@ -27,4 +27,9 @@ class MajorCharacteristic extends Model
     {
         return $this->belongsTo(Criteria::class, 'criteria_id');
     }
+
+    public function getCompatibilityPercentageAttribute()
+    {
+        return $this->compatibility_weight * 100 . '%';
+    }
 }

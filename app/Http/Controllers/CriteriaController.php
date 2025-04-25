@@ -22,7 +22,7 @@ class CriteriaController extends Controller
             $search = $request->search;
             $query->where(function ($q) use ($search)
             {
-                $q->where('name', 'like', "%{$search}%");
+                $q->where('name', 'ilike', "%{$search}%");
             });
         }
 

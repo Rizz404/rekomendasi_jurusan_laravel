@@ -24,7 +24,7 @@ class CollegeMajorController extends Controller
             $search = $request->search;
             $query->where(function ($q) use ($search)
             {
-                $q->where('major_name', 'like', "%{$search}%");
+                $q->where('major_name', 'ilike', "%{$search}%");
             });
         }
 
