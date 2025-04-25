@@ -67,7 +67,7 @@ class MajorCharacteristicController extends Controller
         {
             MajorCharacteristic::create($validated);
 
-            return redirect()->route("college-majors.show", $request->college_major_id)
+            return redirect()->route("admin.college-majors.show", $request->college_major_id)
                 ->with("success", "Karakteristik jurusan berhasil dibuat");
         }
         catch (\Exception $e)
@@ -125,7 +125,7 @@ class MajorCharacteristicController extends Controller
                 $created++;
             }
 
-            return redirect()->route("major-characteristics.index")
+            return redirect()->route("admin.major-characteristics.index")
                 ->with("success", "Karakteristik jurusan berhasil dibuat sebanyak {$created}");
         }
         catch (\Exception $e)
@@ -172,7 +172,7 @@ class MajorCharacteristicController extends Controller
         try
         {
             $majorChar->update($validated);
-            return redirect()->route("major-characteristics.show", $majorChar)
+            return redirect()->route("admin.major-characteristics.show", $majorChar)
                 ->with("success", "Karakteristik jurusan berhasil diperbarui");
         }
         catch (\Exception $e)
@@ -192,7 +192,7 @@ class MajorCharacteristicController extends Controller
         try
         {
             $majorChar->delete();
-            return redirect()->route("major-characteristics.index")
+            return redirect()->route("admin.major-characteristics.index")
                 ->with("success", "Karakteristik jurusan berhasil dihapus");
         }
         catch (\Exception $e)
@@ -219,7 +219,7 @@ class MajorCharacteristicController extends Controller
             $deleted = MajorCharacteristic::whereIn('id', $request->major_characteristic_ids)
                 ->delete();
 
-            return redirect()->route("major-characteristics.index")
+            return redirect()->route("admin.major-characteristics.index")
                 ->with("success", "Berhasil menghapus {$deleted} karakteristik jurusan");
         }
         catch (\Exception $e)

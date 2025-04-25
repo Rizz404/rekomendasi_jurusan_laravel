@@ -110,7 +110,7 @@ class StudentScoreController extends Controller
         {
             StudentScore::create($validated);
 
-            return redirect()->route("student-scores.index")
+            return redirect()->route("admin.student-scores.index")
                 ->with("success", "Nilai siswa berhasil dibuat");
         }
         catch (\Exception $e)
@@ -217,7 +217,7 @@ class StudentScoreController extends Controller
                 }
             }
 
-            return redirect()->route("student-scores.index")
+            return redirect()->route("admin.student-scores.index")
                 ->with("success", "Nilai siswa berhasil dibuat sebanyak {$created}");
         }
         catch (\Exception $e)
@@ -244,7 +244,7 @@ class StudentScoreController extends Controller
         // Make sure the student can only see their own scores
         if ($studentScore->student_id !== $student->id)
         {
-            return redirect()->route("student-scores.index")
+            return redirect()->route("admin.student-scores.index")
                 ->with("error", "Anda tidak memiliki akses ke nilai ini.");
         }
 
@@ -266,7 +266,7 @@ class StudentScoreController extends Controller
         // Make sure the student can only edit their own scores
         if ($studentScore->student_id !== $student->id)
         {
-            return redirect()->route("student-scores.index")
+            return redirect()->route("admin.student-scores.index")
                 ->with("error", "Anda tidak memiliki akses untuk mengedit nilai ini.");
         }
 
@@ -292,7 +292,7 @@ class StudentScoreController extends Controller
         // Make sure the student can only update their own scores
         if ($studentScore->student_id !== $student->id)
         {
-            return redirect()->route("student-scores.index")
+            return redirect()->route("admin.student-scores.index")
                 ->with("error", "Anda tidak memiliki akses untuk memperbarui nilai ini.");
         }
 
@@ -303,7 +303,7 @@ class StudentScoreController extends Controller
         try
         {
             $studentScore->update($validated);
-            return redirect()->route("student-scores.show", $studentScore)
+            return redirect()->route("admin.student-scores.show", $studentScore)
                 ->with("success", "Nilai siswa berhasil diperbarui");
         }
         catch (\Exception $e)
@@ -329,14 +329,14 @@ class StudentScoreController extends Controller
         // Make sure the student can only delete their own scores
         if ($studentScore->student_id !== $student->id)
         {
-            return redirect()->route("student-scores.index")
+            return redirect()->route("admin.student-scores.index")
                 ->with("error", "Anda tidak memiliki akses untuk menghapus nilai ini.");
         }
 
         try
         {
             $studentScore->delete();
-            return redirect()->route("student-scores.index")
+            return redirect()->route("admin.student-scores.index")
                 ->with("success", "Nilai siswa berhasil dihapus");
         }
         catch (\Exception $e)
@@ -376,7 +376,7 @@ class StudentScoreController extends Controller
                 ->where('student_id', $student->id)
                 ->delete();
 
-            return redirect()->route("student-scores.index")
+            return redirect()->route("admin.student-scores.index")
                 ->with("success", "Berhasil menghapus {$deleted} nilai siswa");
         }
         catch (\Exception $e)

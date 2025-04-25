@@ -17,6 +17,7 @@ use App\Http\Controllers\MyUniversityController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SawResultController;
 use App\Http\Controllers\StudentScoreController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 // * Ada contoh dan penjelasan di learn/web.php buat belajar
@@ -81,6 +82,13 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 {
     Route::get('/', [DashboardController::class, 'index'])->name('index');
 
+    // * User gak ada create many karena harus presisi
+    Route::prefix('users')->name('users.')->group(function ()
+    {
+        Route::post('/delete-many', [UserController::class, 'destroyMany'])->name('delete-many');
+    });
+    Route::resource('users', UserController::class);
+
     Route::get('/students/search', [StudentController::class, 'search'])->name('students.search');
     Route::resource('students', StudentController::class);
 
@@ -93,7 +101,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     {
         Route::get('/create-many', [MajorCharacteristicController::class, 'createMany'])->name('create-many');
         Route::post('/store-many', [MajorCharacteristicController::class, 'storeMany'])->name('store-many');
-        Route::post('/delete-many', [MajorCharacteristicController::class, 'deleteMany'])->name('delete-many');
+        Route::post('/delete-many', [MajorCharacteristicController::class, 'destroyMany'])->name('delete-many');
     });
     Route::get('/major-characteristics/create/{collegeMajor}', [MajorCharacteristicController::class, 'create'])
         ->name('major-characteristics.create');
@@ -103,7 +111,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     {
         Route::get('/create-many', [StudentScoreController::class, 'createMany'])->name('create-many');
         Route::post('/store-many', [StudentScoreController::class, 'storeMany'])->name('store-many');
-        Route::post('/delete-many', [StudentScoreController::class, 'deleteMany'])->name('delete-many');
+        Route::post('/delete-many', [StudentScoreController::class, 'destroyMany'])->name('delete-many');
     });
     Route::resource('student-scores', StudentScoreController::class);
 });

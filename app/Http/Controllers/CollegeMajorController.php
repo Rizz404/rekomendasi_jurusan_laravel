@@ -46,7 +46,7 @@ class CollegeMajorController extends Controller
         {
             CollegeMajor::create($validated);
 
-            return redirect()->route('college-majors.index')
+            return redirect()->route('admin.college-majors.index')
                 ->with('success', 'Jurusan kuliah berhasil dibuat');
         }
         catch (\Exception $e)
@@ -100,7 +100,7 @@ class CollegeMajorController extends Controller
         try
         {
             $collegeMajor->update($validated);
-            return redirect()->route('college-majors.show', $collegeMajor)
+            return redirect()->route('admin.college-majors.show', $collegeMajor)
                 ->with('success', 'Jurusan kuliah berhasil diperbarui');
         }
         catch (\Exception $e)
@@ -120,7 +120,7 @@ class CollegeMajorController extends Controller
         try
         {
             $collegeMajor->delete();
-            return redirect()->route('college-majors.index')
+            return redirect()->route('admin.college-majors.index')
                 ->with('success', 'Jurusan kuliah behasil dihapus');
         }
         catch (\Exception $e)

@@ -48,7 +48,7 @@ class CriteriaController extends Controller
         {
             Criteria::create($validated);
 
-            return redirect()->route('criterias.index')
+            return redirect()->route('admin.criterias.index')
                 ->with('success', 'Kriteria berhasil dibuat');
         }
         catch (\Exception $e)
@@ -102,7 +102,7 @@ class CriteriaController extends Controller
         try
         {
             $criteria->update($validated);
-            return redirect()->route('criterias.show', $criteria)
+            return redirect()->route('admin.criterias.show', $criteria)
                 ->with('success', 'Kriteria berhasil diperbarui');
         }
         catch (\Exception $e)
@@ -122,7 +122,7 @@ class CriteriaController extends Controller
         try
         {
             $criteria->delete();
-            return redirect()->route('criterias.index')
+            return redirect()->route('admin.criterias.index')
                 ->with('success', 'Kriteria behasil dihapus');
         }
         catch (\Exception $e)

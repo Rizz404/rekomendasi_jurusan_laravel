@@ -26,28 +26,16 @@
                 Dashboard
             </a>
 
-            <!-- User -->
-            <a href="{{ route('admin.students.index') }}"
-                class="group flex items-center px-4 py-2 text-sm font-medium rounded-md {{ request()->routeIs('admin.students*') ? 'bg-slate-700 text-white' : 'text-slate-300 hover:bg-slate-700 hover:text-white' }}">
+            <!-- User & Siswa -->
+            <a href="{{ route('admin.users.index') }}"
+                class="group flex items-center px-4 py-2 text-sm font-medium rounded-md {{ request()->routeIs('admin.users*') ? 'bg-slate-700 text-white' : 'text-slate-300 hover:bg-slate-700 hover:text-white' }}">
                 <svg xmlns="http://www.w3.org/2000/svg"
-                    class="mr-3 h-5 w-5 {{ request()->routeIs('admin.students*') ? 'text-slate-300' : 'text-slate-400 group-hover:text-slate-300' }}"
+                    class="mr-3 h-5 w-5 {{ request()->routeIs('admin.users*') ? 'text-slate-300' : 'text-slate-400 group-hover:text-slate-300' }}"
                     viewBox="0 0 20 20" fill="currentColor">
                     <path
                         d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
                 </svg>
-                User
-            </a>
-
-            <!-- Students -->
-            <a href="{{ route('admin.students.index') }}"
-                class="group flex items-center px-4 py-2 text-sm font-medium rounded-md {{ request()->routeIs('admin.students*') ? 'bg-slate-700 text-white' : 'text-slate-300 hover:bg-slate-700 hover:text-white' }}">
-                <svg xmlns="http://www.w3.org/2000/svg"
-                    class="mr-3 h-5 w-5 {{ request()->routeIs('admin.students*') ? 'text-slate-300' : 'text-slate-400 group-hover:text-slate-300' }}"
-                    viewBox="0 0 20 20" fill="currentColor">
-                    <path
-                        d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
-                </svg>
-                Siswa
+                User & Siswa
             </a>
 
             <!-- Criterias -->
