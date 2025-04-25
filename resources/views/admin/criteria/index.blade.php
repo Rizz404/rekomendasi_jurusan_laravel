@@ -2,7 +2,7 @@
     <div class="container px-4 py-6">
         <div
             class="flex flex-col md:flex-row md:justify-between md:items-center mb-6 gap-4">
-            <h1 class="text-2xl font-semibold">Users List</h1>
+            <h1 class="text-2xl font-semibold">Criteria List</h1>
             <div>
                 <form action="{{ route('admin.criterias.index') }}" method="GET"
                     class="flex flex-col sm:flex-row gap-2">

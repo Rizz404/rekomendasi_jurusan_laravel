@@ -13,9 +13,22 @@ class CollegeMajorController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $collegeMajors = CollegeMajor::orderByDesc('created_at')->get();
+        $query = CollegeMajor::orderByDesc('updated_at');
+
+        // * Search
+        // Todo: Jadiin case insensitive
+        if ($request->has('search'))
+        {
+            $search = $request->search;
+            $query->where(function ($q) use ($search)
+            {
+                $q->where('major_name', 'like', "%{$search}%");
+            });
+        }
+
+        $collegeMajors = $query->paginate(10)->withQueryString();
 
         return view('admin.college-major.index', compact('collegeMajors'));
     }
