@@ -15,18 +15,33 @@ class StudentScoreController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $user = Auth::user();
+        $query = StudentScore::with('criteria')
+            ->with('student')
+            ->orderByDesc('updated_at');
 
-        $student = Student::where('user_id', $user->id)->firstOrFail();
+        // * Search
+        if ($request->has('search'))
+        {
+            $search = $request->search;
+            $query->where(function ($q) use ($search)
+            {
+                $q->whereHas('student', function ($sq) use ($search)
+                {
+                    $sq->where('name', 'ilike', "%{$search}%")
+                        ->orWhere('NIS', 'ilike', "%{$search}%");
+                })
+                    ->orWhereHas('criteria', function ($sq) use ($search)
+                    {
+                        $sq->where('name', 'ilike', "%{$search}%");
+                    });
+            });
+        }
 
-        $studentScores = StudentScore::with(['criteria'])
-            ->where('student_id', $student->id)
-            ->orderByDesc("created_at")
-            ->get();
+        $studentScores = $query->paginate(10)->withQueryString();
 
-        return view("student-score.index", compact("studentScores"));
+        return view('admin.student-score.index', compact('studentScores'));
     }
 
     /**
@@ -34,45 +49,15 @@ class StudentScoreController extends Controller
      */
     public function create()
     {
-        // Get the currently logged in user
-        $user = Auth::user();
-
-        // Get the student associated with the logged in user
-        $student = Student::where('user_id', $user->id)->first();
-
-        if (!$student)
-        {
-            return redirect()->back()
-                ->with("error", "Data siswa tidak ditemukan untuk user ini.");
-        }
-
-        // Get school type from student data to filter criterias
-        $schoolType = $student->school_type === 'high_school' ? 'SMA' : 'SMK';
-
-        // Get criterias based on student's school type or the "All" type
         $criterias = Criteria::where('is_active', true)
-            ->where(function ($query) use ($schoolType)
-            {
-                $query->where('school_type', $schoolType)
-                    ->orWhere('school_type', 'All');
-            })
             ->orderByDesc("created_at")
             ->get();
+        $students = Student::orderByDesc("created_at")
+            ->get();
 
-        // Get criteria IDs that the student already has scores for
-        $existingCriteriaIds = StudentScore::where('student_id', $student->id)
-            ->pluck('criteria_id')
-            ->toArray();
-
-        // Filter out criteria that the student already has scores for
-        $availableCriterias = $criterias->filter(function ($criteria) use ($existingCriteriaIds)
-        {
-            return !in_array($criteria->id, $existingCriteriaIds);
-        });
-
-        return view("student-score.create", [
-            "criterias" => $availableCriterias,
-            "student" => $student
+        return view("admin.student-score.create", [
+            "criterias" => $criterias,
+            "students" => $students
         ]);
     }
 
@@ -81,30 +66,17 @@ class StudentScoreController extends Controller
      */
     public function store(Request $request)
     {
-        // Get the currently logged in user
-        $user = Auth::user();
-
-        // Get the student associated with the logged in user
-        $student = Student::where('user_id', $user->id)->first();
-
-        if (!$student)
-        {
-            return redirect()->back()
-                ->with("error", "Data siswa tidak ditemukan untuk user ini.");
-        }
-
         $validated = $request->validate([
             "criteria_id" => [
                 "required",
                 "exists:criterias,id",
-                Rule::unique('student_scores', 'criteria_id')
-                    ->where('student_id', $student->id)
+            ],
+            "student_id" => [
+                "required",
+                "exists:students,id",
             ],
             "score" => "required|decimal:2|between:0.01,999.99",
         ]);
-
-        // Add the student_id to the validated data
-        $validated['student_id'] = $student->id;
 
         try
         {
@@ -117,6 +89,7 @@ class StudentScoreController extends Controller
         {
             Log::error("Student score creation failed: " . $e->getMessage());
             return redirect()->back()
+                ->with("raw", $e->getMessage())
                 ->with("error", "Gagal menyimpan nilai siswa. Silahkan coba lagi.")
                 ->withInput();
         }
@@ -125,131 +98,118 @@ class StudentScoreController extends Controller
     /**
      * Show form for creating multiple student scores.
      */
-    public function createMany()
-    {
-        // Get the currently logged in user
-        $user = Auth::user();
+    // public function createMany()
+    // {
+    //     // Get the currently logged in user
+    //     $user = Auth::user();
 
-        // Get the student associated with the logged in user
-        $student = Student::where('user_id', $user->id)->first();
+    //     // Get the student associated with the logged in user
+    //     $student = Student::where('user_id', $user->id)->first();
 
-        if (!$student)
-        {
-            return redirect()->back()
-                ->with("error", "Data siswa tidak ditemukan untuk user ini.");
-        }
+    //     if (!$student)
+    //     {
+    //         return redirect()->back()
+    //             ->with("error", "Data siswa tidak ditemukan untuk user ini.");
+    //     }
 
-        // Get school type from student data to filter criterias
-        $schoolType = $student->school_type === 'high_school' ? 'SMA' : 'SMK';
+    //     // Get school type from student data to filter criterias
+    //     $schoolType = $student->school_type === 'high_school' ? 'SMA' : 'SMK';
 
-        // Get criterias based on student's school type or the "All" type
-        $criterias = Criteria::where('is_active', true)
-            ->where(function ($query) use ($schoolType)
-            {
-                $query->where('school_type', $schoolType)
-                    ->orWhere('school_type', 'All');
-            })
-            ->orderByDesc("created_at")
-            ->get();
+    //     // Get criterias based on student's school type or the "All" type
+    //     $criterias = Criteria::where('is_active', true)
+    //         ->where(function ($query) use ($schoolType)
+    //         {
+    //             $query->where('school_type', $schoolType)
+    //                 ->orWhere('school_type', 'All');
+    //         })
+    //         ->orderByDesc("created_at")
+    //         ->get();
 
-        // Get criteria IDs that the student already has scores for
-        $existingCriteriaIds = StudentScore::where('student_id', $student->id)
-            ->pluck('criteria_id')
-            ->toArray();
+    //     // Get criteria IDs that the student already has scores for
+    //     $existingCriteriaIds = StudentScore::where('student_id', $student->id)
+    //         ->pluck('criteria_id')
+    //         ->toArray();
 
-        // Filter out criteria that the student already has scores for
-        $availableCriterias = $criterias->filter(function ($criteria) use ($existingCriteriaIds)
-        {
-            return !in_array($criteria->id, $existingCriteriaIds);
-        });
+    //     // Filter out criteria that the student already has scores for
+    //     $availableCriterias = $criterias->filter(function ($criteria) use ($existingCriteriaIds)
+    //     {
+    //         return !in_array($criteria->id, $existingCriteriaIds);
+    //     });
 
-        return view("student-score.create-many", [
-            "criterias" => $availableCriterias,
-            "student" => $student
-        ]);
-    }
+    //     return view("admin.student-score.create-many", [
+    //         "criterias" => $availableCriterias,
+    //         "student" => $student
+    //     ]);
+    // }
 
-    /**
-     * Store multiple student scores.
-     */
-    public function storeMany(Request $request)
-    {
-        // Get the currently logged in user
-        $user = Auth::user();
+    // /**
+    //  * Store multiple student scores.
+    //  */
+    // public function storeMany(Request $request)
+    // {
+    //     // Get the currently logged in user
+    //     $user = Auth::user();
 
-        // Get the student associated with the logged in user
-        $student = Student::where('user_id', $user->id)->first();
+    //     // Get the student associated with the logged in user
+    //     $student = Student::where('user_id', $user->id)->first();
 
-        if (!$student)
-        {
-            return redirect()->back()
-                ->with("error", "Data siswa tidak ditemukan untuk user ini.");
-        }
+    //     if (!$student)
+    //     {
+    //         return redirect()->back()
+    //             ->with("error", "Data siswa tidak ditemukan untuk user ini.");
+    //     }
 
-        $request->validate([
-            "student_scores" => "required|array|min:1",
-            "student_scores.*.criteria_id" => [
-                "required",
-                "exists:criterias,id",
-            ],
-            "student_scores.*.score" => "required|decimal:2|between:0.01,999.99",
-        ]);
+    //     $request->validate([
+    //         "student_scores" => "required|array|min:1",
+    //         "student_scores.*.criteria_id" => [
+    //             "required",
+    //             "exists:criterias,id",
+    //         ],
+    //         "student_scores.*.score" => "required|decimal:2|between:0.01,999.99",
+    //     ]);
 
-        $studentScores = $request->student_scores;
-        $created = 0;
+    //     $studentScores = $request->student_scores;
+    //     $created = 0;
 
-        try
-        {
-            foreach ($studentScores as $studentScoreData)
-            {
-                // Add the student_id to each score data
-                $studentScoreData['student_id'] = $student->id;
+    //     try
+    //     {
+    //         foreach ($studentScores as $studentScoreData)
+    //         {
+    //             // Add the student_id to each score data
+    //             $studentScoreData['student_id'] = $student->id;
 
-                // Check for duplicate student_id and criteria_id combination
-                $existingScore = StudentScore::where('student_id', $student->id)
-                    ->where('criteria_id', $studentScoreData['criteria_id'])
-                    ->first();
+    //             // Check for duplicate student_id and criteria_id combination
+    //             $existingScore = StudentScore::where('student_id', $student->id)
+    //                 ->where('criteria_id', $studentScoreData['criteria_id'])
+    //                 ->first();
 
-                if (!$existingScore)
-                {
-                    StudentScore::create($studentScoreData);
-                    $created++;
-                }
-            }
+    //             if (!$existingScore)
+    //             {
+    //                 StudentScore::create($studentScoreData);
+    //                 $created++;
+    //             }
+    //         }
 
-            return redirect()->route("admin.student-scores.index")
-                ->with("success", "Nilai siswa berhasil dibuat sebanyak {$created}");
-        }
-        catch (\Exception $e)
-        {
-            Log::error("Student score creation failed: " . $e->getMessage());
-            return redirect()->back()
-                ->with("error", "Gagal menyimpan nilai siswa. Silahkan coba lagi.")
-                ->with("raw", $e)
-                ->withInput();
-        }
-    }
+    //         return redirect()->route("admin.student-scores.index")
+    //             ->with("success", "Nilai siswa berhasil dibuat sebanyak {$created}");
+    //     }
+    //     catch (\Exception $e)
+    //     {
+    //         Log::error("Student score creation failed: " . $e->getMessage());
+    //         return redirect()->back()
+    //             ->with("error", "Gagal menyimpan nilai siswa. Silahkan coba lagi.")
+    //             ->with("raw", $e)
+    //             ->withInput();
+    //     }
+    // }
 
     /**
      * Display the specified resource.
      */
     public function show(StudentScore $studentScore)
     {
-        // Get the currently logged in user
-        $user = Auth::user();
-
-        // Get the student associated with the logged in user
-        $student = Student::where('user_id', $user->id)->first();
-
-        // Make sure the student can only see their own scores
-        if ($studentScore->student_id !== $student->id)
-        {
-            return redirect()->route("admin.student-scores.index")
-                ->with("error", "Anda tidak memiliki akses ke nilai ini.");
-        }
-
-        $studentScore->load(['criteria']);
-        return view("student-score.show", compact("studentScore"));
+        $studentScore->load(['criteria', 'student']);
+        return view("admin.student-score.show", compact("studentScore"));
     }
 
     /**
@@ -257,24 +217,18 @@ class StudentScoreController extends Controller
      */
     public function edit(StudentScore $studentScore)
     {
-        // Get the currently logged in user
-        $user = Auth::user();
+        $criterias = Criteria::where('is_active', true)
+            ->orderByDesc("created_at")
+            ->get();
+        $students = Student::orderByDesc("created_at")
+            ->get();
 
-        // Get the student associated with the logged in user
-        $student = Student::where('user_id', $user->id)->first();
+        $studentScore->load(['criteria', 'student']);
 
-        // Make sure the student can only edit their own scores
-        if ($studentScore->student_id !== $student->id)
-        {
-            return redirect()->route("admin.student-scores.index")
-                ->with("error", "Anda tidak memiliki akses untuk mengedit nilai ini.");
-        }
-
-        $studentScore->load(['criteria']);
-
-        return view("student-score.edit", [
+        return view("admin.student-score.edit", [
             "studentScore" => $studentScore,
-            "student" => $student
+            "students" => $students,
+            "criterias" => $criterias,
         ]);
     }
 
@@ -283,20 +237,16 @@ class StudentScoreController extends Controller
      */
     public function update(Request $request, StudentScore $studentScore)
     {
-        // Get the currently logged in user
-        $user = Auth::user();
-
-        // Get the student associated with the logged in user
-        $student = Student::where('user_id', $user->id)->first();
-
-        // Make sure the student can only update their own scores
-        if ($studentScore->student_id !== $student->id)
-        {
-            return redirect()->route("admin.student-scores.index")
-                ->with("error", "Anda tidak memiliki akses untuk memperbarui nilai ini.");
-        }
 
         $validated = $request->validate([
+            "criteria_id" => [
+                "required",
+                "exists:criterias,id",
+            ],
+            "student_id" => [
+                "required",
+                "exists:students,id",
+            ],
             "score" => "required|decimal:2|between:0.01,999.99",
         ]);
 
@@ -320,19 +270,6 @@ class StudentScoreController extends Controller
      */
     public function destroy(StudentScore $studentScore)
     {
-        // Get the currently logged in user
-        $user = Auth::user();
-
-        // Get the student associated with the logged in user
-        $student = Student::where('user_id', $user->id)->first();
-
-        // Make sure the student can only delete their own scores
-        if ($studentScore->student_id !== $student->id)
-        {
-            return redirect()->route("admin.student-scores.index")
-                ->with("error", "Anda tidak memiliki akses untuk menghapus nilai ini.");
-        }
-
         try
         {
             $studentScore->delete();
@@ -352,18 +289,6 @@ class StudentScoreController extends Controller
      */
     public function destroyMany(Request $request)
     {
-        // Get the currently logged in user
-        $user = Auth::user();
-
-        // Get the student associated with the logged in user
-        $student = Student::where('user_id', $user->id)->first();
-
-        if (!$student)
-        {
-            return redirect()->back()
-                ->with("error", "Data siswa tidak ditemukan untuk user ini.");
-        }
-
         try
         {
             $request->validate([
@@ -373,7 +298,6 @@ class StudentScoreController extends Controller
 
             // Ensure the student can only delete their own scores
             $deleted = StudentScore::whereIn('id', $request->student_score_ids)
-                ->where('student_id', $student->id)
                 ->delete();
 
             return redirect()->route("admin.student-scores.index")

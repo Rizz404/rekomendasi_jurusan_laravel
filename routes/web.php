@@ -85,12 +85,9 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     // * User gak ada create many karena harus presisi
     Route::prefix('users')->name('users.')->group(function ()
     {
-        Route::post('/delete-many', [UserController::class, 'destroyMany'])->name('delete-many');
+        Route::post('/destroy-many', [UserController::class, 'destroyMany'])->name('destroy-many');
     });
     Route::resource('users', UserController::class);
-
-    Route::get('/students/search', [StudentController::class, 'search'])->name('students.search');
-    Route::resource('students', StudentController::class);
 
     Route::get('/criterias/search', [CriteriaController::class, 'search'])->name('criterias.search');
     Route::resource('criterias', CriteriaController::class);
@@ -99,9 +96,9 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 
     Route::prefix('major-characteristics')->name('major-characteristics.')->group(function ()
     {
-        Route::get('/create-many', [MajorCharacteristicController::class, 'createMany'])->name('create-many');
-        Route::post('/store-many', [MajorCharacteristicController::class, 'storeMany'])->name('store-many');
-        Route::post('/delete-many', [MajorCharacteristicController::class, 'destroyMany'])->name('delete-many');
+        // Route::get('/create-many', [MajorCharacteristicController::class, 'createMany'])->name('create-many');
+        // Route::post('/store-many', [MajorCharacteristicController::class, 'storeMany'])->name('store-many');
+        Route::post('/destroy-many', [MajorCharacteristicController::class, 'destroyMany'])->name('destroy-many');
     });
     Route::get('/major-characteristics/create/{collegeMajor?}', [MajorCharacteristicController::class, 'create'])
         ->name('major-characteristics.create');
@@ -109,9 +106,9 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 
     Route::prefix('student-scores')->name('student-scores.')->group(function ()
     {
-        Route::get('/create-many', [StudentScoreController::class, 'createMany'])->name('create-many');
-        Route::post('/store-many', [StudentScoreController::class, 'storeMany'])->name('store-many');
-        Route::post('/delete-many', [StudentScoreController::class, 'destroyMany'])->name('delete-many');
+        // Route::get('/create-many', [StudentScoreController::class, 'createMany'])->name('create-many');
+        // Route::post('/store-many', [StudentScoreController::class, 'storeMany'])->name('store-many');
+        Route::post('/destroy-many', [StudentScoreController::class, 'destroyMany'])->name('destroy-many');
     });
     Route::resource('student-scores', StudentScoreController::class);
 });
