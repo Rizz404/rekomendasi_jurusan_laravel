@@ -12,11 +12,37 @@ class CriteriaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $criterias = Criteria::orderByDesc('created_at')->get();
+        $query = Criteria::orderByDesc('updated_at');
 
-        return view('admin.criteria.index', compact('criterias'));
+        // * Search
+        if ($request->has('search'))
+        {
+            $search = $request->search;
+            $query->where(function ($q) use ($search)
+            {
+                $q->where('name', 'like', "%{$search}%");
+            });
+        }
+
+        // * Filter by type
+        if ($request->has('type') && in_array($request->type, ['benefit', 'cost']))
+        {
+            $query->where('type', $request->type);
+        }
+
+        // * Filter by school type
+        if ($request->has('school_type') && in_array($request->school_type, ['SMA', 'SMK', 'All']))
+        {
+            $query->where('school_type', $request->school_type);
+        }
+
+        $criterias = $query->paginate(10)->withQueryString();
+
+        return view('admin.criteria.index', compact('criterias'))
+            ->with("types", Criteria::TYPES)
+            ->with("schoolTypes", Criteria::SCHOOL_TYPES);
     }
 
     /**

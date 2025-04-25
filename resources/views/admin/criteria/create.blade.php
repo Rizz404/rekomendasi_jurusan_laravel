@@ -1,41 +1,71 @@
-<x-user-layout title="Tambah Kriteria">
-    <div class="container max-w-2xl px-4 py-6 ">
-        <form action="{{ route('criterias.store') }}" method="POST"
-            class="flex flex-col gap-4 ">
+<x-admin-layout title="Buat Kriteria Baru">
+    <div class="container max-w-3xl mx-auto py-6">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-2xl font-semibold">Buat Kriteria Baru</h1>
+            <x-link-button href="{{ route('admin.criterias.index') }}">
+                Kembali
+            </x-link-button>
+        </div>
 
-            @csrf
+        <div class="bg-white shadow-md rounded-lg overflow-hidden">
+            <div class="p-6">
+                <form action="{{ route('admin.criterias.store') }}" method="POST"
+                    class="space-y-4">
+                    @csrf
 
-            <x-input label="Nama kriteria" name="name"
-                placeholder="Masukkan nama kriteria" required />
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <x-input label="Nama Kriteria" name="name"
+                            value="{{ old('name') }}"
+                            placeholder="Masukkan nama kriteria" required />
 
-            <x-textarea label="Deskripsi" name="description"
-                placeholder="Masukkan deskripsi" />
+                        <x-input label="Bobot" name="weight" type="number"
+                            step="0.01" value="{{ old('weight') }}"
+                            placeholder="Masukkan bobot kriteria" required />
 
-            {{-- Todo: Tambahin atribut step="0.01" di component input --}}
-            <x-input type="number" label="Bobot" name="weight"
-                placeholder="Masukkan bobot kriteria" required step="0.01" />
+                        <x-dropdown label="Tipe" name="type" required>
+                            <option value="">Pilih Tipe</option>
+                            <option value="benefit"
+                                {{ old('type') === 'benefit' ? 'selected' : '' }}>
+                                Benefit</option>
+                            <option value="cost"
+                                {{ old('type') === 'cost' ? 'selected' : '' }}>
+                                Cost</option>
+                        </x-dropdown>
 
-            <x-dropdown name="type" label="Tipe" required>
-                <option value="">Pilih tipe kriteria</option>
-                @foreach ($types as $type)
-                    <option value="{{ $type }}">
-                        {{ $type }}
-                    </option>
-                @endforeach
-            </x-dropdown>
+                        <x-dropdown label="Tipe Sekolah" name="school_type"
+                            required>
+                            <option value="">Pilih Tipe Sekolah</option>
+                            <option value="SMA"
+                                {{ old('school_type') === 'SMA' ? 'selected' : '' }}>
+                                SMA</option>
+                            <option value="SMK"
+                                {{ old('school_type') === 'SMK' ? 'selected' : '' }}>
+                                SMK</option>
+                            <option value="All"
+                                {{ old('school_type') === 'All' ? 'selected' : '' }}>
+                                Semua</option>
+                        </x-dropdown>
 
-            <x-dropdown name="school_type" label="Tipe Sekolah" required>
-                <option value="">Pilih tipe sekolah</option>
-                @foreach ($schoolTypes as $schoolType)
-                    <option value="{{ $schoolType }}">
-                        {{ $schoolType }}
-                    </option>
-                @endforeach
-            </x-dropdown>
+                        <div class="flex items-center space-x-2">
+                            <input type="checkbox" name="is_active"
+                                id="is_active" value="1"
+                                class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                {{ old('is_active', '1') === '1' ? 'checked' : '' }}>
+                            <label for="is_active"
+                                class="block text-sm font-medium text-gray-700">
+                                Aktif
+                            </label>
+                        </div>
+                    </div>
 
-            <x-checkbox label="Aktif" name="is_active" />
+                    <x-textarea label="Deskripsi" name="description"
+                        value="{{ old('description') }}" />
 
-            <x-button type="submit">Submit</x-button>
-        </form>
+                    <div class="flex justify-end mt-6">
+                        <x-button type="submit">Simpan Data</x-button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-</x-user-layout>
+</x-admin-layout>

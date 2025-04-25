@@ -1,6 +1,6 @@
 @props(['criteria'])
 
-<a href="{{ route('criterias.show', $criteria) }}"
+<a href="{{ route('admin.criterias.show', $criteria) }}"
     class="transition-shadow duration-300 bg-white border rounded-md shadow-sm hover:shadow-md border-slate-100">
     <div class="p-6">
         <div class="flex items-start justify-between mb-4">
