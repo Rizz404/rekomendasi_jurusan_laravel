@@ -43,12 +43,6 @@ Route::middleware(['auth', 'role:user'])->group(function ()
 {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-    Route::prefix('profile')->name('profile.')->group(function ()
-    {
-        Route::get('/index', [ProfileController::class, 'index'])->name('index');
-        Route::patch('/upsert', [ProfileController::class, 'upsert'])->name('upsert');
-    });
-
     Route::prefix('my-college-majors')->name('my-college-majors.')->group(function ()
     {
         Route::get('/', [MyCollegeMajorController::class, 'index'])->name('index');
@@ -115,3 +109,10 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 
     Route::resource('universities', UniversityController::class);
 });
+
+// * Shared
+Route::prefix('profile')->name('profile.')->group(function ()
+{
+    Route::get('/index', [ProfileController::class, 'index'])->name('index');
+    Route::patch('/upsert', [ProfileController::class, 'upsert'])->name('upsert');
+})->middleware('auth');

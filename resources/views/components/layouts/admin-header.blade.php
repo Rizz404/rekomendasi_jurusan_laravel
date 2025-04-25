@@ -23,17 +23,14 @@
             </a>
         </div>
 
-        <div class="flex items-center gap-4">
-            <div class="relative ml-3">
-                <div>
-                    <button id="user-menu-button" type="button"
-                        class="flex items-center rounded-full bg-slate-700 text-sm focus:outline-none"
-                        aria-expanded="false" aria-haspopup="true">
-                        <img class="h-8 w-8 rounded-full"
-                            src="https://ui-avatars.com/api/?name=Admin+User&background=0284c7&color=fff"
-                            alt="Profile">
-                    </button>
-                </div>
+        <div class="relative ml-3">
+            <div>
+                <a href="{{ route('profile.index') }}" id="user-menu-button"
+                    class="flex items-center rounded-full bg-slate-700 text-sm focus:outline-none">
+                    <img class="h-8 w-8 rounded-full"
+                        src="https://ui-avatars.com/api/?name=Admin+User&background=0284c7&color=fff"
+                        alt="Profile">
+                </a>
             </div>
         </div>
     </div>

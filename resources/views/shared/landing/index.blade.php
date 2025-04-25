@@ -74,6 +74,8 @@
         </section>
 
         <section class=" mt-4">
+            <h3 class=" text-2xl font-medium text-orange-400">Tar terusin lagi
+            </h3>
             <h3 class=" text-2xl font-medium">Mengapa menggunakan nama website?
             </h3>
 

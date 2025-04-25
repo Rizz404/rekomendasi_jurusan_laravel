@@ -64,7 +64,7 @@ class CriteriaController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:100|unique:criterias',
             'type' => ['required', Rule::in(['benefit', 'cost'])],
-            'weight' => 'required|decimal:2|between:0.01,999.99',
+            'weight' => 'required|numeric|between:0.01,999.99',
             'description' => 'nullable|string',
             'school_type' => ['required', Rule::in(['SMA', 'SMK', 'All'])],
             'is_active' => 'nullable|boolean'
@@ -119,7 +119,7 @@ class CriteriaController extends Controller
                 Rule::unique('criterias')->ignore($criteria->id)
             ],
             'type' => ['required', Rule::in(['benefit', 'cost'])],
-            'weight' => 'required|decimal:2|between:0.01,999.99',
+            'weight' => 'required|numeric|between:0.01,999.99',
             'description' => 'nullable|string',
             'school_type' => ['required', Rule::in(['SMA', 'SMK', 'All'])],
             'is_active' => 'required|boolean'

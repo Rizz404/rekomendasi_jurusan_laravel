@@ -129,8 +129,8 @@ class MajorCharacteristicController extends Controller
     //             "required",
     //             "exists:criterias,id",
     //         ],
-    //         "major_characteristics.*.compatibility_weight" => "required|decimal:2|between:0.01,999.99",
-    //         "minimum_score.*.compatibility_weight" => "required|decimal:2|between:0.01,999.99",
+    //         "major_characteristics.*.compatibility_weight" => "required|numeric|between:0.01,999.99",
+    //         "minimum_score.*.compatibility_weight" => "required|numeric|between:0.01,999.99",
     //     ]);
 
     //     $majorCharacteristics = $request->major_characteristics;
@@ -187,8 +187,8 @@ class MajorCharacteristicController extends Controller
     public function update(Request $request, MajorCharacteristic $majorCharacteristic)
     {
         $validated = $request->validate([
-            "compatibility_weight" => "required|decimal:2|between:0.01,999.99",
-            "minimum_score" => "decimal:2|between:0.01,999.99",
+            "compatibility_weight" => "required|numeric|between:0.01,999.99",
+            "minimum_score" => "numeric|between:0.01,999.99",
         ]);
 
         try

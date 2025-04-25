@@ -129,7 +129,7 @@
                                             <td class="py-4 px-4">
                                                 <div
                                                     class="text-sm text-gray-500">
-                                                    {{ $recommendation->recommendation_reason ?: 'Tidak ada catatan khusus' }}
+                                                    {{ $recommendation->recommendation_reason ? $recommendation->recommendation_reason : 'Tidak ada catatan khusus' }}
                                                 </div>
                                             </td>
                                             <td class="py-4 px-4">

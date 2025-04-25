@@ -75,7 +75,7 @@ class StudentScoreController extends Controller
                 "required",
                 "exists:students,id",
             ],
-            "score" => "required|decimal:2|between:0.01,999.99",
+            "score" => "required|numeric|between:0.01,999.99",
         ]);
 
         try
@@ -165,7 +165,7 @@ class StudentScoreController extends Controller
     //             "required",
     //             "exists:criterias,id",
     //         ],
-    //         "student_scores.*.score" => "required|decimal:2|between:0.01,999.99",
+    //         "student_scores.*.score" => "required|numeric|between:0.01,999.99",
     //     ]);
 
     //     $studentScores = $request->student_scores;
@@ -247,7 +247,7 @@ class StudentScoreController extends Controller
                 "required",
                 "exists:students,id",
             ],
-            "score" => "required|decimal:2|between:0.01,999.99",
+            "score" => "required|numeric|between:0.01,999.99",
         ]);
 
         try

@@ -80,7 +80,7 @@ class MyGradeController extends Controller
                 Rule::unique('student_scores', 'criteria_id')
                     ->where('student_id', $student->id)
             ],
-            "score" => "required|decimal:2|between:0.01,999.99",
+            "score" => "required|numeric|between:0.01,999.99",
         ]);
 
         $validated['student_id'] = $student->id;
@@ -153,7 +153,7 @@ class MyGradeController extends Controller
                 "required",
                 "exists:criterias,id",
             ],
-            "student_scores.*.score" => "required|decimal:2|between:0.01,999.99",
+            "student_scores.*.score" => "required|numeric|between:0.01,999.99",
         ]);
 
         $studentScores = $request->student_scores;
@@ -295,7 +295,7 @@ class MyGradeController extends Controller
 
         try
         {
-            $studentScore->delete();
+            $studentScore->forceDelete();
             return redirect()->route("my-grades.index")
                 ->with("success", "Nilai siswa berhasil dihapus");
         }
