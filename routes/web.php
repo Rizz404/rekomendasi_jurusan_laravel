@@ -17,6 +17,7 @@ use App\Http\Controllers\MyUniversityController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SawResultController;
 use App\Http\Controllers\StudentScoreController;
+use App\Http\Controllers\UniversityController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -111,4 +112,6 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
         Route::post('/destroy-many', [StudentScoreController::class, 'destroyMany'])->name('destroy-many');
     });
     Route::resource('student-scores', StudentScoreController::class);
+
+    Route::resource('universities', UniversityController::class);
 });

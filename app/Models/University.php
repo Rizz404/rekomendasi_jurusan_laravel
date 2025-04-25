@@ -26,4 +26,6 @@ class University extends Model
     {
         return $this->belongsToMany(CollegeMajor::class, 'college_major_university');
     }
+
+    const STATUS = ['negeri', 'swasta'];
 }

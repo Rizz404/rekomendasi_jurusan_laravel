@@ -89,6 +89,18 @@
                 </svg>
                 Nilai Mahasiswa
             </a>
+
+            <!-- Universities -->
+            <a href="{{ route('admin.universities.index') }}"
+                class="group flex items-center px-4 py-2 text-sm font-medium rounded-md {{ request()->routeIs('admin.universities*') ? 'bg-slate-700 text-white' : 'text-slate-300 hover:bg-slate-700 hover:text-white' }}">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                    class="mr-3 h-5 w-5 {{ request()->routeIs('admin.universities*') ? 'text-slate-300' : 'text-slate-400 group-hover:text-slate-300' }}"
+                    viewBox="0 0 20 20" fill="currentColor">
+                    <path
+                        d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" />
+                </svg>
+                Universitas
+            </a>
         </nav>
 
         <div class="flex-shrink-0 flex border-t border-slate-700 p-4">
