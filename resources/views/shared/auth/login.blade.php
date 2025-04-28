@@ -27,12 +27,9 @@
                         </a>
                     </p>
 
-                    <div>
-                        <button type="submit"
-                            class="flex justify-center w-full px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md shadow-sm bg-slate-600 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500">
-                            Login
-                        </button>
-                    </div>
+                    <x-button type="submit">
+                        Login
+                    </x-button>
                 </form>
             </div>
         </div>
