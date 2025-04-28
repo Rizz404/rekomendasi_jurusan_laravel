@@ -30,8 +30,13 @@
 @endphp
 
 <div x-data="{ show: true }" x-show="show"
-    class="{{ $colors['bg'] }} border-l-4 {{ $colors['border'] }} p-4 mb-4"
-    role="alert">
+    x-transition:enter="transition ease-out duration-300"
+    x-transition:enter-start="opacity-0 transform -translate-y-2"
+    x-transition:enter-end="opacity-100 transform translate-y-0"
+    x-transition:leave="transition ease-in duration-200"
+    x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+    class="{{ $colors['bg'] }} border-l-4 {{ $colors['border'] }} p-4 mb-4 shadow-md rounded-r-md fixed top-24 right-0 z-50 max-w-md"
+    role="alert" x-init="setTimeout(() => show = false, 5000)">
     <div class="flex">
         <div class="flex-shrink-0">
             @if ($type === 'error')
@@ -73,8 +78,8 @@
 
         <div class="ml-auto pl-3">
             <div class="-mx-1.5 -my-1.5">
-                <button @click="show = false" type="button"
-                    class="inline-flex rounded-md {{ $colors['bg'] }} p-1.5 {{ $colors['text'] }} hover:{{ str_replace('50', '100', $colors['bg']) }} focus:outline-none focus:ring-2 focus:ring-offset-2 {{ str_replace('400', '500', 'focus:ring-' . $colors['border']) }}">
+                <button @click="show = !show" type="button"
+                    class="inline-flex rounded-md {{ $colors['bg'] }} p-1.5 {{ $colors['text'] }} hover:{{ str_replace('50', '100', $colors['bg']) }} focus:outline-none focus:ring-2 focus:ring-offset-2 {{ str_replace('400', '500', 'focus:ring-' . $colors['border']) }} cursor-pointer">
                     <span class="sr-only">Dismiss</span>
                     <svg class="h-5 w-5" viewBox="0 0 20 20"
                         fill="currentColor">

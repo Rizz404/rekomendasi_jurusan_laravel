@@ -89,7 +89,7 @@ class AuthController extends Controller
 
             $redirectPath = match (Auth::user()->role)
             {
-                'admin'    => route('admin.dashboard'),
+                'admin'    => route('admin.dashboard.index'),
                 'user'  => route('home'),
                 default    => '/home' // Fallback untuk role tidak dikenal
             };

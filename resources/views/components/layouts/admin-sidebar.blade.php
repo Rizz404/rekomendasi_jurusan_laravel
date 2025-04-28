@@ -2,7 +2,8 @@
     <div
         class="flex flex-col flex-grow pt-5 overflow-y-auto bg-slate-800 shadow-lg">
         <div class="flex items-center flex-shrink-0 px-4">
-            <a href="{{ route('admin.index') }}" class="flex items-center">
+            <a href="{{ route('admin.dashboard.index') }}"
+                class="flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg"
                     class="h-8 w-8 text-slate-200 mr-2" viewBox="0 0 20 20"
                     fill="currentColor">
@@ -15,10 +16,10 @@
 
         <nav class="flex-1 mt-6 px-2 space-y-1">
             <!-- Dashboard -->
-            <a href="{{ route('admin.index') }}"
-                class="group flex items-center px-4 py-2 text-sm font-medium rounded-md {{ request()->routeIs('admin.index') ? 'bg-slate-700 text-white' : 'text-slate-300 hover:bg-slate-700 hover:text-white' }}">
+            <a href="{{ route('admin.dashboard.index') }}"
+                class="group flex items-center px-4 py-2 text-sm font-medium rounded-md {{ request()->routeIs('admin.dashboard.index') ? 'bg-slate-700 text-white' : 'text-slate-300 hover:bg-slate-700 hover:text-white' }}">
                 <svg xmlns="http://www.w3.org/2000/svg"
-                    class="mr-3 h-5 w-5 {{ request()->routeIs('admin.index') ? 'text-slate-300' : 'text-slate-400 group-hover:text-slate-300' }}"
+                    class="mr-3 h-5 w-5 {{ request()->routeIs('admin.dashboard.index') ? 'text-slate-300' : 'text-slate-400 group-hover:text-slate-300' }}"
                     viewBox="0 0 20 20" fill="currentColor">
                     <path
                         d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" />

@@ -75,7 +75,7 @@ Route::middleware(['auth', 'role:user'])->group(function ()
 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function ()
 {
-    Route::get('/', [DashboardController::class, 'index'])->name('index');
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
 
     // * User gak ada create many karena harus presisi
     Route::prefix('users')->name('users.')->group(function ()

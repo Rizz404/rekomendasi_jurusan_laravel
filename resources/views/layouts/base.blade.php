@@ -18,9 +18,7 @@
 </head>
 
 <body class="min-h-screen">
-    {{-- * Yang baru pake slot --}}
     {{ $slot }}
-    {{-- @yield('body_content') --}}
 </body>
 
 </html>

@@ -12,7 +12,7 @@
         </div>
 
         <div class="flex-1 flex justify-center md:justify-start">
-            <a href="{{ route('admin.index') }}"
+            <a href="{{ route('admin.dashboard.index') }}"
                 class="bold text-2xl flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-2"
                     viewBox="0 0 20 20" fill="currentColor">

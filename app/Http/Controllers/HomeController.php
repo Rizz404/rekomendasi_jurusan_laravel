@@ -11,6 +11,6 @@ class HomeController extends Controller
 {
     function index()
     {
-        return redirect('my-grades');
+        return view('user.home.index');
     }
 }
