@@ -30,20 +30,8 @@
         </div>
 
         @if ($studentScores->isEmpty())
-            <div
-                class="bg-slate-100 border border-slate-200 rounded-lg p-8 text-center">
-                <svg xmlns="http://www.w3.org/2000/svg"
-                    class="h-16 w-16 mx-auto text-slate-400" fill="none"
-                    viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-                <h3 class="mt-4 text-lg font-medium text-slate-700">Belum ada
-                    nilai</h3>
-                <p class="mt-2 text-slate-500">Tambahkan nilai pertama kamu
-                    dengan menekan tombol "Tambah" di atas.</p>
-            </div>
+            <x-empty-grid title="Belum ada nilai"
+                description="Input nilai terlebih dahulu" />
         @else
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 @foreach ($studentScores as $studentScore)

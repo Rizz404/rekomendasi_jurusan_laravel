@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&family=Nunito:wght@400;600&family=Comfortaa:wght@700&family=Pacifico&display=swap");
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -6,9 +7,43 @@
 @source '../**/*.js';
 
 @theme {
-    --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif,
-        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
-        "Noto Color Emoji";
+    --font-sans: "Quicksand", ui-sans-serif, system-ui, sans-serif;
+    --font-body: "Nunito", ui-sans-serif, system-ui, sans-serif;
+    --font-accent: "Comfortaa", cursive;
+    --font-decorative: "Pacifico", cursive;
+
+    --color-teto-primary: #ff4b6a;
+    --color-teto-dark: #c93756;
+    --color-teto-light: #ff7a9e;
+    --color-teto-metallic: #a3a3b4;
+    --color-teto-cream: #f8f0f5;
+    --color-teto-dark-text: #333340;
+    --color-teto-accent: #ffcc4d;
+    --color-teto-secondary: #c8a2d4;
+}
+
+@layer base {
+    html {
+        font-family: theme("--font-body");
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: theme("--font-sans");
+        font-weight: 700;
+    }
+
+    .accent-text {
+        font-family: theme("--font-accent");
+    }
+
+    .decorative-text {
+        font-family: theme("--font-decorative");
+    }
 }
 
 @layer utilities {
