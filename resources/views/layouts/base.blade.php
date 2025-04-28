@@ -1,6 +1,3 @@
-{{-- * Pake props buat component --}}
-@props(['title' => ''])
-
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -16,6 +13,8 @@
         rel="stylesheet" />
 
     @vite(['../resources/css/app.css', '../resources/js/app.js'])
+    <script defer
+        src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
 </head>
 
 <body class="min-h-screen">

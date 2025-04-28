@@ -21,6 +21,7 @@ class UserSeeder extends Seeder
             'phone' => '081234567890',
             'email_verified_at' => now(),
             'password' => Hash::make('177013'),
+            'role' => "admin",
         ]);
 
         // Regular users
