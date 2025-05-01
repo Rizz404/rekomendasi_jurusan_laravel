@@ -16,7 +16,7 @@ class SawResult extends Model
         'college_major_id',
         'final_score',
         'rank',
-        'recomendation_reason',
+        'recommendation_reason',
         'calculation_date',
     ];
 

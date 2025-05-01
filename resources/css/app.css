@@ -6,24 +6,63 @@
 @source '../**/*.js';
 
 @theme {
+    /* Font Families */
     --font-sans: "Quicksand", ui-sans-serif, system-ui, sans-serif;
     --font-body: "Nunito", ui-sans-serif, system-ui, sans-serif;
     --font-accent: "Comfortaa", cursive;
     --font-decorative: "Pacifico", cursive;
 
+    /* Warna Utama */
     --color-teto-primary: #ff4b6a;
+    --color-teto-primary-hover: #ff355c;
+    --color-teto-primary-active: #e63c5b;
+
+    /* Varian Gelap */
     --color-teto-dark: #c93756;
+    --color-teto-dark-hover: #b12e4a;
+    --color-teto-dark-active: #9e2840;
+
+    /* Varian Terang */
     --color-teto-light: #ff7a9e;
+    --color-teto-light-hover: #ff8caa;
+    --color-teto-light-active: #ff9eb7;
+
+    /* Varian Metalik */
     --color-teto-metallic: #a3a3b4;
+    --color-teto-metallic-hover: #9191a6;
+    --color-teto-metallic-active: #828294;
+
+    /* Varian Cream */
     --color-teto-cream: #f8f0f5;
+    --color-teto-cream-hover: #f0e4ed;
+    --color-teto-cream-active: #e8d8e3;
+
+    /* Teks Gelap */
     --color-teto-dark-text: #333340;
+    --color-teto-dark-text-soft: #4a4a5a;
+    --color-teto-dark-text-muted: #66667a;
+
+    /* Aksen */
     --color-teto-accent: #ffcc4d;
+    --color-teto-accent-hover: #ffd670;
+    --color-teto-accent-active: #ffc029;
+
+    /* Sekunder */
     --color-teto-secondary: #c8a2d4;
+    --color-teto-secondary-hover: #d4b6de;
+    --color-teto-secondary-active: #bc90ca;
+
+    /* Warna Tambahan Untuk Harmonisasi */
+    --color-teto-pastel-pink: #ffb7c5;
+    --color-teto-pastel-purple: #e5c1f0;
+    --color-teto-soft-teal: #8bd8d2;
+    --color-teto-soft-blue: #a9b6fb;
 }
 
 @layer base {
     html {
         font-family: theme("--font-body");
+        color: theme("--color-teto-dark-text");
     }
 
     h1,
@@ -34,6 +73,18 @@
     h6 {
         font-family: theme("--font-sans");
         font-weight: 700;
+    }
+
+    h1 {
+        color: theme("--color-teto-primary");
+    }
+
+    h2 {
+        color: theme("--color-teto-dark");
+    }
+
+    a {
+        transition: color 0.2s ease;
     }
 
     .accent-text {

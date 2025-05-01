@@ -15,13 +15,13 @@
         <div class="flex justify-between items-center mb-2">
             <span class="text-teto-dark-text text-sm">Nilai:</span>
             <span
-                class="text-2xl font-bold text-teto-dark-text">{{ $studentScore->score }}</span>
+                class="text-2xl font-bold text-teto-secondary">{{ $studentScore->score }}</span>
         </div>
 
         <div class="flex justify-between items-center">
             <span class="text-teto-dark-text text-sm">Bobot:</span>
             <span
-                class=" text-teto-dark-text">{{ $studentScore->criteria->weight }}</span>
+                class=" text-teto-secondary">{{ $studentScore->criteria->weight }}</span>
         </div>
 
         @if ($studentScore->criteria->description)
@@ -37,7 +37,7 @@
             <span>{{ $studentScore->input_date->format('d M Y') }}</span>
             <div class="flex gap-2">
                 <a href="{{ route('my-grades.edit', $studentScore) }}"
-                    class=" text-teto-metallic hover:text-teto-accent">
+                    class=" text-teto-metallic hover:text-teto-metallic-hover">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4"
                         viewBox="0 0 20 20" fill="currentColor">
                         <path
@@ -49,7 +49,7 @@
                     @csrf
                     @method('DELETE')
                     <button type="submit"
-                        class=" text-teto-metallic hover:text-teto-accent"
+                        class=" text-teto-metallic hover:text-teto-metallic-hover"
                         onclick="return confirm('Yakin ingin menghapus nilai ini?')">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4"
                             viewBox="0 0 20 20" fill="currentColor">

@@ -6,8 +6,7 @@
                 Daftar Nilai Kamu
             </h2>
             <div class="flex gap-2">
-                <x-link-button href="{{ route('my-grades.create') }}"
-                    class="bg-teto-primary hover:bg-teto-dark text-white">
+                <x-link-button href="{{ route('my-grades.create') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1"
                         viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd"
@@ -16,8 +15,7 @@
                     </svg>
                     Tambah
                 </x-link-button>
-                <x-link-button href="{{ route('my-grades.create-many') }}"
-                    class="bg-teto-primary hover:bg-teto-dark text-white">
+                <x-link-button href="{{ route('my-grades.create-many') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1"
                         viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd"
@@ -42,7 +40,7 @@
                 <div class=" fixed bottom-0 right-0 m-6">
                     <x-link-button
                         href="{{ route('my-recommendations.index') }}"
-                        class="bg-teto-primary hover:bg-teto-dark text-white px-6 py-3">
+                        class="bg-teto-accent hover:bg-teto-accent-hover text-teto-dark-text px-6 py-3">
                         <svg xmlns="http://www.w3.org/2000/svg"
                             class="h-5 w-5 mr-2" viewBox="0 0 20 20"
                             fill="currentColor">

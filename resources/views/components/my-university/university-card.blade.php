@@ -49,7 +49,7 @@
             class="mt-4 pt-3 border-t border-teto-cream flex justify-between items-center">
             @if ($university->website)
                 <a href="{{ $university->website }}" target="_blank"
-                    class="text-sm  text-teto-metallic hover:text-teto-accent flex items-center">
+                    class="text-sm text-teto-secondary hover:text-teto-secondary-hover flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1"
                         viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd"
@@ -63,7 +63,7 @@
                     website</span>
             @endif
             <a href="{{ route('my-universities.show', $university) }}"
-                class="text-sm text-white bg-teto-primary hover:bg-teto-dark px-3 py-1 rounded-full font-medium flex items-center font-sans">
+                class="text-sm text-white bg-teto-primary hover:bg-teto-primary-hover px-3 py-1 rounded-full font-medium flex items-center font-accent">
                 Lihat Detail
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1"
                     viewBox="0 0 20 20" fill="currentColor">

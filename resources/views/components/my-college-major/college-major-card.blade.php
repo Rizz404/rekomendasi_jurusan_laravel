@@ -15,7 +15,7 @@
         <div class="flex justify-between items-center mb-2">
             <span class="text-teto-dark-text text-sm font-body">Fakultas:</span>
             <span
-                class="text-teto-primary font-body">{{ $collegeMajor->faculty ?? 'Tidak tersedia' }}</span>
+                class="text-teto-secondary font-body">{{ $collegeMajor->faculty ?? 'Tidak tersedia' }}</span>
         </div>
 
         <div class="mt-3 pt-3 border-t border-teto-cream">
@@ -26,7 +26,7 @@
 
         <div class="mt-4 pt-3 flex justify-end">
             <a href="{{ route('my-college-majors.show', $collegeMajor) }}"
-                class="text-sm text-white bg-teto-primary hover:bg-teto-dark px-3 py-1 rounded-full font-medium flex items-center font-sans">
+                class="text-sm text-white bg-teto-primary hover:bg-teto-primary-hover px-3 py-1 rounded-full font-medium flex items-center font-accent">
                 Lihat Detail
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1"
                     viewBox="0 0 20 20" fill="currentColor">

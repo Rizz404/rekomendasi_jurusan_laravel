@@ -11,7 +11,7 @@
         <div class="flex items-center gap-4 md:gap-8">
             <div class="flex gap-4 items-center">
                 <a href="{{ route('my-college-majors.index') }}"
-                    class="font-sans font-medium cursor-pointer hover:text-teto-accent transition-colors duration-300 ease-in-out flex items-center">
+                    class="font-sans font-medium cursor-pointer hover:text-teto-accent-hover {{ request()->routeIs('my-college-majors.index') ? ' text-teto-accent-active' : ' text-white' }} transition-colors duration-300 ease-in-out flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1"
                         viewBox="0 0 20 20" fill="currentColor">
                         <path
@@ -24,7 +24,7 @@
                     <span>College Majors</span>
                 </a>
                 <a href="{{ route('my-universities.index') }}"
-                    class="font-sans font-medium cursor-pointer hover:text-teto-accent transition-colors duration-300 ease-in-out flex items-center">
+                    class="font-sans font-medium cursor-pointer hover:text-teto-accent-hover {{ request()->routeIs('my-universities.index') ? ' text-teto-accent-active' : ' text-white' }} transition-colors duration-300 ease-in-out flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1"
                         viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd"
@@ -34,7 +34,7 @@
                     <span>Universities</span>
                 </a>
                 <a href="{{ route('my-grades.index') }}"
-                    class="font-sans font-medium cursor-pointer hover:text-teto-accent transition-colors duration-300 ease-in-out flex items-center">
+                    class="font-sans font-medium cursor-pointer hover:text-teto-accent-hover {{ request()->routeIs('my-grades.index') ? ' text-teto-accent-active' : ' text-white' }} transition-colors duration-300 ease-in-out flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1"
                         viewBox="0 0 20 20" fill="currentColor">
                         <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
@@ -45,7 +45,7 @@
                     <span>My Grades</span>
                 </a>
                 <a href="{{ route('my-recommendations.index') }}"
-                    class="font-sans font-medium cursor-pointer hover:text-teto-accent transition-colors duration-300 ease-in-out flex items-center">
+                    class="font-sans font-medium cursor-pointer hover:text-teto-accent-hover {{ request()->routeIs('my-recommendations.index') ? ' text-teto-accent-active' : ' text-white' }} transition-colors duration-300 ease-in-out flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1"
                         viewBox="0 0 20 20" fill="currentColor">
                         <path
@@ -59,7 +59,7 @@
             @auth
                 <div class="flex items-center gap-2">
                     <a href="{{ route('profile.index') }}"
-                        class="font-sans font-medium cursor-pointer hover:text-teto-accent transition-colors duration-300 ease-in-out flex items-center">
+                        class="font-sans font-medium cursor-pointer hover:text-teto-accent-hover {{ request()->routeIs('profile.index') ? ' text-teto-accent-active' : ' text-white' }} transition-colors duration-300 ease-in-out flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1"
                             viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd"
@@ -72,7 +72,7 @@
             @else
                 <div class="flex gap-2 items-center">
                     <a href="{{ route('login') }}"
-                        class="font-sans font-medium cursor-pointer hover:text-teto-accent transition-colors duration-300 ease-in-out flex items-center">
+                        class="font-sans font-medium cursor-pointer hover:text-teto-accent-hover {{ request()->routeIs('login') ? ' text-teto-accent-active' : ' text-white' }} transition-colors duration-300 ease-in-out flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1"
                             viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd"

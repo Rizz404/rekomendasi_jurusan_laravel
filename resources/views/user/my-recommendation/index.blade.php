@@ -70,7 +70,7 @@
                     </div>
                 </div>
 
-                @if ($recommendations->isNotEmpty())
+                @if ($SAWResults->isNotEmpty())
                     <h3 class="text-xl font-medium text-teto-dark-text mb-4">
                         Hasil
                         Rekomendasi Jurusan</h3>
@@ -96,42 +96,42 @@
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-teto-cream">
-                                @foreach ($recommendations as $recommendation)
+                                @foreach ($SAWResults as $SAWResult)
                                     <tr class="hover:">
                                         <td class="py-4 px-4 whitespace-nowrap">
-                                            @if ($recommendation->rank <= 3)
+                                            @if ($SAWResult->rank <= 3)
                                                 <span
                                                     class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-teto-light text-white">
-                                                    {{ $recommendation->rank }}
+                                                    {{ $SAWResult->rank }}
                                                 </span>
                                             @else
                                                 <span
-                                                    class="text-gray-700">{{ $recommendation->rank }}</span>
+                                                    class="text-gray-700">{{ $SAWResult->rank }}</span>
                                             @endif
                                         </td>
                                         <td class="py-4 px-4">
                                             <div
                                                 class="text-sm font-medium text-gray-900">
-                                                {{ $recommendation->collegeMajor->major_name }}
+                                                {{ $SAWResult->collegeMajor->major_name }}
                                             </div>
                                             <div class="text-sm text-gray-500">
-                                                {{ $recommendation->collegeMajor->faculty ?? 'Fakultas tidak tersedia' }}
+                                                {{ $SAWResult->collegeMajor->faculty ?? 'Fakultas tidak tersedia' }}
                                             </div>
                                         </td>
                                         <td class="py-4 px-4">
                                             <div
-                                                class="text-sm font-medium 
-                                                    {{ $recommendation->final_score >= 80 ? 'text-green-600' : ($recommendation->final_score >= 60 ? 'text-slate-600' : ($recommendation->final_score >= 40 ? 'text-yellow-600' : 'text-red-600')) }}">
-                                                {{ number_format($recommendation->final_score * 100, 2) }}%
+                                                class="text-sm font-medium {{-- Hapus class warna berdasarkan persentase --}} text-gray-900">
+                                                {{-- Tampilkan skor asli, format desimal --}}
+                                                {{ number_format($SAWResult->final_score, 3) }}
                                             </div>
                                         </td>
                                         <td class="py-4 px-4">
                                             <div class="text-sm text-gray-500">
-                                                {{ $recommendation->recommendation_reason ? $recommendation->recommendation_reason : 'Tidak ada catatan khusus' }}
+                                                {{ $SAWResult->recommendation_reason ? $SAWResult->recommendation_reason : 'Tidak ada catatan khusus' }}
                                             </div>
                                         </td>
                                         <td class="py-4 px-4">
-                                            <a href="{{ route('my-college-majors.show', $recommendation->college_major_id) }}"
+                                            <a href="{{ route('my-college-majors.show', $SAWResult->college_major_id) }}"
                                                 class="text-slate-600 hover:text-slate-900">Detail
                                                 Jurusan</a>
                                         </td>
