@@ -22,32 +22,32 @@
             </div>
         </div>
 
-        <div class="bg-white rounded-lg shadow overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
+        <div class="bg-white rounded shadow overflow-x-auto">
+            <table class="min-w-full divide-y divide-teto-cream">
+                <thead class="bg-teto-cream">
                     <tr>
                         <th
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            class="px-6 py-3 text-left text-xs font-medium text-teto-dark-text uppercase tracking-wider">
                             Major Name
                         </th>
                         <th
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            class="px-6 py-3 text-left text-xs font-medium text-teto-dark-text uppercase tracking-wider">
                             Faculty
                         </th>
                         <th
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            class="px-6 py-3 text-left text-xs font-medium text-teto-dark-text uppercase tracking-wider">
                             Field Of Study
                         </th>
                         <th
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            class="px-6 py-3 text-left text-xs font-medium text-teto-dark-text uppercase tracking-wider">
                             Status
                         </th>
                     </tr>
                 </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
+                <tbody class="bg-white divide-y divide-teto-cream">
                     @forelse ($collegeMajors as $collegeMajor)
                         <tr onclick="window.location='{{ route('admin.college-majors.show', $collegeMajor) }}'"
-                            class="hover:bg-gray-50 cursor-pointer transition-colors duration-150">
+                            class="hover:bg-teto-cream-hover cursor-pointer transition-colors duration-150">
                             <td class="px-6 py-4 whitespace-nowrap">
                                 {{ $collegeMajor->major_name }}
                             </td>
@@ -68,7 +68,7 @@
                     @empty
                         <tr>
                             <td colspan="5"
-                                class="px-6 py-4 text-center text-gray-500">
+                                class="px-6 py-4 text-center text-teto-dark-text">
                                 No college major found
                             </td>
                         </tr>

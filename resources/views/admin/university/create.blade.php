@@ -88,7 +88,8 @@
                                 </option>
                             @endforeach
                         </select>
-                        <p class="mt-1 text-xs text-gray-500">Tahan Ctrl (atau
+                        <p class="mt-1 text-xs text-teto-dark-text">Tahan Ctrl
+                            (atau
                             Cmd di Mac) dan klik untuk memilih lebih dari satu.
                         </p>
                         {{-- Tampilkan error validasi untuk college_majors --}}

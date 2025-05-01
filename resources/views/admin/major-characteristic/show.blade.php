@@ -33,7 +33,8 @@
                         </h2>
                         <div class="space-y-4">
                             <div>
-                                <p class="text-sm text-gray-500">Nama Jurusan
+                                <p class="text-sm text-teto-dark-text">Nama
+                                    Jurusan
                                 </p>
                                 <p class="font-medium">
                                     {{ $majorCharacteristic->collegeMajor->major_name }}
@@ -41,14 +42,16 @@
                             </div>
 
                             <div>
-                                <p class="text-sm text-gray-500">Fakultas</p>
+                                <p class="text-sm text-teto-dark-text">Fakultas
+                                </p>
                                 <p class="font-medium">
                                     {{ $majorCharacteristic->collegeMajor->faculty ?? 'Tidak ada' }}
                                 </p>
                             </div>
 
                             <div>
-                                <p class="text-sm text-gray-500">Bidang Studi
+                                <p class="text-sm text-teto-dark-text">Bidang
+                                    Studi
                                 </p>
                                 <p class="font-medium">
                                     {{ $majorCharacteristic->collegeMajor->field_of_study ?? 'Tidak ada' }}
@@ -56,9 +59,9 @@
                             </div>
 
                             <div>
-                                <p class="text-sm text-gray-500">Deskripsi
+                                <p class="text-sm text-teto-dark-text">Deskripsi
                                     Jurusan</p>
-                                <div class="bg-gray-50 rounded-md p-2 mt-1">
+                                <div class="bg-teto-cream rounded-md p-2 mt-1">
                                     <p
                                         class="text-sm text-gray-700 whitespace-pre-wrap">
                                         {{ $majorCharacteristic->collegeMajor->description ?? 'Tidak ada deskripsi' }}
@@ -71,7 +74,8 @@
                             Kriteria</h2>
                         <div class="space-y-4">
                             <div>
-                                <p class="text-sm text-gray-500">Nama Kriteria
+                                <p class="text-sm text-teto-dark-text">Nama
+                                    Kriteria
                                 </p>
                                 <p class="font-medium">
                                     {{ $majorCharacteristic->criteria->name }}
@@ -79,7 +83,8 @@
                             </div>
 
                             <div>
-                                <p class="text-sm text-gray-500">Tipe Kriteria
+                                <p class="text-sm text-teto-dark-text">Tipe
+                                    Kriteria
                                 </p>
                                 <span
                                     class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium 
@@ -89,7 +94,8 @@
                             </div>
 
                             <div>
-                                <p class="text-sm text-gray-500">Bobot Kriteria
+                                <p class="text-sm text-teto-dark-text">Bobot
+                                    Kriteria
                                 </p>
                                 <p class="font-medium">
                                     {{ $majorCharacteristic->criteria->weight }}
@@ -97,7 +103,8 @@
                             </div>
 
                             <div>
-                                <p class="text-sm text-gray-500">Tipe Sekolah
+                                <p class="text-sm text-teto-dark-text">Tipe
+                                    Sekolah
                                 </p>
                                 <span
                                     class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
@@ -112,7 +119,7 @@
                         </h2>
                         <div class="space-y-4">
                             <div>
-                                <p class="text-sm text-gray-500">Bobot
+                                <p class="text-sm text-teto-dark-text">Bobot
                                     Kompatibilitas</p>
                                 <div class="mt-1">
                                     <div
@@ -129,23 +136,25 @@
                             </div>
 
                             <div>
-                                <p class="text-sm text-gray-500">Nilai Minimum
+                                <p class="text-sm text-teto-dark-text">Nilai
+                                    Minimum
                                 </p>
                                 <p class="font-medium">
                                     @if ($majorCharacteristic->minimum_score)
                                         {{ $majorCharacteristic->minimum_score }}
                                         / 100
                                     @else
-                                        <span class="text-gray-500">Tidak ada
+                                        <span class="text-teto-dark-text">Tidak
+                                            ada
                                             nilai minimum</span>
                                     @endif
                                 </p>
                             </div>
 
                             <div class="mt-6">
-                                <p class="text-sm text-gray-500">Deskripsi
+                                <p class="text-sm text-teto-dark-text">Deskripsi
                                     Kriteria</p>
-                                <div class="bg-gray-50 rounded-md p-2 mt-1">
+                                <div class="bg-teto-cream rounded-md p-2 mt-1">
                                     <p
                                         class="text-sm text-gray-700 whitespace-pre-wrap">
                                         {{ $majorCharacteristic->criteria->description ?? 'Tidak ada deskripsi' }}
@@ -154,9 +163,10 @@
                             </div>
 
                             <div class="mt-6">
-                                <p class="text-sm text-gray-500">Prospek Karir
+                                <p class="text-sm text-teto-dark-text">Prospek
+                                    Karir
                                     Jurusan</p>
-                                <div class="bg-gray-50 rounded-md p-2 mt-1">
+                                <div class="bg-teto-cream rounded-md p-2 mt-1">
                                     <p
                                         class="text-sm text-gray-700 whitespace-pre-wrap">
                                         {{ $majorCharacteristic->collegeMajor->career_prospects ?? 'Tidak ada informasi prospek karir' }}
@@ -166,7 +176,8 @@
                         </div>
 
                         <div class="mt-6">
-                            <p class="text-sm text-gray-500">Tanggal Pembuatan
+                            <p class="text-sm text-teto-dark-text">Tanggal
+                                Pembuatan
                             </p>
                             <p class="font-medium">
                                 {{ $majorCharacteristic->created_at->format('d F Y H:i') }}
@@ -174,7 +185,8 @@
                         </div>
 
                         <div class="mt-2">
-                            <p class="text-sm text-gray-500">Terakhir Diperbarui
+                            <p class="text-sm text-teto-dark-text">Terakhir
+                                Diperbarui
                             </p>
                             <p class="font-medium">
                                 {{ $majorCharacteristic->updated_at->format('d F Y H:i') }}

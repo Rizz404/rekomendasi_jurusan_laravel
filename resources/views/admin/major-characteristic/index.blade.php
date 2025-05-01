@@ -20,47 +20,47 @@
             </div>
         </div>
 
-        <div class="bg-white rounded-lg shadow overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
+        <div class="bg-white rounded shadow overflow-x-auto">
+            <table class="min-w-full divide-y divide-teto-cream">
+                <thead class="bg-teto-cream">
                     <tr>
                         <th
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            class="px-6 py-3 text-left text-xs font-medium text-teto-dark-text uppercase tracking-wider">
                             Jurusan
                         </th>
                         <th
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            class="px-6 py-3 text-left text-xs font-medium text-teto-dark-text uppercase tracking-wider">
                             Fakultas
                         </th>
                         <th
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            class="px-6 py-3 text-left text-xs font-medium text-teto-dark-text uppercase tracking-wider">
                             Kriteria
                         </th>
                         <th
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            class="px-6 py-3 text-left text-xs font-medium text-teto-dark-text uppercase tracking-wider">
                             Tipe Kriteria
                         </th>
                         <th
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            class="px-6 py-3 text-left text-xs font-medium text-teto-dark-text uppercase tracking-wider">
                             Bobot Kompatibilitas
                         </th>
                         <th
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            class="px-6 py-3 text-left text-xs font-medium text-teto-dark-text uppercase tracking-wider">
                             Nilai Minimum
                         </th>
                     </tr>
                 </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
+                <tbody class="bg-white divide-y divide-teto-cream">
                     @forelse ($majorCharacteristics as $majorCharacteristic)
                         <tr onclick="window.location='{{ route('admin.major-characteristics.show', $majorCharacteristic) }}'"
-                            class="hover:bg-gray-50 cursor-pointer transition-colors duration-150">
+                            class="hover:bg-teto-cream-hover cursor-pointer transition-colors duration-150">
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="text-sm font-medium text-gray-900">
                                     {{ $majorCharacteristic->collegeMajor->major_name }}
                                 </div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-500">
+                                <div class="text-sm text-teto-dark-text">
                                     {{ $majorCharacteristic->collegeMajor->faculty ?? 'Tidak ada' }}
                                 </div>
                             </td>
@@ -90,7 +90,7 @@
                     @empty
                         <tr>
                             <td colspan="7"
-                                class="px-6 py-4 text-center text-gray-500">
+                                class="px-6 py-4 text-center text-teto-dark-text">
                                 Data karakteristik jurusan tidak ditemukan
                             </td>
                         </tr>

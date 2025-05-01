@@ -1,4 +1,5 @@
-<header class="bg-teto-primary text-white">
+<header
+    class=" bg-gradient-to-r from-teto-primary to-teto-light text-white shadow-md">
     <nav class="flex items-center justify-between px-4 md:px-12 py-4 mx-auto">
         <a href="{{ route('home') }}" class="bold text-2xl flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-2"

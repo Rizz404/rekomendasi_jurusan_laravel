@@ -6,13 +6,11 @@
             <div>
                 <form action="{{ route('admin.users.index') }}" method="GET"
                     class="flex flex-col sm:flex-row gap-2">
-                    <input type="text" name="search"
-                        placeholder="Search users..."
-                        value="{{ request('search') }}"
-                        class="px-4 py-2 border rounded-lg w-full sm:w-auto">
 
-                    <select name="role"
-                        class="px-4 py-2 border rounded-lg w-full sm:w-auto">
+                    <x-searchbar name="search" placeholder="Search users..."
+                        value="{{ request('search') }}" />
+
+                    <x-dropdown name="role">
                         <option value="">All Roles</option>
                         <option value="admin"
                             {{ request('role') == 'admin' ? 'selected' : '' }}>
@@ -20,11 +18,12 @@
                         <option value="user"
                             {{ request('role') == 'user' ? 'selected' : '' }}>
                             User</option>
-                    </select>
+                    </x-dropdown>
 
                     <x-button type="submit">
-                        Search
+                        Filter
                     </x-button>
+
                     <x-link-button href="{{ route('admin.users.create') }}">
                         Create
                     </x-link-button>
@@ -32,73 +31,91 @@
             </div>
         </div>
 
-        <div class="bg-white rounded-lg shadow overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
+        <div class="bg-white rounded shadow overflow-x-auto">
+            <table class="min-w-full divide-y divide-teto-cream">
+                <thead class="bg-teto-cream"> {{-- Applied teto-cream background --}}
                     <tr>
                         <th
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            class="px-6 py-3 text-left text-xs font-medium text-teto-dark-text-muted uppercase tracking-wider">
+                            {{-- Applied teto-dark-text-muted --}}
                             Username
                         </th>
                         <th
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            class="px-6 py-3 text-left text-xs font-medium text-teto-dark-text-muted uppercase tracking-wider">
+                            {{-- Applied teto-dark-text-muted --}}
                             Email
                         </th>
                         <th
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            class="px-6 py-3 text-left text-xs font-medium text-teto-dark-text-muted uppercase tracking-wider">
+                            {{-- Applied teto-dark-text-muted --}}
                             Role
                         </th>
                         <th
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            class="px-6 py-3 text-left text-xs font-medium text-teto-dark-text-muted uppercase tracking-wider">
+                            {{-- Applied teto-dark-text-muted --}}
                             Student Info
                         </th>
                         <th
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            class="px-6 py-3 text-left text-xs font-medium text-teto-dark-text-muted uppercase tracking-wider">
+                            {{-- Applied teto-dark-text-muted --}}
                             School Type
                         </th>
                     </tr>
                 </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
+                <tbody class="bg-white divide-y divide-teto-cream">
                     @forelse ($users as $user)
                         <tr onclick="window.location='{{ route('admin.users.show', $user) }}'"
-                            class="hover:bg-gray-50 cursor-pointer transition-colors duration-150">
-                            <td class="px-6 py-4 whitespace-nowrap">
+                            class="hover:bg-teto-cream-hover-hover cursor-pointer transition-colors duration-150">
+                            {{-- Applied teto-cream-hover --}}
+                            <td
+                                class="px-6 py-4 whitespace-nowrap text-teto-dark-text">
+                                {{-- Applied teto-dark-text --}}
                                 {{ $user->username }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900">
+                                <div class="text-sm text-teto-dark-text">
+                                    {{-- Applied teto-dark-text --}}
                                     {{ $user->email }}</div>
                                 @if ($user->email_verified_at)
-                                    <div class="text-xs text-green-600">Verified
+                                    <div class="text-xs text-teto-soft-teal">
+                                        Verified {{-- Applied teto-soft-teal --}}
                                     </div>
                                 @else
-                                    <div class="text-xs text-red-600">Not
+                                    <div class="text-xs text-teto-primary">Not
+                                        {{-- Applied teto-primary --}}
                                         Verified</div>
                                 @endif
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <span
-                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
-                                    {{ $user->role === 'admin' ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800' }}">
+                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full text-white
+                                    {{ $user->role === 'admin' ? 'bg-teto-light' : 'bg-teto-soft-blue' }}">
+                                    {{-- Applied teto colors for roles --}}
                                     {{ ucfirst($user->role) }}
                                 </span>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 @if ($user->student)
                                     <div
-                                        class="text-sm font-medium text-gray-900">
+                                        class="text-sm font-medium text-teto-dark-text">
+                                        {{-- Applied teto-dark-text --}}
                                         {{ $user->student->name }}</div>
-                                    <div class="text-xs text-gray-500">NIS:
+                                    <div
+                                        class="text-xs text-teto-dark-text-muted">
+                                        NIS: {{-- Applied teto-dark-text-muted --}}
                                         {{ $user->student->NIS ?? 'Not set' }}
                                     </div>
                                 @else
-                                    <span class="text-xs text-gray-500">No
+                                    <span
+                                        class="text-xs text-teto-dark-text-muted">No
+                                        {{-- Applied teto-dark-text-muted --}}
                                         student profile</span>
                                 @endif
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 @if ($user->student && $user->student->school_type)
-                                    <span class="text-sm text-gray-900">
+                                    <span class="text-sm text-teto-dark-text">
+                                        {{-- Applied teto-dark-text --}}
                                         {{ $user->student->formatted_school_type }}
                                         @if ($user->student->school_major)
                                             -
@@ -106,7 +123,9 @@
                                         @endif
                                     </span>
                                 @else
-                                    <span class="text-xs text-gray-500">Not
+                                    <span
+                                        class="text-xs text-teto-dark-text-muted">Not
+                                        {{-- Applied teto-dark-text-muted --}}
                                         specified</span>
                                 @endif
                             </td>
@@ -114,7 +133,8 @@
                     @empty
                         <tr>
                             <td colspan="5"
-                                class="px-6 py-4 text-center text-gray-500">
+                                class="px-6 py-4 text-center text-teto-dark-text-muted">
+                                {{-- Applied teto-dark-text-muted --}}
                                 No users found
                             </td>
                         </tr>
@@ -124,7 +144,7 @@
         </div>
 
         <div class="mt-4">
-            {{ $users->links() }}
+            {{ $users->links() }} {{-- Pagination will use theme colors if configured in Tailwind --}}
         </div>
     </div>
 </x-admin-layout>

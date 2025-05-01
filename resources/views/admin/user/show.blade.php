@@ -30,12 +30,13 @@
                         </h2>
                         <div class="space-y-4">
                             <div>
-                                <p class="text-sm text-gray-500">Username</p>
+                                <p class="text-sm text-teto-dark-text">Username
+                                </p>
                                 <p class="font-medium">{{ $user->username }}</p>
                             </div>
 
                             <div>
-                                <p class="text-sm text-gray-500">Email</p>
+                                <p class="text-sm text-teto-dark-text">Email</p>
                                 <p class="font-medium">{{ $user->email }}</p>
                                 @if ($user->email_verified_at)
                                     <span
@@ -51,13 +52,14 @@
                             </div>
 
                             <div>
-                                <p class="text-sm text-gray-500">No. Telepon</p>
+                                <p class="text-sm text-teto-dark-text">No.
+                                    Telepon</p>
                                 <p class="font-medium">
                                     {{ $user->phone ?? 'Tidak ada' }}</p>
                             </div>
 
                             <div>
-                                <p class="text-sm text-gray-500">Role</p>
+                                <p class="text-sm text-teto-dark-text">Role</p>
                                 <span
                                     class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium 
                                     {{ $user->role === 'admin' ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800' }}">
@@ -66,7 +68,7 @@
                             </div>
 
                             <div>
-                                <p class="text-sm text-gray-500">Tanggal
+                                <p class="text-sm text-teto-dark-text">Tanggal
                                     Registrasi</p>
                                 <p class="font-medium">
                                     {{ $user->created_at->format('d F Y H:i') }}
@@ -81,21 +83,22 @@
                         @if ($user->student)
                             <div class="space-y-4">
                                 <div>
-                                    <p class="text-sm text-gray-500">Nama
+                                    <p class="text-sm text-teto-dark-text">Nama
                                         Lengkap</p>
                                     <p class="font-medium">
                                         {{ $user->student->name }}</p>
                                 </div>
 
                                 <div>
-                                    <p class="text-sm text-gray-500">NIS</p>
+                                    <p class="text-sm text-teto-dark-text">NIS
+                                    </p>
                                     <p class="font-medium">
                                         {{ $user->student->NIS ?? 'Tidak ada' }}
                                     </p>
                                 </div>
 
                                 <div>
-                                    <p class="text-sm text-gray-500">Jenis
+                                    <p class="text-sm text-teto-dark-text">Jenis
                                         Kelamin</p>
                                     <p class="font-medium">
                                         {{ $user->student->gender === 'man' ? 'Laki-laki' : 'Perempuan' }}
@@ -103,14 +106,14 @@
                                 </div>
 
                                 <div>
-                                    <p class="text-sm text-gray-500">Asal
+                                    <p class="text-sm text-teto-dark-text">Asal
                                         Sekolah</p>
                                     <p class="font-medium">
                                         {{ $user->student->school_origin }}</p>
                                 </div>
 
                                 <div>
-                                    <p class="text-sm text-gray-500">Tipe
+                                    <p class="text-sm text-teto-dark-text">Tipe
                                         Sekolah</p>
                                     <p class="font-medium">
                                         {{ $user->student->school_type === 'high_school' ? 'SMA' : 'SMK' }}
@@ -118,13 +121,15 @@
                                 </div>
 
                                 <div>
-                                    <p class="text-sm text-gray-500">Jurusan</p>
+                                    <p class="text-sm text-teto-dark-text">
+                                        Jurusan</p>
                                     <p class="font-medium">
                                         {{ $user->student->school_major }}</p>
                                 </div>
 
                                 <div>
-                                    <p class="text-sm text-gray-500">Tahun Lulus
+                                    <p class="text-sm text-teto-dark-text">Tahun
+                                        Lulus
                                     </p>
                                     <p class="font-medium">
                                         {{ $user->student->graduation_year }}
@@ -133,7 +138,8 @@
                             </div>
                         @else
                             <div class="bg-gray-100 rounded-md p-4">
-                                <p class="text-gray-500">Tidak ada data siswa
+                                <p class="text-teto-dark-text">Tidak ada data
+                                    siswa
                                 </p>
                             </div>
                         @endif

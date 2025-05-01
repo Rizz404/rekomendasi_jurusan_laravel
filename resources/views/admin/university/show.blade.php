@@ -35,7 +35,7 @@
                         @else
                             <div
                                 class="h-40 w-40 rounded-lg bg-gray-200 flex items-center justify-center">
-                                <span class="text-gray-500">No Logo</span>
+                                <span class="text-teto-dark-text">No Logo</span>
                             </div>
                         @endif
                     </div>
@@ -97,7 +97,8 @@
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
                             <div>
-                                <p class="text-sm text-gray-500">Lokasi</p>
+                                <p class="text-sm text-teto-dark-text">Lokasi
+                                </p>
                                 <p class="font-medium">
                                     {{ $university->city }},
                                     {{ $university->province }}
@@ -106,7 +107,8 @@
 
                             @if ($university->website)
                                 <div>
-                                    <p class="text-sm text-gray-500">Website</p>
+                                    <p class="text-sm text-teto-dark-text">
+                                        Website</p>
                                     <a href="{{ $university->website }}"
                                         target="_blank"
                                         class="text-blue-600 hover:underline font-medium">
@@ -118,8 +120,9 @@
 
                         @if ($university->description)
                             <div class="mt-4">
-                                <p class="text-sm text-gray-500">Deskripsi</p>
-                                <div class="bg-gray-50 rounded-md p-3 mt-1">
+                                <p class="text-sm text-teto-dark-text">Deskripsi
+                                </p>
+                                <div class="bg-teto-cream rounded-md p-3 mt-1">
                                     <p
                                         class="text-sm text-gray-700 whitespace-pre-wrap">
                                         {{ $university->description }}
@@ -142,7 +145,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         @foreach ($university->collegeMajors as $major)
                             <div
-                                class="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors">
+                                class="border border-gray-200 rounded-lg p-4 hover:bg-teto-cream-hover transition-colors">
                                 <div class="flex justify-between">
                                     <h4 class="font-medium text-gray-900">
                                         {{ $major->major_name }}</h4>
@@ -169,14 +172,14 @@
                         @endforeach
                     </div>
                 @else
-                    <div class="text-center py-4 text-gray-500">
+                    <div class="text-center py-4 text-teto-dark-text">
                         Belum ada jurusan yang terdaftar untuk universitas ini.
                     </div>
                 @endif
             </div>
 
             <div
-                class="px-6 py-4 bg-gray-50 border-t border-gray-200 flex justify-between items-center">
+                class="px-6 py-4 bg-teto-cream border-t border-gray-200 flex justify-between items-center">
                 <span class="text-sm text-gray-600">Total:
                     {{ $university->collegeMajors->count() }} jurusan</span>
                 <x-link-button
@@ -187,7 +190,7 @@
             </div>
         </div>
 
-        <div class="mt-6 text-sm text-gray-500">
+        <div class="mt-6 text-sm text-teto-dark-text">
             <div class="flex justify-between">
                 <div>
                     <p>Dibuat pada:

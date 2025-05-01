@@ -1,5 +1,6 @@
-<header class="bg-slate-800 text-white shadow-md">
-    <div class="flex items-center justify-between px-4 md:px-8 py-4 mx-auto">
+<header
+    class="bg-gradient-to-r from-teto-dark to-teto-light text-white shadow-md">
+    <div class="flex items-center justify-between px-4 md:px-8 py-5 mx-auto">
         <div class="flex md:hidden">
             <button id="mobile-menu-button" type="button"
                 class="text-slate-200 hover:text-white focus:outline-none">
@@ -13,7 +14,7 @@
 
         <div class="flex-1 flex justify-center md:justify-start">
             <a href="{{ route('admin.dashboard.index') }}"
-                class="bold text-2xl flex items-center">
+                class="bold text-2xl flex items-center text-teto-cream">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-2"
                     viewBox="0 0 20 20" fill="currentColor">
                     <path

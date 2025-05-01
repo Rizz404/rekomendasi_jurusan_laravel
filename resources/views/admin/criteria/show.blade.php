@@ -29,19 +29,20 @@
                     <div>
                         <div class="space-y-4">
                             <div>
-                                <p class="text-sm text-gray-500">Nama Kriteria
+                                <p class="text-sm text-teto-dark-text">Nama
+                                    Kriteria
                                 </p>
                                 <p class="font-medium">{{ $criteria->name }}</p>
                             </div>
 
                             <div>
-                                <p class="text-sm text-gray-500">Bobot</p>
+                                <p class="text-sm text-teto-dark-text">Bobot</p>
                                 <p class="font-medium">{{ $criteria->weight }}
                                 </p>
                             </div>
 
                             <div>
-                                <p class="text-sm text-gray-500">Tipe</p>
+                                <p class="text-sm text-teto-dark-text">Tipe</p>
                                 <span
                                     class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium 
                                     {{ $criteria->type === 'benefit' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
@@ -50,7 +51,8 @@
                             </div>
 
                             <div>
-                                <p class="text-sm text-gray-500">Tipe Sekolah
+                                <p class="text-sm text-teto-dark-text">Tipe
+                                    Sekolah
                                 </p>
                                 <span
                                     class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
@@ -59,7 +61,8 @@
                             </div>
 
                             <div>
-                                <p class="text-sm text-gray-500">Status</p>
+                                <p class="text-sm text-teto-dark-text">Status
+                                </p>
                                 <span
                                     class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium 
                                     {{ $criteria->is_active ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800' }}">
@@ -68,7 +71,8 @@
                             </div>
 
                             <div>
-                                <p class="text-sm text-gray-500">Tanggal Dibuat
+                                <p class="text-sm text-teto-dark-text">Tanggal
+                                    Dibuat
                                 </p>
                                 <p class="font-medium">
                                     {{ $criteria->created_at->format('d F Y H:i') }}
@@ -76,7 +80,7 @@
                             </div>
 
                             <div>
-                                <p class="text-sm text-gray-500">Terakhir
+                                <p class="text-sm text-teto-dark-text">Terakhir
                                     Diperbarui</p>
                                 <p class="font-medium">
                                     {{ $criteria->updated_at->format('d F Y H:i') }}
@@ -87,8 +91,9 @@
 
                     <div>
                         <div>
-                            <p class="text-sm text-gray-500 mb-2">Deskripsi</p>
-                            <div class="bg-gray-50 rounded-md p-4">
+                            <p class="text-sm text-teto-dark-text mb-2">
+                                Deskripsi</p>
+                            <div class="bg-teto-cream rounded-md p-4">
                                 <p class="whitespace-pre-wrap">
                                     {{ $criteria->description ?? 'Tidak ada deskripsi' }}
                                 </p>

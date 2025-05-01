@@ -36,7 +36,7 @@
                     'border-teto-primary text-teto-dark placeholder-teto-cream focus:ring-teto-primary focus:border-teto-primary' => $errors->has(
                         $dotName,
                     ),
-                    'border-teto-metallic text-teto-dark-text focus:ring-teto-accent focus:border-teto-secondary' => !$errors->has(
+                    'border-teto-metallic text-teto-dark-text focus:ring-teto-accent-active focus:border-teto-secondary' => !$errors->has(
                         $dotName,
                     ),
                 ]) }}>
