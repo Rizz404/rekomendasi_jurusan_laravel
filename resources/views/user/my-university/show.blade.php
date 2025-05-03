@@ -7,7 +7,7 @@
             back-text="Kembali ke daftar universitas" />
 
         <div
-            class="bg-white border border-slate-200 rounded-lg shadow-sm overflow-hidden">
+            class="bg-white border border-teto-cream rounded-lg shadow-sm overflow-hidden">
             <div class="p-6">
                 <div
                     class="flex flex-col md:flex-row md:items-center md:justify-between">
@@ -18,15 +18,16 @@
                                 class="w-20 h-20 object-contain mr-4">
                         @else
                             <div
-                                class="w-20 h-20 bg-slate-200 rounded-full flex items-center justify-center mr-4">
+                                class="w-20 h-20 bg-teto-cream rounded-full flex items-center justify-center mr-4">
                                 <span
-                                    class="text-slate-500 font-semibold text-2xl">{{ substr($university->name, 0, 1) }}</span>
+                                    class=" text-teto-dark-text font-semibold text-2xl">{{ substr($university->name, 0, 1) }}</span>
                             </div>
                         @endif
                         <div>
-                            <h1 class="text-2xl font-bold text-slate-800">
+                            <h1 class="text-2xl font-bold text-teto-primary">
                                 {{ $university->name }}</h1>
-                            <p class="text-slate-600">{{ $university->city }},
+                            <p class="text-teto-dark-text">
+                                {{ $university->city }},
                                 {{ $university->province }}</p>
                             <div class="flex items-center mt-1">
                                 <span
@@ -47,38 +48,36 @@
                         </div>
                     </div>
                     @if ($university->website)
-                        <a href="{{ $university->website }}" target="_blank"
-                            class="mt-4 md:mt-0 inline-flex items-center px-4 py-2 border border-slate-300 rounded-md shadow-sm text-sm font-medium text-slate-700 bg-white hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500">
+                        <x-link-button href="{{ $university->website }}">
                             <svg xmlns="http://www.w3.org/2000/svg"
-                                class="h-5 w-5 mr-2 text-slate-500"
-                                fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
+                                class="h-5 w-5 mr-2  text-white" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round"
                                     stroke-linejoin="round" stroke-width="2"
                                     d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
                             </svg>
                             Kunjungi Website
-                        </a>
+                        </x-link-button>
                     @endif
                 </div>
 
-                <div class="mt-6 border-t border-slate-100 pt-6">
-                    <h2 class="text-lg font-semibold text-slate-800 mb-3">
+                <div class="mt-6 border-t border-teto-cream pt-6">
+                    <h2 class="text-lg font-semibold text-teto-dark mb-3">
                         Deskripsi Universitas</h2>
-                    <p class="text-slate-600">
+                    <p class="text-teto-dark-text">
                         {{ $university->description ?? 'Tidak ada deskripsi tersedia.' }}
                     </p>
                 </div>
 
-                <div class="mt-6 border-t border-slate-100 pt-6">
+                <div class="mt-6 border-t border-teto-cream pt-6">
                     <div
                         class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4">
-                        <h2 class="text-lg font-semibold text-slate-800">Jurusan
+                        <h2 class="text-lg font-semibold text-teto-dark">Jurusan
                             yang Tersedia</h2>
                         <form class="mt-2 sm:mt-0 flex">
                             <input type="text" name="major_search"
                                 placeholder="Cari jurusan..."
-                                class="w-full sm:w-auto rounded-l-lg border-slate-300 focus:border-slate-500 focus:ring focus:ring-slate-200 focus:ring-opacity-50 text-sm"
+                                class="w-full sm:w-auto rounded-l-lg border-teto-secondary focus:border-slate-500 focus:ring focus:ring-slate-200 focus:ring-opacity-50 text-sm"
                                 value="{{ request('major_search') }}">
                             <button type="submit"
                                 class="bg-slate-700 hover:bg-slate-800 text-white px-3 rounded-r-lg">
@@ -94,53 +93,55 @@
                     </div>
 
                     @if ($university->collegeMajors->count() > 0)
-                        <div class="overflow-x-auto">
-                            <table class="min-w-full divide-y divide-slate-200">
-                                <thead class="bg-slate-50">
+                        <div class="overflow-x-auto rounded shadow">
+                            <table
+                                class="min-w-full divide-y divide-teto-cream">
+                                <thead class="bg-teto-cream">
                                     <tr>
                                         <th scope="col"
-                                            class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
+                                            class="px-6 py-3 text-left text-xs font-medium  text-teto-dark-text uppercase tracking-wider">
                                             Nama Jurusan</th>
                                         <th scope="col"
-                                            class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
+                                            class="px-6 py-3 text-left text-xs font-medium  text-teto-dark-text uppercase tracking-wider">
                                             Fakultas</th>
                                         <th scope="col"
-                                            class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
+                                            class="px-6 py-3 text-left text-xs font-medium  text-teto-dark-text uppercase tracking-wider">
                                             Bidang Studi</th>
                                         <th scope="col"
-                                            class="px-6 py-3 text-right text-xs font-medium text-slate-500 uppercase tracking-wider">
+                                            class="px-6 py-3 text-right text-xs font-medium  text-teto-dark-text uppercase tracking-wider">
                                             Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody
-                                    class="bg-white divide-y divide-slate-200">
+                                    class="bg-white divide-y divide-teto-cream">
                                     @foreach ($university->collegeMajors as $major)
-                                        <tr class="hover:bg-slate-50">
+                                        <tr
+                                            class="hover:bg-teto-cream-hover cursor-pointer transition-colors duration-150">
                                             <td
                                                 class="px-6 py-4 whitespace-nowrap">
                                                 <div
-                                                    class="text-sm font-medium text-slate-900">
+                                                    class="text-sm font-medium text-teto-dark-text">
                                                     {{ $major->major_name }}
                                                 </div>
                                             </td>
                                             <td
                                                 class="px-6 py-4 whitespace-nowrap">
                                                 <div
-                                                    class="text-sm text-slate-600">
+                                                    class="text-sm text-teto-dark-text">
                                                     {{ $major->faculty ?? 'Tidak tersedia' }}
                                                 </div>
                                             </td>
                                             <td
                                                 class="px-6 py-4 whitespace-nowrap">
                                                 <span
-                                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-slate-100 text-slate-800">
+                                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-slate-100 text-teto-dark">
                                                     {{ $major->field_of_study ?? 'Tidak tersedia' }}
                                                 </span>
                                             </td>
                                             <td
                                                 class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                                 <a href="{{ route('my-college-majors.show', $major) }}"
-                                                    class="text-slate-600 hover:text-slate-900">
+                                                    class="text-teto-dark-text hover:text-teto-dark-text">
                                                     Detail
                                                 </a>
                                             </td>
@@ -150,7 +151,7 @@
                             </table>
                         </div>
                     @else
-                        <div class="bg-slate-50 rounded-lg p-6 text-center">
+                        <div class="bg-teto-cream rounded-lg p-6 text-center">
                             <svg xmlns="http://www.w3.org/2000/svg"
                                 class="h-12 w-12 mx-auto text-slate-400"
                                 fill="none" viewBox="0 0 24 24"
@@ -159,31 +160,32 @@
                                     stroke-linejoin="round" stroke-width="2"
                                     d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                             </svg>
-                            <h3 class="mt-3 text-lg font-medium text-slate-700">
+                            <h3
+                                class="mt-3 text-lg font-medium text-teto-dark-text">
                                 Belum ada jurusan</h3>
-                            <p class="mt-2 text-slate-500">Belum ada data
+                            <p class="mt-2  text-teto-dark-text">Belum ada data
                                 jurusan yang tersedia di universitas ini.</p>
                         </div>
                     @endif
                 </div>
 
-                <div class="mt-6 border-t border-slate-100 pt-6">
-                    <h2 class="text-lg font-semibold text-slate-800 mb-4">Lokasi
+                <div class="mt-6 border-t border-teto-cream pt-6">
+                    <h2 class="text-lg font-semibold text-teto-dark mb-4">Lokasi
                     </h2>
 
-                    <div class="bg-slate-50 rounded-lg p-4">
+                    <div class="bg-teto-cream rounded-lg p-4">
                         <div class="flex items-start">
                             <svg xmlns="http://www.w3.org/2000/svg"
-                                class="h-5 w-5 text-slate-500 mt-0.5 mr-2"
+                                class="h-5 w-5  text-teto-dark-text mt-0.5 mr-2"
                                 viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd"
                                     d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
                                     clip-rule="evenodd" />
                             </svg>
                             <div>
-                                <h3 class="font-medium text-slate-800">
+                                <h3 class="font-medium text-teto-dark">
                                     {{ $university->name }}</h3>
-                                <p class="text-slate-600 mt-1">
+                                <p class="text-teto-dark-text mt-1">
                                     {{ $university->city }},
                                     {{ $university->province }}</p>
                             </div>
@@ -191,8 +193,8 @@
 
                         {{-- Todo: Kalo ada waktu implementasiin lokasi gmaps --}}
                         {{-- <div
-                            class="mt-4 h-64 bg-slate-200 rounded-lg flex items-center justify-center">
-                            <div class="text-center text-slate-500">
+                            class="mt-4 h-64 bg-teto-cream rounded-lg flex items-center justify-center">
+                            <div class="text-center  text-teto-dark-text">
                                 <svg xmlns="http://www.w3.org/2000/svg"
                                     class="h-10 w-10 mx-auto" fill="none"
                                     viewBox="0 0 24 24" stroke="currentColor">
@@ -208,11 +210,11 @@
                     </div>
                 </div>
 
-                <div class="mt-6 border-t border-slate-100 pt-6">
-                    <h2 class="text-lg font-semibold text-slate-800 mb-4">
+                <div class="mt-6 border-t border-teto-cream pt-6">
+                    <h2 class="text-lg font-semibold text-teto-dark mb-4">
                         Rating/Akreditas</h2>
 
-                    <div class="bg-slate-50 rounded-lg p-4">
+                    <div class="bg-teto-cream rounded-lg p-4">
                         <div class="flex items-center mb-4">
                             <div class="flex items-center">
                                 @for ($i = 1; $i <= 5; $i++)
@@ -225,7 +227,7 @@
                                     </svg>
                                 @endfor
                                 <span
-                                    class="ml-2 text-slate-700 font-medium">{{ number_format($university->rating, 1) }}
+                                    class="ml-2 text-teto-dark-text font-medium">{{ number_format($university->rating, 1) }}
                                     / 5.0</span>
                             </div>
                         </div>

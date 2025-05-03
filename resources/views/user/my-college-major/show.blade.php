@@ -10,40 +10,40 @@
             back-text="Kembali ke Daftar Jurusan" />
 
         <div
-            class="bg-white border border-slate-200 rounded-lg shadow-sm overflow-hidden">
+            class="bg-white border border-teto-cream rounded-lg shadow-sm overflow-hidden">
             <div class="p-6">
                 <div
                     class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
                     <div>
-                        <h1 class="text-2xl font-bold text-slate-800">
+                        <h1 class="text-2xl font-bold text-teto-primary">
                             {{ $collegeMajor->major_name }}</h1>
-                        <p class="text-slate-600 mt-1">Fakultas:
+                        <p class="text-teto-dark-text-soft mt-1">Fakultas:
                             {{ $collegeMajor->faculty ?? 'Tidak tersedia' }}</p>
                     </div>
                     <span
-                        class="mt-2 lg:mt-0 px-4 py-2 rounded-full text-sm font-medium bg-slate-100 text-slate-800">
+                        class="mt-2 lg:mt-0 px-4 py-2 rounded-full text-sm font-medium bg-teto-light text-white">
                         {{ $collegeMajor->field_of_study ?? 'Bidang studi tidak tersedia' }}
                     </span>
                 </div>
 
-                <div class="mt-6 border-t border-slate-100 pt-6">
-                    <h2 class="text-lg font-semibold text-slate-800 mb-3">
+                <div class="mt-6 border-t border-teto-cream pt-6">
+                    <h2 class="text-lg font-semibold text-teto-dark mb-3">
                         Deskripsi Jurusan</h2>
-                    <p class="text-slate-600">
+                    <p class="text-teto-dark-text-soft">
                         {{ $collegeMajor->description ?? 'Tidak ada deskripsi tersedia.' }}
                     </p>
                 </div>
 
-                <div class="mt-6 border-t border-slate-100 pt-6">
-                    <h2 class="text-lg font-semibold text-slate-800 mb-3">
+                <div class="mt-6 border-t border-teto-cream pt-6">
+                    <h2 class="text-lg font-semibold text-teto-dark mb-3">
                         Prospek Karir</h2>
-                    <p class="text-slate-600">
+                    <p class="text-teto-dark-text-soft">
                         {{ $collegeMajor->career_prospects ?? 'Informasi prospek karir belum tersedia.' }}
                     </p>
                 </div>
 
-                <div class="mt-6 border-t border-slate-100 pt-6">
-                    <h2 class="text-lg font-semibold text-slate-800 mb-4">
+                <div class="mt-6 border-t border-teto-cream pt-6">
+                    <h2 class="text-lg font-semibold text-teto-dark mb-4">
                         Universitas yang Menawarkan</h2>
 
                     @if ($collegeMajor->universities->count() > 0)
@@ -51,7 +51,7 @@
                             class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                             @foreach ($collegeMajor->universities as $university)
                                 <div
-                                    class="border border-slate-200 rounded-lg p-4 hover:bg-slate-50 transition-colors duration-200">
+                                    class="border border-teto-cream rounded-lg p-4 hover:bg-teto-cream-hover transition-colors duration-200">
                                     <div class="flex items-center">
                                         @if ($university->logo)
                                             <img src="{{ $university->logo }}"
@@ -59,16 +59,17 @@
                                                 class="w-12 h-12 object-contain mr-3">
                                         @else
                                             <div
-                                                class="w-12 h-12 bg-slate-200 rounded-full flex items-center justify-center mr-3">
+                                                class="w-12 h-12 bg-teto-cream rounded-full flex items-center justify-center mr-3">
                                                 <span
-                                                    class="text-slate-500 font-semibold">{{ substr($university->name, 0, 1) }}</span>
+                                                    class="text-teto-dark-text-muted font-semibold">{{ substr($university->name, 0, 1) }}</span>
                                             </div>
                                         @endif
                                         <div>
                                             <h3
-                                                class="font-medium text-slate-800">
+                                                class="font-medium text-teto-dark-text">
                                                 {{ $university->name }}</h3>
-                                            <p class="text-sm text-slate-600">
+                                            <p
+                                                class="text-sm text-teto-dark-text-muted">
                                                 {{ $university->city }},
                                                 {{ $university->province }}</p>
                                         </div>
@@ -76,12 +77,12 @@
                                     <div
                                         class="mt-3 flex justify-between items-center">
                                         <span
-                                            class="inline-flex items-center px-2 py-1 rounded text-xs font-medium {{ $university->status === 'negeri' ? 'bg-blue-100 text-blue-800' : 'bg-purple-100 text-purple-800' }}">
+                                            class="inline-flex items-center px-2 py-1 rounded text-xs font-medium text-white {{ $university->status === 'negeri' ? 'bg-teto-soft-blue' : 'bg-teto-pastel-purple' }}">
                                             {{ ucfirst($university->status) }}
                                         </span>
                                         <div class="flex items-center">
                                             <svg xmlns="http://www.w3.org/2000/svg"
-                                                class="h-4 w-4 text-yellow-400"
+                                                class="h-4 w-4 text-teto-accent"
                                                 viewBox="0 0 20 20"
                                                 fill="currentColor">
                                                 <path
@@ -93,7 +94,7 @@
                                     </div>
                                     <div class="mt-3 text-right">
                                         <a href="{{ route('my-universities.show', $university) }}"
-                                            class="text-sm text-slate-700 hover:text-slate-900 font-medium flex items-center justify-end">
+                                            class="text-sm text-teto-dark hover:text-teto-primary font-medium flex items-center justify-end">
                                             Detail Universitas
                                             <svg xmlns="http://www.w3.org/2000/svg"
                                                 class="h-4 w-4 ml-1"
@@ -109,18 +110,19 @@
                             @endforeach
                         </div>
                     @else
-                        <div class="bg-slate-50 rounded-lg p-6 text-center">
+                        <div class="bg-teto-cream rounded-lg p-6 text-center">
                             <svg xmlns="http://www.w3.org/2000/svg"
-                                class="h-12 w-12 mx-auto text-slate-400"
+                                class="h-12 w-12 mx-auto text-teto-dark-text-muted"
                                 fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
                                 <path stroke-linecap="round"
                                     stroke-linejoin="round" stroke-width="2"
                                     d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
                             </svg>
-                            <h3 class="mt-3 text-lg font-medium text-slate-700">
+                            <h3 class="mt-3 text-lg font-medium text-teto-dark">
                                 Belum ada universitas</h3>
-                            <p class="mt-2 text-slate-500">Belum ada universitas
+                            <p class="mt-2 text-teto-dark-text-muted">Belum ada
+                                universitas
                                 yang menawarkan jurusan ini.</p>
                         </div>
                     @endif

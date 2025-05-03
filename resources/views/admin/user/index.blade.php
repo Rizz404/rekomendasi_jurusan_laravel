@@ -65,7 +65,7 @@
                 <tbody class="bg-white divide-y divide-teto-cream">
                     @forelse ($users as $user)
                         <tr onclick="window.location='{{ route('admin.users.show', $user) }}'"
-                            class="hover:bg-teto-cream-hover-hover cursor-pointer transition-colors duration-150">
+                            class="hover:bg-teto-cream-hover cursor-pointer transition-colors duration-150">
                             {{-- Applied teto-cream-hover --}}
                             <td
                                 class="px-6 py-4 whitespace-nowrap text-teto-dark-text">
