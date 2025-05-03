@@ -1,6 +1,5 @@
 <x-user-layout title="Profile">
     <div class="container max-w-2xl py-4 mx-auto">
-        <h2>Masih nyatu sama user nanti dibuat terpisah</h2>
         <form action="{{ route('profile.upsert') }}" method="POST"
             class="flex flex-col gap-4">
             @csrf
