@@ -30,7 +30,6 @@
                 class="flex-1 relative overflow-y-auto focus:outline-none p-4 bg-gray-100">
                 {{ $slot }}
             </main>
-            <x-layouts.footer />
         </div>
     </div>
 </x-base-layout>

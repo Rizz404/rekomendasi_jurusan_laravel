@@ -22,5 +22,4 @@
     </div>
 
     {{ $slot }}
-    <x-layouts.footer />
 </x-base-layout>
