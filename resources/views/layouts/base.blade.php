@@ -21,7 +21,7 @@
         src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
 </head>
 
-<body class="min-h-screen">
+<body class="min-h-screen overflow-y-scroll">
     {{ $slot }}
 </body>
 

@@ -25,37 +25,32 @@
                 </a>
             </div>
             @auth
-                <div class="flex items-center gap-2">
-                    <a href="{{ route('profile.index') }}"
-                        class="font-sans font-medium cursor-pointer hover:text-teto-accent-hover {{ request()->routeIs('profile.index') ? ' text-teto-accent-active' : ' text-white' }} transition-colors duration-300 ease-in-out flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1"
-                            viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd"
-                                d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                                clip-rule="evenodd" />
-                        </svg>
-                        <span>Profile</span>
-                    </a>
-                </div>
+                @php
+                    $user = Auth::user();
+                    $profilePicture = $user->profile_picture;
+                    $defaultAvatarSvg = '
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                </svg>';
+                @endphp
+                <a href="{{ route('profile.index') }}"
+                    class="  font-sans font-medium cursor-pointer hover:text-teto-dark-text-muted {{ request()->routeIs('profile.index') ? ' text-teto-accent-active' : ' text-teto-dark-text' }} transition-colors duration-300 ease-in-out">
+                    @if ($profilePicture)
+                        <img src="{{ $profilePicture }}"
+                            alt="{{ $user->username }}'s profile picture"
+                            class="h-8 w-8 rounded-full object-cover">
+                    @else
+                        {!! $defaultAvatarSvg !!}
+                    @endif
+                </a>
             @else
                 <div class="flex gap-2 items-center">
                     <a href="{{ route('login') }}"
                         class="font-sans font-medium cursor-pointer hover:text-teto-accent-hover {{ request()->routeIs('login') ? ' text-teto-accent-active' : ' text-white' }} transition-colors duration-300 ease-in-out flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1"
-                            viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd"
-                                d="M3 3a1 1 0 011 1v12a1 1 0 11-2 0V4a1 1 0 011-1zm7.707 3.293a1 1 0 010 1.414L9.414 9H17a1 1 0 110 2H9.414l1.293 1.293a1 1 0 01-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0z"
-                                clip-rule="evenodd" />
-                        </svg>
                         <span>Login</span>
                     </a>
                     <a href="{{ route('register') }}"
-                        class="bg-teto-dark text-white px-3 py-1 rounded font-sans font-medium cursor-pointer hover:bg-teto-light flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1"
-                            viewBox="0 0 20 20" fill="currentColor">
-                            <path
-                                d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z" />
-                        </svg>
+                        class="font-sans font-medium cursor-pointer hover:text-teto-accent-hover {{ request()->routeIs('register') ? ' text-teto-accent-active' : ' text-white' }} transition-colors duration-300 ease-in-out flex items-center">
                         <span>Register</span>
                     </a>
                 </div>
