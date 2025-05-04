@@ -3,13 +3,13 @@
     <div class="container mx-auto px-4">
         <div
             class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 text-center md:text-left">
-            {{-- Center text on small screens --}}
 
-            {{-- Kolom 1: Deskripsi Singkat --}}
+
+
             <div>
                 <h5
                     class="text-lg font-semibold text-white mb-3 decorative-text">
-                    ...</h5> {{-- Nama placeholder, maybe use decorative font --}}
+                    ...</h5>
                 <p class="text-sm text-[var(--color-teto-cream-hover)]">
                     Membantu Anda memilih jurusan kuliah yang tepat berdasarkan
                     nilai akademik dan preferensi menggunakan metode SAW.
@@ -17,7 +17,7 @@
                 </p>
             </div>
 
-            {{-- Kolom 2: Tautan Cepat --}}
+
             <div>
                 <h5 class="text-lg font-semibold text-white mb-3">Tautan Cepat
                 </h5>
@@ -28,7 +28,7 @@
                             Beranda
                         </a>
                     </li>
-                    {{-- Ganti '#' dengan route yang sesuai jika ada --}}
+
                     <li>
                         <a href="#"
                             class="hover:text-[var(--color-teto-light)] transition-colors duration-200 ease-in-out">
@@ -50,14 +50,14 @@
                 </ul>
             </div>
 
-            {{-- Kolom 3: Media Sosial --}}
+
             <div>
                 <h5 class="text-lg font-semibold text-white mb-3">Ikuti Kami
                 </h5>
                 <div class="flex space-x-4 justify-center md:justify-start">
-                    {{-- Center icons on small screens --}}
-                    {{-- Ganti '#' dengan URL sosial media Anda --}}
-                    {{-- Ikon SVG Sederhana sebagai Placeholder --}}
+
+
+
                     <a href="#" aria-label="Facebook" title="Facebook"
                         class="text-[var(--color-teto-cream)] hover:text-[var(--color-teto-light)] transition-colors duration-200 ease-in-out">
                         <svg class="w-6 h-6" fill="currentColor"
@@ -98,16 +98,16 @@
             </div>
         </div>
 
-        {{-- Garis Pemisah & Copyright --}}
+
         <div
             class="mt-8 pt-6 border-t border-[var(--color-teto-metallic)] opacity-50">
-        </div> {{-- Separator line with opacity --}}
+        </div>
         <div
             class="mt-6 text-center text-sm text-[var(--color-teto-cream-hover)]">
             &copy; {{ date('Y') }} ... . Hak Cipta Dilindungi Undang-Undang.
             Dibuat dengan <span class="text-[var(--color-teto-primary)]"
                 title="Cinta">&hearts;</span> di Indonesia.
-            {{-- Added current year and location context --}}
+
         </div>
     </div>
 </footer>

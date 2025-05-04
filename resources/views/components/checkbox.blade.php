@@ -6,7 +6,7 @@
     'required' => false,
 ])
 
-{{-- Todo: Benerin designnya --}}
+
 <div class="space-y-2">
     @if ($label)
         <label class="block text-sm font-medium text-slate-800 mb-2">

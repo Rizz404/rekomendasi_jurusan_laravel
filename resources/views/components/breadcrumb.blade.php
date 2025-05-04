@@ -1,4 +1,3 @@
-{{-- Todo: Nanti pake route atau semacamnya yang bakal link secara dinamis --}}
 <div class="mb-4 flex justify-between items-center">
     @if ($showBackButton && $backUrl)
         <a href="{{ $backUrl }}"

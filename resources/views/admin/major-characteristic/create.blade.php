@@ -1,5 +1,5 @@
 <x-admin-layout title="Buat Jurusan">
-    <div class="container max-w-3xl mx-auto py-6">
+    <div class="container max-w-4xl mx-auto py-6">
         <div class="flex justify-between items-center mb-6">
             <h1 class="text-2xl font-semibold">Buat Karakteristik Jurusan Baru
             </h1>

@@ -66,7 +66,7 @@
                 value="{{ old('graduation_year', $user->student?->graduation_year) }}"
                 placeholder="Input tahun lulus" required />
 
-            {{-- Todo: Nanti pas pertama kali update bakal redirect ke kalkulasi nilai --}}
+
             <x-button type="submit">Update profile</x-button>
         </form>
 

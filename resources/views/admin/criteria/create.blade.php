@@ -1,5 +1,5 @@
 <x-admin-layout title="Buat Kriteria Baru">
-    <div class="container max-w-3xl mx-auto py-6">
+    <div class="container max-w-4xl mx-auto py-6">
         <div class="flex justify-between items-center mb-6">
             <h1 class="text-2xl font-semibold">Buat Kriteria Baru</h1>
             <x-link-button href="{{ route('admin.criterias.index') }}">

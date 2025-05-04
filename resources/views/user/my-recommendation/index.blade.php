@@ -120,8 +120,8 @@
                                         </td>
                                         <td class="py-4 px-4">
                                             <div
-                                                class="text-sm font-medium {{-- Hapus class warna berdasarkan persentase --}} text-gray-900">
-                                                {{-- Tampilkan skor asli, format desimal --}}
+                                                class="text-sm font-medium  text-gray-900">
+
                                                 {{ number_format($SAWResult->final_score, 3) }}
                                             </div>
                                         </td>

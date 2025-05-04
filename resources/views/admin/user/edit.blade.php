@@ -1,5 +1,5 @@
 <x-admin-layout title="Edit Pengguna">
-    <div class="container max-w-3xl mx-auto py-6">
+    <div class="container max-w-4xl mx-auto py-6">
         <div class="flex justify-between items-center mb-6">
             <h1 class="text-2xl font-semibold">Edit Pengguna</h1>
             <div class="flex space-x-2">

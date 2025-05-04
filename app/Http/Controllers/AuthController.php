@@ -47,6 +47,7 @@ class AuthController extends Controller
                 'username' => $validated['username'],
                 'email' => $validated['email'],
                 'password' => Hash::make($validated['password']),
+                'profile_picture' => "https://i.pinimg.com/736x/c6/ee/a1/c6eea122496fbe5aadc69231fddd5e2e.jpg"
             ]);
 
             Student::create([

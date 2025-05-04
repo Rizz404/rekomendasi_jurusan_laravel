@@ -84,6 +84,7 @@ class UserController extends Controller
         try
         {
             $userData['password'] = Hash::make($userData['password']);
+            $userData['profile_picture'] = "https://i.pinimg.com/736x/c6/ee/a1/c6eea122496fbe5aadc69231fddd5e2e.jpg";
 
             $user = User::create($userData);
 

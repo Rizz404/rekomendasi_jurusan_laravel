@@ -17,7 +17,7 @@
 
             <div>
                 <ul class="flex items-center space-x-1">
-                    {{-- Previous Page Link --}}
+
                     @if ($paginator->onFirstPage())
                         <li
                             class="px-3 py-2 rounded text-teto-dark-text-muted bg-teto-cream-hover opacity-50 cursor-not-allowed">
@@ -32,9 +32,8 @@
                         </li>
                     @endif
 
-                    {{-- Pagination Elements --}}
+
                     @foreach ($elements as $element)
-                        {{-- "Three Dots" Separator --}}
                         @if (is_string($element))
                             <li
                                 class="px-3 py-2 rounded text-teto-dark-text-muted bg-teto-cream-hover">
@@ -42,7 +41,7 @@
                             </li>
                         @endif
 
-                        {{-- Array Of Links --}}
+
                         @if (is_array($element))
                             @foreach ($element as $page => $url)
                                 @if ($page == $paginator->currentPage())
@@ -62,7 +61,7 @@
                         @endif
                     @endforeach
 
-                    {{-- Next Page Link --}}
+
                     @if ($paginator->hasMorePages())
                         <li>
                             <a href="{{ $paginator->nextPageUrl() }}"
@@ -80,7 +79,7 @@
             </div>
         </div>
 
-        {{-- Mobile Pagination --}}
+
         <div class="flex items-center justify-between sm:hidden">
             @if ($paginator->onFirstPage())
                 <span

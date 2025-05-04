@@ -191,7 +191,7 @@
                             </div>
                         </div>
 
-                        {{-- Todo: Kalo ada waktu implementasiin lokasi gmaps --}}
+
                         {{-- <div
                             class="mt-4 h-64 bg-teto-cream rounded-lg flex items-center justify-center">
                             <div class="text-center  text-teto-dark-text">

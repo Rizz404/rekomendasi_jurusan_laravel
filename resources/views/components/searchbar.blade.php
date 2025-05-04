@@ -1,6 +1,6 @@
 @props(['name' => 'search', 'placeholder' => 'Cari...', 'value' => null])
 
-<div class="relative w-full">
+<div class="relative">
     <div class="absolute inset-y-0 left-3 flex items-center pointer-events-none">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-teto-primary"
             fill="none" viewBox="0 0 24 24" stroke="currentColor">

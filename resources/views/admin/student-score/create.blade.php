@@ -1,5 +1,5 @@
 <x-admin-layout title="Buat Nilai Siswa">
-    <div class="container max-w-3xl mx-auto py-6">
+    <div class="container max-w-4xl mx-auto py-6">
         @if (session('raw'))
             <div class="alert alert-danger">
                 {{ session('raw') }}
