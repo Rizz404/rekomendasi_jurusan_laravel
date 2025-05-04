@@ -68,8 +68,13 @@
                             class="hover:bg-teto-cream-hover cursor-pointer transition-colors duration-150">
                             {{-- Applied teto-cream-hover --}}
                             <td
-                                class="px-6 py-4 whitespace-nowrap text-teto-dark-text">
+                                class="px-6 py-4 whitespace-nowrap text-teto-dark-text flex gap-2">
                                 {{-- Applied teto-dark-text --}}
+                                @if ($user->profile_picture)
+                                    <img src="{{ $user->profile_picture }}"
+                                        class=" rounded-full object-cover size-6"
+                                        alt="{{ $user->username }}">
+                                @endif
                                 {{ $user->username }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">

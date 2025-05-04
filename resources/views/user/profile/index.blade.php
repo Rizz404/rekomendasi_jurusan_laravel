@@ -1,7 +1,7 @@
 <x-user-layout title="Profile">
     <div class="container max-w-2xl py-4 mx-auto">
         <form action="{{ route('profile.upsert') }}" method="POST"
-            class="flex flex-col gap-4">
+            enctype="multipart/form-data" class="flex flex-col gap-4">
             @csrf
             @method('PATCH')
 
@@ -12,6 +12,11 @@
             <x-input label="Email" name="email"
                 value="{{ old('email', $user->email) }}"
                 placeholder="Input email" required />
+
+            <x-file-input name="profile_picture" label="Profile Image"
+                accept="image/*" required
+                helpText="Upload a square image for best results. Max size: 2MB" />
+
 
             <x-input label="Fullname" name="name"
                 value="{{ old('name', $user->student?->name) }}"

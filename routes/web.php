@@ -113,6 +113,6 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 // * Shared
 Route::prefix('profile')->name('profile.')->group(function ()
 {
-    Route::get('/index', [ProfileController::class, 'index'])->name('index');
+    Route::get('/', [ProfileController::class, 'index'])->name('index');
     Route::patch('/upsert', [ProfileController::class, 'upsert'])->name('upsert');
 })->middleware('auth');
