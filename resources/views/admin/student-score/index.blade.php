@@ -5,9 +5,10 @@
             <div class="flex space-x-2">
                 <form action="{{ route('admin.student-scores.index') }}"
                     method="GET" class="flex space-x-2">
-                    <x-input type="text" name="search"
+                    <x-searchbar name="search"
                         placeholder="Cari siswa atau kriteria..."
                         value="{{ request('search') }}" />
+
 
                     <x-button type="submit">
                         Cari
@@ -15,7 +16,7 @@
                 </form>
                 <x-link-button
                     href="{{ route('admin.student-scores.create') }}">
-                    Tambah Baru
+                    Tambah
                 </x-link-button>
             </div>
         </div>
@@ -80,8 +81,8 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <span
-                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
-                                    {{ $studentScore->criteria->type === 'benefit' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
+                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full text-white
+                                    {{ !$studentScore->criteria->type === 'benefit' ? 'bg-teto-light' : 'bg-teto-soft-teal' }}">
                                     {{ ucfirst($studentScore->criteria->type) }}
                                 </span>
                             </td>

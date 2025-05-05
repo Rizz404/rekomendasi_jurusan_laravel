@@ -21,11 +21,11 @@
                     @csrf
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <x-dropdown label="Siswa" name="college_major_id">
+                        <x-dropdown label="Siswa" name="student_id">
                             <option value="">Pilih Siswa</option>
                             @foreach ($students as $student)
                                 <option value="{{ $student->id }}"
-                                    {{ old('college_major_id') === $student->id ? 'selected' : '' }}>
+                                    {{ old('student_id') === $student->id ? 'selected' : '' }}>
                                     {{ $student->name }}
                                 </option>
                             @endforeach

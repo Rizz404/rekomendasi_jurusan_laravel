@@ -62,8 +62,7 @@
                                 <p class="text-sm text-teto-dark-text">Deskripsi
                                     Jurusan</p>
                                 <div class="bg-teto-cream rounded-md p-2 mt-1">
-                                    <p
-                                        class="text-sm text-gray-700 whitespace-pre-wrap">
+                                    <p class="text-sm text-gray-700 ">
                                         {{ $majorCharacteristic->collegeMajor->description ?? 'Tidak ada deskripsi' }}
                                     </p>
                                 </div>
@@ -155,8 +154,7 @@
                                 <p class="text-sm text-teto-dark-text">Deskripsi
                                     Kriteria</p>
                                 <div class="bg-teto-cream rounded-md p-2 mt-1">
-                                    <p
-                                        class="text-sm text-gray-700 whitespace-pre-wrap">
+                                    <p class="text-sm text-gray-700 ">
                                         {{ $majorCharacteristic->criteria->description ?? 'Tidak ada deskripsi' }}
                                     </p>
                                 </div>
@@ -167,8 +165,7 @@
                                     Karir
                                     Jurusan</p>
                                 <div class="bg-teto-cream rounded-md p-2 mt-1">
-                                    <p
-                                        class="text-sm text-gray-700 whitespace-pre-wrap">
+                                    <p class="text-sm text-gray-700 ">
                                         {{ $majorCharacteristic->collegeMajor->career_prospects ?? 'Tidak ada informasi prospek karir' }}
                                     </p>
                                 </div>

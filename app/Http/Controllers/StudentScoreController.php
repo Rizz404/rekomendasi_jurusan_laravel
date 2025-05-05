@@ -239,14 +239,6 @@ class StudentScoreController extends Controller
     {
 
         $validated = $request->validate([
-            "criteria_id" => [
-                "required",
-                "exists:criterias,id",
-            ],
-            "student_id" => [
-                "required",
-                "exists:students,id",
-            ],
             "score" => "required|numeric|between:0.01,999.99",
         ]);
 

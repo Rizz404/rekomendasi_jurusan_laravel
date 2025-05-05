@@ -94,7 +94,7 @@
                             <p class="text-sm text-teto-dark-text mb-2">
                                 Deskripsi</p>
                             <div class="bg-teto-cream rounded-md p-4">
-                                <p class="whitespace-pre-wrap">
+                                <p class="">
                                     {{ $criteria->description ?? 'Tidak ada deskripsi' }}
                                 </p>
                             </div>

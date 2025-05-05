@@ -1,18 +1,20 @@
-<x-admin-layout title="Buat Universitas Baru">
+<x-admin-layout title="Tambah Universitas Baru">
     <div class="container max-w-4xl mx-auto py-6">
         <div class="flex justify-between items-center mb-6">
-            <h1 class="text-2xl font-semibold">Buat Universitas Baru</h1>
-            <x-link-button href="{{ route('admin.universities.index') }}">
-                Kembali
-            </x-link-button>
+            <h1 class="text-2xl font-semibold">Tambah Universitas Baru</h1>
+            <div class="flex space-x-2">
+                <x-link-button href="{{ route('admin.universities.index') }}">
+                    Kembali
+                </x-link-button>
+            </div>
         </div>
 
         <div class="bg-white shadow-md rounded-lg overflow-hidden">
             <div class="p-6">
                 <form action="{{ route('admin.universities.store') }}"
-                    method="POST" class="space-y-4">
+                    method="POST" class="space-y-4"
+                    enctype="multipart/form-data">
                     @csrf
-
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <x-input label="Nama Universitas" name="name"
@@ -42,55 +44,49 @@
                             value="{{ old('website') }}"
                             placeholder="https://contoh.com" />
 
-                        <x-input label="URL Logo" name="logo" type="url"
-                            value="{{ old('logo') }}"
-                            placeholder="https://contoh.com/logo.png" />
-
                         <x-input label="Rating (0-5)" name="rating"
                             type="number" step="0.01" min="0"
-                            max="5" value="{{ old('rating', 0) }}"
+                            max="5" value="{{ old('rating') }}"
                             placeholder="Masukkan rating" required />
 
-                        <div class="flex items-center space-x-2 md:col-span-2">
-                            <input type="checkbox" name="is_active"
-                                id="is_active" value="1"
-                                class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                                {{ old('is_active', '1') == '1' ? 'checked' : '' }}>
-                            <label for="is_active"
-                                class="block text-sm font-medium text-gray-700">
-                                Aktif
-                            </label>
-                        </div>
+                        <input type="hidden" name="is_active" value="0">
+                        <x-checkbox label="Aktif" name="is_active"
+                            :checked="old('is_active') == 1" labelPosition="side" />
                     </div>
+
+                    <x-file-input name="logo" label="Logo" accept="image/*"
+                        helpText="Upload a square image for best results. Max size: 2MB" />
 
                     <x-textarea label="Deskripsi" name="description"
                         value="{{ old('description') }}"
                         placeholder="Masukkan deskripsi singkat universitas (opsional)" />
 
-
                     <div class="mt-4">
-                        <label for="college_majors"
+                        <label
                             class="block text-sm font-medium text-gray-700 mb-1">
                             Jurusan Kuliah yang Tersedia
                         </label>
 
-
-                        <select name="college_majors[]" id="college_majors"
-                            multiple
-                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm h-48">
-
-                            @foreach ($collegeMajors as $major)
-                                <option value="{{ $major->id }}"
-                                    {{ in_array($major->id, old('college_majors', [])) ? 'selected' : '' }}>
-                                    {{ $major->major_name }}
-                                    {{ $major->faculty ? "({$major->faculty})" : '' }}
-                                </option>
-                            @endforeach
-                        </select>
-                        <p class="mt-1 text-xs text-teto-dark-text">Tahan Ctrl
-                            (atau
-                            Cmd di Mac) dan klik untuk memilih lebih dari satu.
-                        </p>
+                        <div
+                            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 mt-1">
+                            @forelse ($collegeMajors as $major)
+                                <x-checkbox name="college_majors[]"
+                                    value="{{ $major->id }}"
+                                    :checked="in_array(
+                                        $major->id,
+                                        old('college_majors', []),
+                                    )" :label="$major->major_name .
+                                        ($major->faculty
+                                            ? ' (' . $major->faculty . ')'
+                                            : '')"
+                                    labelPosition="side" />
+                            @empty
+                                <div
+                                    class="col-span-3 py-2 px-3 bg-gray-50 rounded text-gray-500">
+                                    Jurusan kuliah tidak tersedia
+                                </div>
+                            @endforelse
+                        </div>
 
                         @error('college_majors')
                             <p class="text-sm text-red-600 mt-1">
@@ -102,10 +98,8 @@
                         @enderror
                     </div>
 
-
-
                     <div class="flex justify-end mt-6">
-                        <x-button type="submit">Simpan Data</x-button>
+                        <x-button type="submit">Simpan</x-button>
                     </div>
                 </form>
             </div>

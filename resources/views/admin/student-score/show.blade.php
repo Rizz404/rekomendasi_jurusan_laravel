@@ -176,8 +176,7 @@
                                 <p class="text-sm text-teto-dark-text">Deskripsi
                                     Kriteria</p>
                                 <div class="bg-teto-cream rounded-md p-2 mt-1">
-                                    <p
-                                        class="text-sm text-gray-700 whitespace-pre-wrap">
+                                    <p class="text-sm text-gray-700 ">
                                         {{ $studentScore->criteria->description ?? 'Tidak ada deskripsi' }}
                                     </p>
                                 </div>

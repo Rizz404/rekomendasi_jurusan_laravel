@@ -4,37 +4,38 @@
     'options' => null,
     'multiple' => false,
     'required' => false,
+    'labelPosition' => 'side', // Opsi: 'top', 'side'
+    'checked' => false, // Untuk menentukan apakah checkbox dicentang atau tidak
+    'value' => null, // Tambahkan parameter value untuk checkbox dalam array
 ])
 
-
 <div class="space-y-2">
-    @if ($label)
-        <label class="block text-sm font-medium text-slate-800 mb-2">
+    @if ($label && $labelPosition === 'top')
+        <label class="block text-sm font-medium text-teto-dark-text mb-2">
             {{ $label }}
             @if ($required)
-                <span class="text-red-500 ml-0.5">*</span>
+                <span class="text-teto-primary ml-0.5">*</span>
             @endif
         </label>
     @endif
 
     <div class="{{ $multiple ? 'space-y-2' : 'flex items-center' }}">
         @if ($options)
-            @foreach ($options as $value => $optionLabel)
-                <div class="flex items-center">
+            @foreach ($options as $optValue => $optionLabel)
+                <div class="flex items-center mr-4">
                     <div class="relative flex items-center">
-                        <input type="{{ $multiple ? 'checkbox' : 'checkbox' }}"
-                            id="{{ $name }}{{ $multiple ? '_' . $value : '' }}"
+                        <input type="checkbox"
+                            id="{{ $name }}{{ $multiple ? '_' . $optValue : '' }}"
                             name="{{ $multiple ? $name . '[]' : $name }}"
-                            value="{{ $value }}"
-                            {{ $multiple ? '' : 'class="rounded border-slate-300 text-slate-700 focus:ring-slate-500 focus:border-slate-500 shadow-sm"' }}
+                            value="{{ $optValue }}"
                             {{ $attributes->class([
-                                'rounded border-slate-300 text-slate-700 focus:ring-slate-500 focus:border-slate-500 shadow-sm',
-                                'border-red-500' => $errors->has($name),
+                                'rounded border-teto-metallic text-teto-primary focus:ring-teto-primary focus:border-teto-primary shadow-sm',
+                                'border-teto-primary' => $errors->has($name),
                             ]) }}>
                         @if ($errors->has($name))
                             <div
                                 class="absolute -top-1 -right-1 pointer-events-none">
-                                <svg class="h-4 w-4 text-red-500"
+                                <svg class="h-4 w-4 text-teto-primary"
                                     fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd"
                                         d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
@@ -44,24 +45,26 @@
                         @endif
                     </div>
                     <label
-                        for="{{ $name }}{{ $multiple ? '_' . $value : '' }}"
-                        class="ml-2 text-sm text-slate-700">
+                        for="{{ $name }}{{ $multiple ? '_' . $optValue : '' }}"
+                        class="ml-2 text-sm text-teto-dark-text-soft">
                         {{ $optionLabel }}
                     </label>
                 </div>
             @endforeach
         @else
             <div class="relative flex items-center">
-                <input type="checkbox" id="{{ $name }}"
-                    name="{{ $name }}" value="1"
+                <input type="checkbox"
+                    id="{{ $name }}_{{ $value ?? 'default' }}"
+                    name="{{ $name }}" value="{{ $value ?? '1' }}"
+                    {{ $checked || old($name, $checked) ? 'checked' : '' }}
                     {{ $attributes->class([
-                        'rounded border-slate-300 text-slate-700 focus:ring-slate-500 focus:border-slate-500 shadow-sm',
-                        'border-red-500' => $errors->has($name),
+                        'rounded border-teto-metallic text-teto-primary focus:ring-teto-primary focus:border-teto-primary shadow-sm',
+                        'border-teto-primary' => $errors->has($name),
                     ]) }}>
                 @if ($errors->has($name))
                     <div class="absolute -top-1 -right-1 pointer-events-none">
-                        <svg class="h-4 w-4 text-red-500" fill="currentColor"
-                            viewBox="0 0 20 20">
+                        <svg class="h-4 w-4 text-teto-primary"
+                            fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd"
                                 d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
                                 clip-rule="evenodd" />
@@ -69,19 +72,21 @@
                     </div>
                 @endif
             </div>
-            <label for="{{ $name }}"
-                class="ml-2 text-sm text-slate-700">
-                {{ $label }}
-                @if ($required)
-                    <span class="text-red-500 ml-0.5">*</span>
-                @endif
-            </label>
+            @if ($label && $labelPosition === 'side')
+                <label for="{{ $name }}_{{ $value ?? 'default' }}"
+                    class="ml-2 text-sm text-teto-dark-text-soft">
+                    {{ $label }}
+                    @if ($required)
+                        <span class="text-teto-primary ml-0.5">*</span>
+                    @endif
+                </label>
+            @endif
         @endif
     </div>
 
     @error($name)
-        <p class="mt-1 text-sm text-red-600 flex items-center">
-            <svg class="h-4 w-4 mr-1 text-red-500" fill="currentColor"
+        <p class="mt-1 text-sm text-teto-primary flex items-center">
+            <svg class="h-4 w-4 mr-1 text-teto-primary" fill="currentColor"
                 viewBox="0 0 20 20">
                 <path fill-rule="evenodd"
                     d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"

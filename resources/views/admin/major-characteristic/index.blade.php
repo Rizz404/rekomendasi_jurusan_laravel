@@ -5,8 +5,8 @@
             <div class="flex space-x-2">
                 <form action="{{ route('admin.major-characteristics.index') }}"
                     method="GET" class="flex space-x-2">
-                    <x-input type="text" name="search"
-                        placeholder="Cari jurusan atau kriteria..."
+                    <x-searchbar name="search"
+                        placeholder="Cari criterias or majors..."
                         value="{{ request('search') }}" />
 
                     <x-button type="submit">
@@ -15,7 +15,7 @@
                 </form>
                 <x-link-button
                     href="{{ route('admin.major-characteristics.create') }}">
-                    Tambah Baru
+                    Tambah
                 </x-link-button>
             </div>
         </div>
@@ -71,8 +71,8 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <span
-                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
-                                    {{ $majorCharacteristic->criteria->type === 'benefit' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
+                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full text-white
+                                    {{ !$majorCharacteristic->criteria->type === 'benefit' ? 'bg-teto-light' : 'bg-teto-soft-teal' }}">
                                     {{ ucfirst($majorCharacteristic->criteria->type) }}
                                 </span>
                             </td>

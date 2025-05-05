@@ -26,11 +26,23 @@
 
         <div class="relative ml-3">
             <div>
-                <a href="{{ route('profile.index') }}" id="user-menu-button"
-                    class="flex items-center rounded-full bg-slate-700 text-sm focus:outline-none">
-                    <img class="h-8 w-8 rounded-full"
-                        src="https://ui-avatars.com/api/?name=Admin+User&background=0284c7&color=fff"
-                        alt="Profile">
+                @php
+                    $user = Auth::user();
+                    $profilePicture = $user->profile_picture;
+                    $defaultAvatarSvg = '
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                        </svg>';
+                @endphp
+                <a href="{{ route('profile.index') }}"
+                    class="  font-sans font-medium cursor-pointer hover:text-teto-dark-text-muted {{ request()->routeIs('profile.index') ? ' text-teto-accent-active' : ' text-teto-dark-text' }} transition-colors duration-300 ease-in-out">
+                    @if ($profilePicture)
+                        <img src="{{ $profilePicture }}"
+                            alt="{{ $user->username }}'s profile picture"
+                            class="h-8 w-8 rounded-full object-cover">
+                    @else
+                        {!! $defaultAvatarSvg !!}
+                    @endif
                 </a>
             </div>
         </div>

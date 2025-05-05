@@ -84,9 +84,6 @@ class ProfileController extends Controller
         // * Handle profile picture upload
         if ($request->hasFile('profile_picture'))
         {
-            // $file = $request->file('profile_picture');
-            // $fileName = time() . '_' . Str::slug($request->name) . '.' . $file->getClientOriginalExtension();
-
             // * Hapus gambar lama jika ada
             if ($user->profile_picture_id)
             {

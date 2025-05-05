@@ -14,7 +14,7 @@
                 placeholder="Input email" required />
 
             <x-file-input name="profile_picture" label="Profile Image"
-                accept="image/*" required
+                accept="image/*"
                 helpText="Upload a square image for best results. Max size: 2MB" />
 
 

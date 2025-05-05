@@ -1,7 +1,7 @@
 <x-admin-layout title="Buat Jurusan">
     <div class="container max-w-4xl mx-auto py-6">
         <div class="flex justify-between items-center mb-6">
-            <h1 class="text-2xl font-semibold">Buat Kriteria Baru</h1>
+            <h1 class="text-2xl font-semibold">Buat Jurusan Kuliah Baru</h1>
             <x-link-button href="{{ route('admin.college-majors.index') }}">
                 Kembali
             </x-link-button>
@@ -16,7 +16,8 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <x-input label="Nama Jurusan" name="major_name"
                             value="{{ old('major_name') }}"
-                            placeholder="Masukkan nama kriteria" required />
+                            placeholder="Masukkan nama jurusan kuliah"
+                            required />
 
                         <x-input label="Fakultas" name="faculty"
                             value="{{ old('faculty') }}"
@@ -28,16 +29,9 @@
                             required />
                     </div>
 
-                    <div class="flex items-center space-x-2">
-                        <input type="checkbox" name="is_active" id="is_active"
-                            value="1"
-                            class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                            {{ old('is_active', '1') === '1' ? 'checked' : '' }}>
-                        <label for="is_active"
-                            class="block text-sm font-medium text-gray-700">
-                            Aktif
-                        </label>
-                    </div>
+                    <input type="hidden" name="is_active" value="0">
+                    <x-checkbox label="Aktif" name="is_active"
+                        checked="old('is_active')" labelPosition="side" />
 
                     <x-textarea label="Deskripsi" name="description"
                         value="{{ old('description') }}" />

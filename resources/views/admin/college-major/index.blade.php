@@ -7,16 +7,16 @@
                 <form action="{{ route('admin.college-majors.index') }}"
                     method="GET" class="flex flex-col sm:flex-row gap-2">
 
-                    <x-input type="text" name="search"
-                        placeholder="Search college-majors..."
+                    <x-searchbar name="search"
+                        placeholder="Cari college majors..."
                         value="{{ request('search') }}" />
 
                     <x-button type="submit">
-                        Search
+                        Cari
                     </x-button>
                     <x-link-button
                         href="{{ route('admin.college-majors.create') }}">
-                        Create
+                        Tambah
                     </x-link-button>
                 </form>
             </div>
@@ -59,8 +59,9 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <span
-                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
-                                    {{ $collegeMajor->is_active === 'false' ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800' }}">
+                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full text-white
+                                {{ !$collegeMajor->is_active ? 'bg-teto-light' : 'bg-teto-soft-teal' }}">
+
                                     {{ $collegeMajor->is_active ? 'Active' : 'Non active' }}
                                 </span>
                             </td>

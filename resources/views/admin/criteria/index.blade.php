@@ -7,7 +7,7 @@
                 <form action="{{ route('admin.criterias.index') }}" method="GET"
                     class="flex flex-col sm:flex-row gap-2">
 
-                    <x-searchbar name="search" placeholder="Search criterias..."
+                    <x-searchbar name="search" placeholder="Cari criterias..."
                         value="{{ request('search') }}" />
 
 
@@ -34,11 +34,11 @@
 
                     <x-button type="submit"
                         class="bg-teto-primary hover:bg-teto-primary-hover text-white font-semibold rounded-md shadow-md transition ease-in-out duration-150">
-                        Search
+                        Cari
                     </x-button>
 
                     <x-link-button href="{{ route('admin.criterias.create') }}">
-                        Create
+                        Tambah
                     </x-link-button>
                 </form>
             </div>

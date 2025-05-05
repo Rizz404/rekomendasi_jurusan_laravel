@@ -123,8 +123,7 @@
                                 <p class="text-sm text-teto-dark-text">Deskripsi
                                 </p>
                                 <div class="bg-teto-cream rounded-md p-3 mt-1">
-                                    <p
-                                        class="text-sm text-gray-700 whitespace-pre-wrap">
+                                    <p class="text-sm text-gray-700 ">
                                         {{ $university->description }}
                                     </p>
                                 </div>

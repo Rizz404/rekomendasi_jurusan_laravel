@@ -21,6 +21,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('website')->nullable();
             $table->string('logo')->nullable();
+            $table->string('logo_id')->nullable();
             $table->decimal('rating', 3, 2)->default(0); // Rating kampus (0-5)
             $table->boolean('is_active')->default(true);
             $table->timestamps();

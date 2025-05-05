@@ -89,7 +89,7 @@ class MajorCharacteristicController extends Controller
         {
             MajorCharacteristic::create($validated);
 
-            return redirect()->route("admin.college-majors.show", $request->college_major_id)
+            return redirect()->route("admin.major-characteristics.show", $request->college_major_id)
                 ->with("success", "Karakteristik jurusan berhasil dibuat");
         }
         catch (\Exception $e)

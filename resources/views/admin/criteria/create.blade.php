@@ -46,16 +46,10 @@
                                 Semua</option>
                         </x-dropdown>
 
-                        <div class="flex items-center space-x-2">
-                            <input type="checkbox" name="is_active"
-                                id="is_active" value="1"
-                                class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                                {{ old('is_active', '1') === '1' ? 'checked' : '' }}>
-                            <label for="is_active"
-                                class="block text-sm font-medium text-gray-700">
-                                Aktif
-                            </label>
-                        </div>
+                        {{-- * Biar kalo gak chek bakal kirim 0 soalnya defaultnya checkbox kaga ngirim kalo gak check --}}
+                        <input type="hidden" name="is_active" value="0">
+                        <x-checkbox label="Aktif" name="is_active"
+                            value="{{ old('is_active') }}" />
                     </div>
 
                     <x-textarea label="Deskripsi" name="description"

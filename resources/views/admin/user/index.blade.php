@@ -7,7 +7,7 @@
                 <form action="{{ route('admin.users.index') }}" method="GET"
                     class="flex flex-col sm:flex-row gap-2">
 
-                    <x-searchbar name="search" placeholder="Search users..."
+                    <x-searchbar name="search" placeholder="Cari users..."
                         value="{{ request('search') }}" />
 
                     <x-dropdown name="role">
@@ -25,7 +25,7 @@
                     </x-button>
 
                     <x-link-button href="{{ route('admin.users.create') }}">
-                        Create
+                        Tambah
                     </x-link-button>
                 </form>
             </div>
