@@ -101,3 +101,26 @@
         @apply mx-auto;
     }
 }
+
+.auth-bg {
+    position: relative;
+}
+
+.auth-bg::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("../../public/images/auth-bg.png");
+    background-repeat: repeat;
+    background-size: 100px;
+    opacity: 0.1;
+    z-index: 0;
+}
+
+.auth-bg > * {
+    position: relative;
+    z-index: 1;
+}
