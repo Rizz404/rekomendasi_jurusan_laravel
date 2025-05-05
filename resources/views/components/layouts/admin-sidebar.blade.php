@@ -95,11 +95,14 @@
             <!-- Universities -->
             <a href="{{ route('admin.universities.index') }}"
                 class="group flex items-center px-4 py-2 text-sm font-medium rounded-md {{ request()->routeIs('admin.universities*') ? 'bg-teto-primary-active text-teto-cream' : 'text-teto-cream hover:bg-teto-primary-active hover:text-teto-cream' }}">
-                <svg xmlns="http://www.w3.org/2000/svg"
-                    class="mr-3 h-5 w-5 {{ request()->routeIs('admin.universities*') ? 'text-teto-accent' : 'text-teto-pastel-pink group-hover:text-teto-accent' }}"
-                    viewBox="0 0 20 20" fill="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                    fill="currentColor"
+                    class="mr-3 h-5 w-5 {{ request()->routeIs('admin.universities*') ? 'text-teto-accent' : 'text-teto-pastel-pink group-hover:text-teto-accent' }}">
+                    <path d="M10 1L1 5l9 4 9-4-9-4z" />
                     <path
-                        d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" />
+                        d="M3 7v6h2v-6H3zm4 0v6h2v-6H7zm4 0v6h2v-6h-2zm4 0v6h2v-6h-2z" />
+                    <path d="M2 14h16v2a1 1 0 01-1 1H3a1 1 0 01-1-1v-2z" />
+                    <path d="M1 6v7h1V6H1zm17 0v7h1V6h-1z" />
                 </svg>
                 Universitas
             </a>
