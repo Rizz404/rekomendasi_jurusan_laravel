@@ -18,11 +18,11 @@
                 helpText="Upload a square image for best results. Max size: 2MB" />
 
 
-            <x-input label="Fullname" name="name"
+            <x-input label="Nama Lengkap" name="name"
                 value="{{ old('name', $user->student?->name) }}"
                 placeholder="Input name" required />
 
-            <x-input label="Phone" name="phone"
+            <x-input label="No Telepon" name="phone"
                 value="{{ old('phone', $user->phone) }}"
                 placeholder="Input phone" required />
 
@@ -34,20 +34,20 @@
                 <option value="">Pilih Gender</option>
                 <option value="man"
                     {{ old('gender', $user->student?->gender) === 'man' ? 'selected' : '' }}>
-                    Male
+                    Laki-laki
                 </option>
                 <option value="woman"
                     {{ old('gender', $user->student?->gender) === 'woman' ? 'selected' : '' }}>
-                    Woman
+                    Perempuan
                 </option>
             </x-dropdown>
 
             <x-input label="Asal sekolah" name="school_origin"
                 value="{{ old('school_origin', $user->student?->school_origin) }}"
-                placeholder="Input school_origin" required />
+                placeholder="Input asal sekolah" required />
 
             <x-dropdown label="Tipe sekolah" name="school_type" required>
-                <option value="">Select School Type</option>
+                <option value="">Pilih tipe sekolah</option>
                 <option value="high_school"
                     {{ old('school_type', $user->student?->school_type) === 'high_school' ? 'selected' : '' }}>
                     High School

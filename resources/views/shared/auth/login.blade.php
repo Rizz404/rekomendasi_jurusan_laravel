@@ -1,9 +1,9 @@
 <x-base-layout title="Login">
     <div
-        class="flex items-center justify-center min-h-screen py-12 bg-gradient-to-br from-teto-dark to-teto-primary sm:px-6 lg:px-8">
-        <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+        class="flex items-center justify-center min-h-screen py-12 bg-gradient-to-br from-teto-dark to-teto-primary sm:px-4 lg:px-8">
+        <div class="mt-8 w-full max-w-sm mx-auto sm:max-w-md">
             <div
-                class="px-4 py-8 bg-white/90 shadow-lg sm:rounded-lg sm:px-10 backdrop-blur-sm border border-teto-light/30">
+                class="px-6 py-8 bg-white/90 shadow-lg rounded-lg sm:px-10 backdrop-blur-sm border border-teto-light/30">
                 <div class="mb-6 text-center">
                     <h2 class="text-2xl font-bold text-teto-primary">Welcome
                         Back!</h2>
@@ -24,6 +24,8 @@
                         autocomplete="current-password" />
 
                     <div class="flex justify-between items-center">
+                        <x-input type="hidden" name="remember"
+                            value="0" />
                         <x-checkbox name="remember" label="Remember me"
                             class="text-teto-primary" />
                         {{-- <a href="{{ route('password.request') }}"

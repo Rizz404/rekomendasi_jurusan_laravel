@@ -74,22 +74,6 @@
                         class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4">
                         <h2 class="text-lg font-semibold text-teto-dark">Jurusan
                             yang Tersedia</h2>
-                        <form class="mt-2 sm:mt-0 flex">
-                            <input type="text" name="major_search"
-                                placeholder="Cari jurusan..."
-                                class="w-full sm:w-auto rounded-l-lg border-teto-secondary focus:border-slate-500 focus:ring focus:ring-slate-200 focus:ring-opacity-50 text-sm"
-                                value="{{ request('major_search') }}">
-                            <button type="submit"
-                                class="bg-slate-700 hover:bg-slate-800 text-white px-3 rounded-r-lg">
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                    class="h-4 w-4" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round"
-                                        stroke-linejoin="round" stroke-width="2"
-                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                                </svg>
-                            </button>
-                        </form>
                     </div>
 
                     @if ($university->collegeMajors->count() > 0)
@@ -190,23 +174,6 @@
                                     {{ $university->province }}</p>
                             </div>
                         </div>
-
-
-                        {{-- <div
-                            class="mt-4 h-64 bg-teto-cream rounded-lg flex items-center justify-center">
-                            <div class="text-center  text-teto-dark-text">
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                    class="h-10 w-10 mx-auto" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
-                                </svg>
-                                <p class="mt-2">Peta lokasi universitas akan
-                                    ditampilkan di sini</p>
-                            </div>
-                        </div> --}}
                     </div>
                 </div>
 
@@ -220,8 +187,7 @@
                                 @for ($i = 1; $i <= 5; $i++)
                                     <svg xmlns="http://www.w3.org/2000/svg"
                                         class="h-5 w-5 {{ $i <= ceil($university->rating) ? 'text-yellow-400' : 'text-slate-300' }}"
-                                        viewBox="0 0 20 20"
-                                        fill="currentColor">
+                                        viewBox="0 0 20 20" fill="currentColor">
                                         <path
                                             d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                                     </svg>
