@@ -15,7 +15,7 @@
         href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&family=Nunito:wght@400;600&family=Comfortaa:wght@700&family=Pacifico&display=swap"
         rel="stylesheet" />
 
-    @vite(['../resources/css/app.css', '../resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <script defer
         src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
