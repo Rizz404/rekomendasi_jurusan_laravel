@@ -10,7 +10,7 @@
                     </p>
                 </div>
 
-                <form class="flex flex-col gap-4" action="{{ route('login') }}"
+                <form class="flex flex-col gap-4" action="{{ route('register') }}"
                     method="POST">
                     @csrf
 
