@@ -21,7 +21,7 @@ return new class extends Migration
             $table->text('recommendation_reason')->nullable();
             $table->timestamp('calculation_date')->useCurrent();
             $table->timestamps();
-            $table->softDeletes();
+
 
             $table->unique(['student_id', 'college_major_id']);
         });

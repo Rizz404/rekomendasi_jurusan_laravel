@@ -21,7 +21,6 @@ return new class extends Migration
             $table->enum('school_type', ['SMA', 'SMK', 'All']);
             $table->boolean('is_active')->default(true);
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

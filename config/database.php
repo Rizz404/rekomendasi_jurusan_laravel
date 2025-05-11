@@ -97,8 +97,8 @@ return [
             'sslmode' => 'prefer',
             'options' => [
                 PDO::ATTR_PERSISTENT => false, // Disable persistent connections
-                PDO::ATTR_EMULATE_PREPARES => true, // Emulate prepares di sisi client
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                // PDO::ATTR_EMULATE_PREPARES => true, // Emulate prepares di sisi client
+                // PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
             ],
         ],
 

@@ -24,7 +24,7 @@ return new class extends Migration
             $table->integer('graduation_year')->nullable();
             // * Ini tuh otomatis ada created_at dan updated_at
             $table->timestamps();
-            $table->softDeletes(); // * Tambahin deleted at
+            // ! jagan tambahin deleted at, nyusahin
 
             $table->index('name');
             $table->index('school_type');

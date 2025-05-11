@@ -21,7 +21,6 @@ return new class extends Migration
             $table->text('career_prospects')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

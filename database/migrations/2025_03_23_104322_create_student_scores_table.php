@@ -19,7 +19,7 @@ return new class extends Migration
             $table->decimal('score', 5, 2);
             $table->timestamp('input_date')->useCurrent();
             $table->timestamps();
-            $table->softDeletes();
+
 
             $table->unique(['student_id', 'criteria_id']);
         });

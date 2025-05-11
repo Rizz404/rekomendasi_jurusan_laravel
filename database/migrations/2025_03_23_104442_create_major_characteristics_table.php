@@ -20,7 +20,7 @@ return new class extends Migration
             $table->decimal('compatibility_weight', 5, 2);
             $table->decimal('minimum_score', 5, 2)->nullable();
             $table->timestamps();
-            $table->softDeletes();
+
 
             $table->unique(['college_major_id', 'criteria_id']);
         });

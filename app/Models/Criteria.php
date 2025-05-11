@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Criteria extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
     // * Soalnya table otomatis plural jadi harus diginiin dulu
     // ! udah dibenerin sebagai penanda aja
     protected $table = 'criterias';

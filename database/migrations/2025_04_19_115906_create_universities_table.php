@@ -25,7 +25,7 @@ return new class extends Migration
             $table->decimal('rating', 3, 2)->default(0); // Rating kampus (0-5)
             $table->boolean('is_active')->default(true);
             $table->timestamps();
-            $table->softDeletes();
+
 
             $table->index('name');
             $table->index('city');

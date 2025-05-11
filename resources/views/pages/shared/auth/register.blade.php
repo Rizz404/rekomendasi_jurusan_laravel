@@ -15,8 +15,7 @@
                     @csrf
 
                     <x-ui.input label="Username" name="username" type="text"
-                        placeholder="Input your username" required
-                        autocomplete="username" />
+                        placeholder="Input your username" required />
 
                     <x-ui.input label="Email address" name="email"
                         type="email" placeholder="Input your email" required
