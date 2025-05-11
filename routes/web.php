@@ -1,24 +1,22 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CollegeMajorController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\StudentController;
-use App\Http\Controllers\CriteriaController;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LandingController;
-use App\Http\Controllers\MajorCharacteristicController;
-use App\Http\Controllers\MyCollegeMajorController;
-use App\Http\Controllers\MyGradeController;
-use App\Http\Controllers\MyRecomendationController;
-use App\Http\Controllers\MyUniversityController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\SawResultController;
-use App\Http\Controllers\StudentScoreController;
-use App\Http\Controllers\UniversityController;
-use App\Http\Controllers\UserController;
+
+use App\Http\Controllers\User\MyCollegeMajorController;
+use App\Http\Controllers\User\MyGradeController;
+use App\Http\Controllers\User\MyRecomendationController;
+use App\Http\Controllers\User\MyUniversityController;
+use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\User\HomeController;
+
+use App\Http\Controllers\Admin\CollegeMajorController;
+use App\Http\Controllers\Admin\CriteriaController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\MajorCharacteristicController;
+use App\Http\Controllers\Admin\StudentScoreController;
+use App\Http\Controllers\Admin\UniversityController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
 // * Ada contoh dan penjelasan di learn/web.php buat belajar

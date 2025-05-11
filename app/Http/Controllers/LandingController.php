@@ -8,6 +8,6 @@ class LandingController extends Controller
 {
     public function index()
     {
-        return view('shared.landing.index');
+        return view('pages.shared.landing.index');
     }
 }

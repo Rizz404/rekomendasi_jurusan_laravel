@@ -21,6 +21,6 @@ class AdminSidebar extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.layouts.admin-sidebar');
+        return view('components.layout-parts.admin-sidebar');
     }
 }

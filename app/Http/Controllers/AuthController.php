@@ -14,7 +14,7 @@ class AuthController extends Controller
 {
     public function showRegisterForm()
     {
-        return view('shared.auth.register');
+        return view('pages.shared.auth.register');
     }
 
     public function register(Request $request)
@@ -68,7 +68,7 @@ class AuthController extends Controller
 
     public function showLoginForm()
     {
-        return view('shared.auth.login');
+        return view('pages.shared.auth.login');
     }
 
     public function login(Request $request)
