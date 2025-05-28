@@ -338,15 +338,48 @@ class MyGradeController extends Controller
         }
     }
 
-    private function getAuthenticatedStudent($checkProfileComplete = false)
+    private function getAuthenticatedStudent(bool $checkProfileComplete = false)
     {
         $user = Auth::user();
-        $student = Student::where('user_id', $user->id)->firstOrFail();
-
-        if ($checkProfileComplete && !$this->isProfileComplete($student))
+        if (!$user)
         {
-            return redirect()->route('profile.index')
-                ->with("warning", "Mohon lengkapi profil Anda terlebih dahulu sebelum menambahkan nilai.");
+            // Ini seharusnya ditangani oleh middleware auth, tapi sebagai fallback
+            return redirect()->route('login')->with("error", "Silakan login terlebih dahulu.");
+        }
+
+        $student = Student::where('user_id', $user->id)->first();
+
+        if (!$student)
+        {
+            Log::warning("Student record not found for user ID: {$user->id}. Redirecting to profile.");
+            return redirect()->route('profile.index') // Asumsi ada route 'profile.index'
+                ->with("error", "Data siswa tidak ditemukan. Mohon lengkapi profil Anda.");
+        }
+
+
+        if ($checkProfileComplete)
+        {
+            $missingFields = $this->getMissingProfileFields($student);
+            if (!empty($missingFields))
+            {
+                $fieldNames = [
+                    'NIS' => 'NIS',
+                    'name' => 'Nama Lengkap',
+                    'gender' => 'Jenis Kelamin',
+                    'school_origin' => 'Asal Sekolah',
+                    'school_type' => 'Jenis Sekolah (SMA/SMK)',
+                    'school_major' => 'Jurusan Sekolah',
+                    'graduation_year' => 'Tahun Lulus',
+                ];
+                $missingFieldNames = array_map(function ($field) use ($fieldNames)
+                {
+                    return $fieldNames[$field] ?? $field;
+                }, $missingFields);
+
+                $errorMessage = "Mohon lengkapi profil Anda terlebih dahulu. Bidang yang belum terisi: " . implode(', ', $missingFieldNames) . ".";
+                return redirect()->route('profile.index')
+                    ->with("warning", $errorMessage);
+            }
         }
 
         return $student;
@@ -386,5 +419,28 @@ class MyGradeController extends Controller
         }
 
         return true;
+    }
+
+    private function getMissingProfileFields(Student $student): array
+    {
+        $requiredFields = [
+            'NIS',
+            'name',
+            'gender',
+            'school_origin',
+            'school_type',
+            'school_major',
+            'graduation_year',
+        ];
+
+        $missingFields = [];
+        foreach ($requiredFields as $field)
+        {
+            if (empty($student->$field))
+            {
+                $missingFields[] = $field;
+            }
+        }
+        return $missingFields;
     }
 }
