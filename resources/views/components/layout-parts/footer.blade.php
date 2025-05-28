@@ -9,7 +9,7 @@
             <div>
                 <h5
                     class="text-lg font-semibold text-white mb-3 decorative-text">
-                    ...</h5>
+                    TetoEdu</h5>
                 <p class="text-sm text-[var(--color-teto-cream-hover)]">
                     Membantu Anda memilih jurusan kuliah yang tepat berdasarkan
                     nilai akademik dan preferensi menggunakan metode SAW.
@@ -104,7 +104,8 @@
         </div>
         <div
             class="mt-6 text-center text-sm text-[var(--color-teto-cream-hover)]">
-            &copy; {{ date('Y') }} ... . Hak Cipta Dilindungi Undang-Undang.
+            &copy; {{ date('Y') }} TetoEdu . Hak Cipta Dilindungi
+            Undang-Undang.
             Dibuat dengan <span class="text-[var(--color-teto-primary)]"
                 title="Cinta">&hearts;</span> di Indonesia.
 

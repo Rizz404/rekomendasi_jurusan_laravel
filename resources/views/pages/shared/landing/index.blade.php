@@ -44,7 +44,7 @@
         <section class="mt-12">
 
             <h2 class="text-3xl font-semibold text-center mb-8 text-teto-dark">
-                Mengapa menggunakan ...?</h2>
+                Mengapa menggunakan TetoEdu?</h2>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
@@ -95,7 +95,7 @@
         <section class="mt-12 py-10 bg-teto-cream-hover rounded-lg">
 
             <h2 class="text-3xl font-semibold text-center mb-8 text-teto-dark">
-                Bagaimana ... Bekerja?</h2>
+                Bagaimana TetoEdu Bekerja?</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-6 text-center">
 
                 <div class="flex flex-col items-center">
@@ -139,7 +139,7 @@
 
         <section class="mt-12">
             <h2 class="text-3xl font-semibold text-center mb-8 text-teto-dark">
-                ... dalam Angka</h2>
+                TetoEdu dalam Angka</h2>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
                 <div class="bg-white p-6 rounded-lg shadow">
                     <div class="text-4xl font-bold text-teto-primary">
@@ -186,7 +186,7 @@
                     <p class="text-teto-dark-text-soft italic mb-4">
                         "Sangat membantu! Tadinya bingung mau pilih jurusan apa
                         antara Teknik Informatika dan Sistem Informasi, setelah
-                        pakai ..., jadi lebih yakin."</p>
+                        pakai TetoEdu, jadi lebih yakin."</p>
                     <h6 class="font-semibold text-teto-dark">Andi
                         P.</h6>
                     <p class="text-sm text-teto-dark-text-muted">
