@@ -1,5 +1,5 @@
 <x-user-layout title="Profile">
-    <div class="container max-w-2xl py-4 mx-auto">
+    <div class="container max-w-2xl p-4 py-4 mx-auto md:px-0">
         <form action="{{ route('profile.upsert') }}" method="POST"
             enctype="multipart/form-data" class="flex flex-col gap-4">
             @csrf
