@@ -19,7 +19,7 @@ class MyUniversityController extends Controller
     public function show(University $university)
     {
         return view(
-            'user.my-university.show',
+            'pages.user.my-university.show',
             compact('university')
         );
     }

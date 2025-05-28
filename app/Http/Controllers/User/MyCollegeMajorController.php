@@ -21,7 +21,7 @@ class MyCollegeMajorController extends Controller
         $collegeMajor->load('universities');
 
         return view(
-            'user.my-college-major.show',
+            'pages.user.my-college-major.show',
             compact('collegeMajor')
         )->with('universities', $collegeMajor->universities()->paginate(10));
     }
