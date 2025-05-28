@@ -23,7 +23,7 @@
                     $user = Auth::user();
                     $profilePicture = $user->profile_picture ?? null;
                 @endphp
-                <a href="{{ route('profile.index') }}"
+                <a href="{{ route('admin.profile.index') }}"
                     class="font-sans font-medium cursor-pointer hover:text-teto-dark-text-muted {{ request()->routeIs('profile.index') ? ' text-teto-accent-active' : ' text-teto-dark-text' }} transition-colors duration-300 ease-in-out flex items-center">
                     @if ($profilePicture)
                         <img src="{{ $profilePicture }}"

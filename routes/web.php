@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\MajorCharacteristicController;
 use App\Http\Controllers\Admin\StudentScoreController;
 use App\Http\Controllers\Admin\UniversityController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\AdminProfileController;
 use Illuminate\Support\Facades\Route;
 
 // * Ada contoh dan penjelasan di learn/web.php buat belajar
@@ -69,6 +70,12 @@ Route::middleware(['auth', 'role:user'])->group(function ()
         Route::post('/calculate/{student}', [MyRecomendationController::class, 'calculate'])->name('calculate');
         Route::post('/recalculate/{student}', [MyRecomendationController::class, 'recalculate'])->name('recalculate');
     });
+
+    Route::prefix('profile')->name('profile.')->group(function ()
+    {
+        Route::get('/', [ProfileController::class, 'index'])->name('index');
+        Route::patch('/upsert', [ProfileController::class, 'upsert'])->name('upsert');
+    });
 });
 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function ()
@@ -106,11 +113,10 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::resource('student-scores', StudentScoreController::class);
 
     Route::resource('universities', UniversityController::class);
-});
 
-// * Shared
-Route::prefix('profile')->name('profile.')->group(function ()
-{
-    Route::get('/', [ProfileController::class, 'index'])->name('index');
-    Route::patch('/upsert', [ProfileController::class, 'upsert'])->name('upsert');
-})->middleware('auth');
+    Route::prefix('profile')->name('profile.')->group(function ()
+    {
+        Route::get('/', [AdminProfileController::class, 'index'])->name('index');
+        Route::patch('/upsert', [AdminProfileController::class, 'upsert'])->name('upsert');
+    });
+});

@@ -1,7 +1,7 @@
 @props(['title' => ''])
 
 <x-app title="{{ $title }}">
-    <div class="flex h-screen bg-teto-cream-active" x-data="{ sidebarOpen: window.innerWidth >= 1024 }">
+    <div class="flex h-screen" x-data="{ sidebarOpen: window.innerWidth >= 1024 }">
         <div x-show="sidebarOpen && window.innerWidth < 1024"
             @click="sidebarOpen = false" class="fixed inset-0 z-30 lg:hidden"
             x-cloak>
