@@ -18,7 +18,6 @@
                 </p>
             </div>
 
-
             <div
                 class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-16 translate-x-16">
             </div>
@@ -26,7 +25,6 @@
                 class="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full translate-y-12 -translate-x-12">
             </div>
         </div>
-
 
         <div class="mb-12 text-center">
             <a href="{{ route('my-grades.index') }}"
@@ -36,20 +34,19 @@
             </a>
         </div>
 
-
-        @if ($student && $latestRecommendations && $latestRecommendations->count() > 0)
+        @if ($student && $bestRecommendations && $bestRecommendations->count() > 0)
             <div class="mb-12">
                 <div class="flex items-center mb-6">
                     <div class="w-1 h-8 bg-teto-primary rounded-full mr-4">
                     </div>
                     <h2 class="text-3xl font-bold text-teto-dark">
-                        <i class="fas fa-bullseye mr-2"></i> Rekomendasi
-                        Terakhir Untukmu
+                        <i class="fas fa-medal mr-2"></i> Rekomendasi Terbaik
+                        Untukmu
                     </h2>
                 </div>
 
                 <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                    @foreach ($latestRecommendations as $rec)
+                    @foreach ($bestRecommendations as $rec)
                         <div
                             class="relative p-6 transition-all duration-300 bg-white shadow-lg rounded-md hover:shadow-xl hover:-translate-y-2">
 
@@ -75,12 +72,17 @@
                                     </span>
                                 </div>
 
-
                                 <div
                                     class="w-full bg-gray-200 rounded-full h-2 mb-4">
                                     <div class="h-2 rounded-full transition-all duration-500 bg-gradient-to-r from-teto-primary to-teto-accent"
-                                        style="width: {{ $rec->final_score * 100 }}%;">
+                                        style="width: {{ min($rec->final_score * 100, 100) }}%;">
                                     </div>
+                                </div>
+
+                                <div class="text-xs text-teto-dark-text-muted">
+                                    <i class="fas fa-clock mr-1"></i>
+                                    Dihitung:
+                                    {{ \Carbon\Carbon::parse($rec->calculation_date)->format('d M Y') }}
                                 </div>
                             </div>
                         </div>
@@ -123,9 +125,7 @@
             </div>
         @endif
 
-
         <div class="grid gap-12 lg:grid-cols-2">
-
             <div>
                 <div class="flex items-center mb-6">
                     <div class="w-1 h-8 bg-teto-accent rounded-full mr-4"></div>
@@ -178,7 +178,6 @@
                     </div>
                 @endif
             </div>
-
 
             <div>
                 <div class="flex items-center mb-6">
@@ -236,7 +235,6 @@
             </div>
         </div>
 
-
         <div class="pt-12 mt-12 border-t-2 border-teto-pastel-pink">
             <div class="flex items-center mb-6">
                 <div class="w-1 h-8 bg-teto-primary rounded-full mr-4"></div>
@@ -293,7 +291,6 @@
                 </a>
             </div>
         </div>
-
 
         <div
             class="mt-12 p-8 bg-gradient-to-r bg-teto-secondary rounded-md text-center">
