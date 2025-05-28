@@ -26,6 +26,6 @@ class UserSeeder extends Seeder
         ]);
 
         // Regular users
-        User::factory(10)->create();
+        User::factory(25)->create();
     }
 }
