@@ -10,23 +10,19 @@
                     </p>
                 </div>
 
-                <form class="flex flex-col gap-4" action="{{ route('register') }}"
-                    method="POST">
+                <form class="flex flex-col gap-4" action="{{ route('register') }}" method="POST">
                     @csrf
 
-                    <x-ui.input label="Username" name="username" type="text"
-                        placeholder="Input your username" required />
+                    <x-ui.input label="Username" name="username" type="text" placeholder="Input your username"
+                        required />
 
-                    <x-ui.input label="Email address" name="email"
-                        type="email" placeholder="Input your email" required
-                        autocomplete="email" />
+                    <x-ui.input label="Email address" name="email" type="email" placeholder="Input your email"
+                        required autocomplete="email" />
 
-                    <x-ui.input label="Password" name="password" type="password"
-                        placeholder="Input your password" required
-                        autocomplete="current-password" />
+                    <x-ui.input label="Password" name="password" type="password" placeholder="Input your password"
+                        required autocomplete="current-password" />
 
-                    <x-ui.input label="Confirm Password"
-                        name="password_confirmation" type="password"
+                    <x-ui.input label="Confirm Password" name="password_confirmation" type="password"
                         placeholder="Input your confirm password" required />
 
                     <div class="flex items-center justify-center gap-2 mt-2">

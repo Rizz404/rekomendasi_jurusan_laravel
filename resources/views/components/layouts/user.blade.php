@@ -7,7 +7,7 @@
 
     <div class="fixed top-0 left-0 z-50 w-full pointer-events-none p-4">
         @php
-            $alertTypes = ['success', 'error', 'warning', 'info'];
+            $alertTypes = ['success', 'error', 'warning', 'info', 'raw'];
         @endphp
 
         @foreach ($alertTypes as $type)
